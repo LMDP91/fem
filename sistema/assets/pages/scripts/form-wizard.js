@@ -28,7 +28,7 @@ var FormWizard = function () {
             var error = $('.alert-danger', form);
             var success = $('.alert-success', form);
 
-            form.validate({
+           /* form.validate({
                 doNotHideMessage: true, //this option enables to show the error/success messages on tab switch.
                 errorElement: 'span', //default input error message container
                 errorClass: 'help-block help-block-error', // default input error message class
@@ -148,7 +148,7 @@ var FormWizard = function () {
                 }
 
             });
-
+*/
             var displayConfirm = function() {
                 $('#tab4 .form-control-static', form).each(function(){
                     var input = $('[name="'+$(this).attr("data-display")+'"]', form);
@@ -243,13 +243,13 @@ var FormWizard = function () {
 
             $('#form_wizard_1').find('.button-previous').hide();
             $('#form_wizard_1 .button-submit').click(function () {
-                alert('Finished! Hope you like it :)');
+                alert('Has finalizado la encuesta!');
             }).hide();
 
             //apply validation on select2 dropdown value change, this only needed for chosen dropdown integration.
-            $('#country_list', form).change(function () {
+           /* $('#country_list', form).change(function () {
                 form.validate().element($(this)); //revalidate the chosen dropdown value and show error or success message for the input
-            });
+            });*/
         }
 
     };
