@@ -1,0 +1,3 @@
+ALTER TABLE  `imagen` ADD  `tipo` ENUM(  "slider" ) NOT NULL AFTER  `descripcion` ;
+
+ALTER TABLE  `imagen` ADD  `activo` ENUM(  "no",  "si" ) NOT NULL AFTER  `tipo` ;

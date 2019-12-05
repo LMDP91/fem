@@ -1,0 +1,2 @@
+ALTER TABLE `ventas`
+	CHANGE COLUMN `estatus` `estatus` ENUM('captura','enviado','cancelado') NOT NULL AFTER `paso`;

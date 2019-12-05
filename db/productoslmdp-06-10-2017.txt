@@ -1,0 +1,124 @@
+-- phpMyAdmin SQL Dump
+-- version 4.0.4
+-- http://www.phpmyadmin.net
+--
+-- Servidor: localhost
+-- Tiempo de generación: 06-10-2017 a las 19:14:28
+-- Versión del servidor: 5.6.12-log
+-- Versión de PHP: 5.4.12
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+--
+-- Base de datos: `siv`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `productos_categorias`
+--
+
+CREATE TABLE IF NOT EXISTS `productos_categorias` (
+  `producto_categoria_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(254) DEFAULT NULL,
+  `descripcion` text,
+  `caracteristica` text,
+  `categoria_id` int(11) unsigned DEFAULT NULL,
+  `nombre_archivo` varchar(50) DEFAULT NULL,
+  `extension` varchar(10) DEFAULT NULL,
+  `url` varchar(255) DEFAULT NULL,
+  `status` enum('Acivo','Baja') DEFAULT NULL,
+  `promocion` enum('no','si') NOT NULL,
+  `precioAnterior` decimal(15,2) NOT NULL,
+  `precioActual` decimal(15,2) NOT NULL,
+  `sustancia` text NOT NULL,
+  PRIMARY KEY (`producto_categoria_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=79 ;
+
+--
+-- Volcado de datos para la tabla `productos_categorias`
+--
+
+INSERT INTO `productos_categorias` (`producto_categoria_id`, `nombre`, `descripcion`, `caracteristica`, `categoria_id`, `nombre_archivo`, `extension`, `url`, `status`, `promocion`, `precioAnterior`, `precioActual`, `sustancia`) VALUES
+(1, 'Calcimax 60 Capsulas', 'El aporte de calcio de coral nos beneficiara a corto y\r\nlargo plazo en el buen funcionamiento de nue', '.', 5, 'img_pro_cat_51', 'jpg', 'http://farmaciassalinasg.com/images/productos_categorias/', '', 'si', '0.00', '0.00', ''),
+(2, 'FF Flex 30 Tabletas', 'Garantiza la mejora de la flexibilidad\r\ny la fuerza en las articulaciones en\r\npersonas con problemas', '.', 5, 'img_pro_cat_52', 'jpg', 'http://farmaciassalinasg.com/images/productos_categorias/', '', 'si', '0.00', '0.00', ''),
+(11, 'Queso Crema', 'El queso crema es un tipo de queso untable que se obtiene al cuajar mediante fermentos lácticos una', 'Por regla general se expende en su presentación original, si bien hay diversas versiones del mismo', 24, 'img_pro_cat_2411', 'png', 'http://localhost/siv/images/productos_categorias/', '', 'si', '40.00', '35.00', 'no aplica'),
+(12, 'Cotija', '1 kg y 250 mg', 'Refrigeración:\r\nNo necesariamente', 24, 'img_pro_cat_2412', 'png', 'http://localhost/siv/images/productos_categorias/', '', 'no', '60.00', '45.00', 'Toda la familia'),
+(13, 'Doble queso enchipotlado', 'queso con chipotle', 'despierte tus sentidos. Atrévete a vivir esta experiencia de sazón y picor.', 24, 'img_pro_cat_2413', 'png', 'http://localhost/siv/images/productos_categorias/', '', 'si', '30.00', '25.00', 'Chile'),
+(14, 'Azadero', 'Elaboración artesanal de queso asadero consiste en la acidificación previa de la leche con la adic', 'El queso Asadero funde a partir de 60°C; esto debido al pH ácido de su pasta (5.0 y 5.5). ', 24, 'img_pro_cat_2414', 'png', 'http://localhost/siv/images/productos_categorias/', '', 'no', '80.00', '76.00', 'no aplica'),
+(15, 'Queso Manchego', 'es un queso español elaborado con leche de oveja de raza manchega y protegido por una denominación', 'che de: Oveja\r\nPaís de origen: España\r\nPasteurizado: Depende de la variedad\r\nAñejamiento: 30 día', 24, 'img_pro_cat_2415', 'png', 'http://localhost/siv/images/productos_categorias/', '', 'si', '90.00', '85.00', 'no aplica'),
+(16, 'Mozzarella', 'queso fibroso y graso es utilizado tanto en fresco como tierno, pudiendo ser degustado al natural o ', 'Provolone, que es la Mozzarella secada al aire\r\nScamorza, la Mozzarella secada al aire y ahumada con', 24, 'img_pro_cat_2416', 'png', 'http://localhost/siv/images/productos_categorias/', '', 'si', '150.00', '130.00', 'no aplica'),
+(17, 'QUESO OAXACA', 'un queso blanco y blando de origen mexicano. Su lugar de origen es en el estado de Oaxaca, específi', 'Su elaboración requiere de destreza y conocimiento, puesto que presenta ciertos puntos críticos cu', 24, 'img_pro_cat_2417', 'png', 'http://localhost/siv/images/productos_categorias/', '', 'si', '90.00', '80.00', 'Textura	blando'),
+(18, 'Queso Panela', 'El queso panela es un queso fresco, suave y blanco de leche de vaca pasteurizada, no requiere madura', 'Absorbe otros sabores fácilmente, y se reviste a veces con una pasta de ajo y chile, es muy utiliza', 24, 'img_pro_cat_2418', 'png', 'http://localhost/siv/images/productos_categorias/', '', 'si', '120.00', '100.00', 'Fresco y suave'),
+(19, 'Doble Crema', 'El Queso Doble Crema es un queso fresco de pasta hilada, semiduro y semigraso, el cual hace parte de', 'La grasa es un nutriente que además de aportar energía en la alimentación ayuda en el mantenimien', 24, 'img_pro_cat_2419', 'png', 'http://localhost/siv/images/productos_categorias/', '', 'si', '150.00', '120.00', 'pasta hilada, semiduro y semigraso'),
+(20, 'Enchiladas', 'son similares a los tacos, pero con mucho picante, sin cereales dentro y con abundante queso. Hay qu', 'Así, según el estilo de preparación, la enchilada puede acompañarse bien de carne de pavo, pollo', 11, 'img_pro_cat_1120', 'png', 'http://localhost/siv/images/productos_categorias/', '', 'si', '100.00', '90.00', 'abundante queso'),
+(21, 'Tacos', 'son tortillas de maíz rellenas con pollo o cualquier otra variedad de carne, chiles rojos, verdes y', 'Tamaño mediano, 200 gramos de carne al gusto paquete de 4 tacos.', 11, 'img_pro_cat_1121', 'png', 'http://localhost/siv/images/productos_categorias/', '', 'si', '80.00', '60.00', 'Los populares tacos mexicanos'),
+(22, 'Fajitas', 'Este plato consiste en tiras de carne asadas a la parrilla junto con una variedad de verduras, entre', 'Según la historia más difundida acerca de la historia de este plato, su invención se debe a los v', 11, 'img_pro_cat_1122', 'png', 'http://localhost/siv/images/productos_categorias/', '', 'si', '120.00', '90.00', 'gastronomía Tex-Mex'),
+(23, 'Burritos', 'pues los burritos también consisten en una tortilla de maíz o harina de trigo rellena de carne asa', 'La principal diferencia es que incluyen frijoles fritos, ingrediente que no puede faltar en este pla', 11, 'img_pro_cat_1123', 'png', 'http://localhost/siv/images/productos_categorias/', '', 'si', '50.00', '30.00', 'plato muy similar a las fajitas y los tacos'),
+(24, 'Camarón en aguachile', 'El camarón en aguachile, también denominado simplemente aguachile, es un plato mexicano original d', 'Así, en resumen, los ingredientes principales de este plato son: camarones, pepinos, chiles serrano', 11, 'img_pro_cat_1124', 'png', 'http://localhost/siv/images/productos_categorias/', '', 'si', '90.00', '85.00', 'El camarón en aguachile'),
+(25, 'Huevos rancheros', 'Hay quien dice que el origen del término huevos rancheros se remonta a la época en que los jornale', 'Consiste en huevos fritos acompañados por dos tortillas de maíz o de harina de trigo también frit', 11, 'img_pro_cat_1125', 'png', 'http://localhost/siv/images/productos_categorias/', '', 'si', '120.00', '90.00', 'desayuno ranchero.'),
+(26, 'Ceviche de pescado', 'El ceviche es uno de los platos más tradicionales de México y, en general, se consume en toda Amé', 'A estos ingredientes, se añaden ramas de cilantro, cebollas moradas, chiles rojos, limón, pimienta', 11, 'img_pro_cat_1126', 'png', 'http://localhost/siv/images/productos_categorias/', '', 'si', '130.00', '100.00', 'Buenisismos'),
+(27, 'Alitas de pollo en salsa BBQ', 'Las alitas de pollo en salsa barbacoa o barbecue son un plato internacional, pero las que se prepara', 'sabor agri-dulce con 20 alitas', 11, 'img_pro_cat_1127', 'png', 'http://localhost/siv/images/productos_categorias/', '', 'si', '190.00', '150.00', 'alas de pollo'),
+(28, 'Habitacion Doble - 1 cama doble', 'TV de pantalla plana  Baño privado   Wifi gratis\r\n• TV • Canales por cable • Suelo de baldosa', 'Condiciones especiales\r\nSin pago por adelantado', 18, 'img_pro_cat_1828', 'png', 'http://localhost/siv/images/productos_categorias/', '', 'si', '220.00', '190.00', 'Patio'),
+(29, 'Habitacion Doble - 2 camas', 'Patio  TV de pantalla plana  Baño privado   Wifi gratis\r\n• TV • Canales por cable • Suelo de', 'Condiciones especiales\r\nSin pago por adelantado', 18, 'img_pro_cat_1829', 'png', 'http://localhost/siv/images/productos_categorias/', '', 'si', '340.00', '290.00', '2 camas individuales'),
+(30, 'Habitacion Doble Básica', '2 camas dobles  o 2 camas dobles', 'Patio  TV de pantalla plana  Baño privado   Wifi gratis\r\n• TV • Canales por cable • Suelo de', 18, 'img_pro_cat_1830', 'png', 'http://localhost/siv/images/productos_categorias/', '', 'si', '450.00', '390.00', '¡Solo queda 1 habitación!'),
+(31, 'Cerveza Bonampak', 'Bonampak cerveza artesanal apuesta a una cerveza menos amarga que las consumidas en Alemania, Inglat', 'Existen dos estilos de la Cerveza Bonampak: de trigo frutal y de cebada con toques de caramelo y mal', 27, 'img_pro_cat_2731', 'png', 'http://localhost/siv/images/productos_categorias/', '', 'si', '45.00', '32.00', 'fue creada para los chiapanecos'),
+(32, 'Cerveza Tzotzil', 'Nace con la idea de crear identidad en los Chiapanecos, queremos dar a conocer a propios y extraños', 'tienes que disfrutar sus cinco estilos: ambar, porter, red ale miel, stout cafe, lager', 27, 'img_pro_cat_2732', 'png', 'http://localhost/siv/images/productos_categorias/', '', 'si', '40.00', '32.00', 'Cerveza Chiapaneca'),
+(33, 'Corona Extra', 'Graduación alcohólica, 4.6%. Servida en, Botella transparente', 'Con una botella de 33-cl ó 330 ml', 27, 'img_pro_cat_2733', 'png', 'http://localhost/siv/images/productos_categorias/', '', 'si', '95.00', '85.00', 'Corona 6-pack'),
+(34, 'Tascalate', '1 kilo de tortillas de maíz\r\n\r\n250 gramos de cacao tostado y pelado (chocolate)\r\n\r\nCanela molida\r\n\r', 'En una jarra con 4 tazas de agua agrega 4 cucharadas de tascalate y revuelve bien. Agrega hielo.', 28, 'img_pro_cat_2834', 'png', 'http://localhost/siv/images/productos_categorias/', '', 'si', '60.00', '45.00', 'fresquísima bebida chiapaneca con achiote'),
+(35, 'Pinole', 'En México, se elabora tradicionalmente a base de harina de maíz endulzado con azúcar o piloncillo', 'Esta harina puede consumirse sola, como dulce; o bien servir como base para una bebida del mismo nom', 28, 'img_pro_cat_2835', 'png', 'http://localhost/siv/images/productos_categorias/', '', 'si', '50.00', '32.00', 'El pinole es un alimento prehispánico de Mesoamérica.'),
+(36, 'Camisa polo original', 'Tipo de manga\r\nManga corta\r\nCuello\r\nPolo', 'Buen producto y de calidad.', 20, 'img_pro_cat_2036', 'png', 'http://localhost/siv/images/productos_categorias/', '', 'si', '500.00', '450.00', 'Hombre'),
+(37, 'Blusa Bordada De Moda Con Flores', 'Marca:\r\nmanta\r\nModelo\r\nbordado', 'Blusas elegantes de moda para toda ocasión tenemos variedad de modelos y colores LOS MODELOS Y COLO', 20, 'img_pro_cat_2037', 'png', 'http://localhost/siv/images/productos_categorias/', '', 'si', '300.00', '270.00', 'Tradicional'),
+(38, 'Blusa Bordada De Moda Con Flores', 'Blusas elegantes de moda para toda ocasión tenemos variedad de modelos y colores LOS MODELOS Y COLO', 'Blusas elegantes de moda para toda ocasión tenemos variedad de modelos y colores LOS MODELOS Y COLO', 20, 'img_pro_cat_2038', 'png', 'http://localhost/siv/images/productos_categorias/', '', 'si', '300.00', '270.00', 'Blusa Artezanal'),
+(39, 'Playeras Para Sublimar', 'Marca\r\nOTRA\r\nModelo\r\nCUELLO REDONDO PARA CABALLERO', 'Colores: rojo, blanco y negro', 20, 'img_pro_cat_2039', 'png', 'http://localhost/siv/images/productos_categorias/', '', 'si', '60.00', '48.00', 'Hombre Redondo'),
+(40, 'Pijama Unicornio', '3 Tallas', 'altura, 1.50 , 1.60, y 170.', 20, 'img_pro_cat_2040', 'png', 'http://localhost/siv/images/productos_categorias/', '', 'si', '700.00', '649.00', 'Kigurumi Cosplay'),
+(41, 'Ladrillo Refractario', 'Temperatura de Servicio: 1,450ºC\r\nMedidas: 23 x 11 x 3cm', 'Rendimiento: se requieren alrededor de 40 ladrillos por cada metro cuadrado para un revestimiento de', 21, 'img_pro_cat_2141', 'png', 'http://localhost/siv/images/productos_categorias/', '', 'si', '70.00', '55.77', 'X 3 Cmm Termico'),
+(42, 'CUNA PARA CONCRETO', 'Medida 1&quot; x 40 cm. Forjada en acero alto carbono 1060. Dureza de punta 50RC y de cabeza 45Rc. C', '(176527)', 21, 'img_pro_cat_2142', 'png', 'http://localhost/siv/images/productos_categorias/', '', 'si', '150.00', '109.00', '1&quot;X40 CM'),
+(43, 'CUCHARA', 'Fabricada en acero al carbón 1080 con dureza de 48-50rc.', 'Modelo CT-10P.', 21, 'img_pro_cat_2143', 'png', 'http://localhost/siv/images/productos_categorias/', '', 'si', '80.00', '69.00', 'DE 10&quot; PRETUL'),
+(44, 'LLANA LISA', 'Hoja fabricada de acero alto carbono 1074.', 'ureza 52Rc perfectamente alineadas. Mangos robustos de madera estufada. Modelo LM-6.', 21, 'img_pro_cat_2144', 'png', 'http://localhost/siv/images/productos_categorias/', '', 'si', '150.00', '119.00', '11 X 5&quot; MANGO DE MADERA'),
+(45, 'CEMENTO PORTLAND', 'Gris. Cemento especialmente formulado para reducir grietas hasta un 80%.', 'Permite una mejor integración de materiales y trabajabilidad. Mayor resistencia a condiciones ambie', 21, 'img_pro_cat_2145', 'png', 'http://localhost/siv/images/productos_categorias/', '', 'si', '200.00', '193.00', 'GRIS 50KG'),
+(46, 'IMPERFACIL TOTAL ROJO', 'Es un impermeabilizante base agua 100% acrílico de última generación que brinda una solución com', 'Protege tus techos de manera fácil y rápida no requiere malla de refuerzo y su secado rápido te p', 21, 'img_pro_cat_2146', 'png', 'http://localhost/siv/images/productos_categorias/', '', 'si', '1000.00', '984.00', '3+1 AÑOS 19 L'),
+(47, 'CABALLETE SUPERIOR', 'Caballete para techos de teja.', 'Superior modelo san miguel. Larga duración.', 21, 'img_pro_cat_2147', 'png', 'http://localhost/siv/images/productos_categorias/', '', 'si', '130.00', '115.00', 'SAN MIGUEL'),
+(48, 'Cafe soluble', 'colombiano gourmet 200 g', 'UPC:00750101040785', 22, 'img_pro_cat_2248', 'png', 'http://localhost/siv/images/productos_categorias/', '', 'si', '90.00', '69.90', 'Great Value'),
+(49, 'Cafe soluble', '205 g', 'UPC:00750103846057', 22, 'img_pro_cat_2249', 'png', 'http://localhost/siv/images/productos_categorias/', '', 'si', '65.00', '60.00', 'Los Portales de Córdoba tradicional'),
+(50, 'Cafe soluble', 'Café soluble 100% puro. \r\nCertificación Kosher.', 'UPC:00750105241760', 22, 'img_pro_cat_2250', 'png', 'http://localhost/siv/images/productos_categorias/', '', 'si', '60.00', '54.50', 'Oro 200 g'),
+(51, 'Cafe soluble', 'Café puro soluble Garat gourmet 100% arábica, frasco de vidrio con 125 g.', 'UPC:00750105241992', 22, 'img_pro_cat_2251', 'png', 'http://localhost/siv/images/productos_categorias/', '', 'si', '80.00', '74.50', 'Garat gourmet 125 g'),
+(52, 'Cafe soluble', 'afé soluble descafeinado Juan Valdez en una presentación de 95 g. Sólo agrega un poco de agua cal', 'Como sugerencia agrega un poco de sustituto de crema para café o leche y dale un toque cremoso.', 22, 'img_pro_cat_2252', 'png', 'http://localhost/siv/images/productos_categorias/', '', 'si', '140.00', '135.00', 'Juan Valdez descafeinado 95 g'),
+(53, 'Paquete premiun', 'ELIGE TUS ASIENTOS DE IDA', 'Saliendo de:\r\nTuxtla Gutierrez, Chis.', 23, 'img_pro_cat_2353', 'png', 'http://localhost/siv/images/productos_categorias/', '', 'si', '880.00', '862.00', 'Viaje redondo'),
+(54, 'Paquete Estandar', 'Tuxtla Gutierrez, Chis.', 'LLEGANDO A: Huatuco', 23, 'img_pro_cat_2354', 'png', 'http://localhost/siv/images/productos_categorias/', '', 'si', '700.00', '650.00', 'Promocion amigo'),
+(55, 'Bolis Mayoreo Tipo Bonice', 'Somos Fabricantes de Bolis o Congeladas\r\nPodemos enviar a toda la republica a mayoreo', 'Para cualquier informacion den comprar y enviamos muestras.', 25, 'img_pro_cat_2555', 'png', 'http://localhost/siv/images/productos_categorias/', '', 'si', '40.00', '35.00', 'Paquete 50 piezas'),
+(56, 'Bolis Rollo', 'Fabricación de bolis liquidos en bolsa, fabricación de gelatinas en bolsa.', 'Bolis de sabores en rollo.', 25, 'img_pro_cat_2556', 'png', 'http://localhost/siv/images/productos_categorias/', '', 'si', '35.00', '25.00', 'Variedad de productos'),
+(57, 'Paleta max', 'Deliciosas paletas sabor limón, mango o uva, ideal para cualquier ocasión.', 'Paletas de figuras', 25, 'img_pro_cat_2557', 'png', 'http://localhost/siv/images/productos_categorias/', '', 'si', '19.00', '15.00', 'Sabor limon'),
+(58, 'Paletas Max', 'Delicioso Helado sabor vainilla cubierta de helado de sabor fresa.', 'Sabores tropicales.', 25, 'img_pro_cat_2558', 'png', 'http://localhost/siv/images/productos_categorias/', '', 'si', '19.00', '16.00', 'Delicioso Helados de sabor'),
+(59, 'Paletas max', 'Helado sabor chocolate con cobertura sabor chocolate, difícil de resistir.', 'Edición especial', 25, 'img_pro_cat_2559', 'png', 'http://localhost/siv/images/productos_categorias/', '', 'si', '22.00', '19.50', 'Paleta Chocolate'),
+(60, 'FIBRA MANZANA VERDE', '*Precauciones: \r\n- Consulte a su médico antes de tomar cualquier suplemento alimenticio.\r\n- Este pr', 'Fibra sabor manzana verde.', 26, 'img_pro_cat_2660', 'png', 'http://localhost/siv/images/productos_categorias/', '', 'si', '245.50', '213.00', 'Sabor Manzana Verde'),
+(61, 'Aceite de Coco', '*Precauciones: \r\n- Consulte a su médico antes de tomar cualquier suplemento alimenticio.\r\n- Este pr', 'cantidad net: 420mml', 26, 'img_pro_cat_2661', 'png', 'http://localhost/siv/images/productos_categorias/', '', 'si', '108.50', '96.00', 'Extra virgen'),
+(62, 'Clorofila', '*Precauciones: \r\n- Consulte a su médico antes de tomar cualquier suplemento alimenticio.\r\n- Este pr', 'Cloro fila liquida', 26, 'img_pro_cat_2662', 'png', 'http://localhost/siv/images/productos_categorias/', '', 'si', '61.50', '55.50', 'Hierba buena'),
+(63, 'Caramelo', '*Precauciones: \r\n- Consulte a su médico antes de tomar cualquier suplemento alimenticio.\r\n- Este pr', 'Hard Candy -Caramelo Macizo', 26, 'img_pro_cat_2663', 'png', 'http://localhost/siv/images/productos_categorias/', '', 'si', '26.50', '23.00', 'Zorritone'),
+(64, 'Combo piñata', 'Sabores surtidos Dulces de caramelo macizo acidulado', 'Código: 76690200405', 29, 'img_pro_cat_2964', 'png', 'http://localhost/siv/images/productos_categorias/', '', 'si', '140.00', '135.00', 'Extra 10 Libras'),
+(65, 'Sandia', 'Paleta de caramelo macizo acidulado', 'Código: 76690200405', 29, 'img_pro_cat_2965', 'png', 'http://localhost/siv/images/productos_categorias/', '', 'si', '26.00', '22.00', '12 Gramos'),
+(66, 'Paleamor', 'acidulado y polvo con chile', 'Código: 766902003616\r\nSabor: Sandia\r\n\r\nPeso: 17gr\r\n\r\nPiezas por bolsa: 30 piezas', 29, 'img_pro_cat_2966', 'png', 'http://localhost/siv/images/productos_categorias/', '', 'si', '67.00', '55.00', 'Paletas de caramelo macizo'),
+(67, 'Maramango', 'Acidulado y polvo con chile', 'Código: 766902001032\r\n\r\nSabor: Mango\r\n\r\nPeso: 17gr\r\n\r\nPiezas por bolsa: 30 piezas', 29, 'img_pro_cat_2967', 'png', 'http://localhost/siv/images/productos_categorias/', '', 'si', '45.00', '41.00', 'Paletas de caramelo macizo'),
+(68, 'Bolonchas', 'acidulado', 'Código: 766902000110\r\n\r\nSabor: Coco\r\n\r\nPeso: 14 gr\r\n\r\nPiezas por bolsa: 40 piezas', 29, 'img_pro_cat_2968', 'png', 'http://localhost/siv/images/productos_categorias/', '', 'si', '24.00', '22.00', 'Paletas de caramelo macizo'),
+(69, 'Dulce de cocada', 'cocada', 'Color amarillo 150gr', 29, 'img_pro_cat_2969', 'png', 'http://localhost/siv/images/productos_categorias/', '', 'si', '14.00', '12.00', 'Fruta-coco'),
+(70, 'Salsa habanera', 'Ingredientes\r\n\r\nAgua, puré de tomate, jugo de limón, chile habanero, chile de árbol, ácido acét', 'Cont. Net. 190g / NET WT. 6.7 OZ.', 30, 'img_pro_cat_3070', 'png', 'http://localhost/siv/images/productos_categorias/', '', 'no', '19.00', '17.50', 'Tradicional'),
+(71, 'Salsa habanera', 'Ingredientes\r\n\r\nAgua, puré de tomatillo verde silvestre, jugo de limón, chile habanero, chile de', 'Cont. Net. 190g / NET WT. 6.7 OZ.', 30, 'img_pro_cat_3071', 'png', 'http://localhost/siv/images/productos_categorias/', '', 'si', '22.50', '19.00', 'Estilo comiteca'),
+(72, 'Salsa habanera', 'Ingredientes\r\n\r\nAgua, puré de tomate, jugo de limón, chile habanero, chile de árbol, semilla de c', 'Cont. Net. 190g / NET WT. 6.7 OZ.', 30, 'img_pro_cat_3072', 'png', 'http://localhost/siv/images/productos_categorias/', '', 'si', '18.00', '16.50', 'Con pepita'),
+(73, 'Salsa habanera', 'Ingredientes\r\n\r\nAgua, puré de tomate, jugo de limón, chile habanero, chile de árbol, cacahuate, ', 'Cont. Net. 190g / NET WT. 6.7 OZ.', 30, 'img_pro_cat_3073', 'png', 'http://localhost/siv/images/productos_categorias/', '', 'si', '22.00', '19.50', 'Con cacahuate'),
+(74, 'Salsa habanera', 'Ingredientes\r\n\r\nChile habanero naranja, vinagre , sal yodatada y goma xantana como estabilizante.', 'Cont. Net. 190g / NET WT. 6.7 OZ.', 30, 'img_pro_cat_3074', 'png', 'http://localhost/siv/images/productos_categorias/', '', 'si', '22.00', '19.50', 'Naranja'),
+(75, 'Salsa habanera', 'Ingredientes\r\n\r\nChile habanero verde, vinagre, sal yodatada y goma xantana como estabilizante.', 'Cont. Net. 190g / NET WT. 6.7 OZ.', 30, 'img_pro_cat_3075', 'png', 'http://localhost/siv/images/productos_categorias/', '', 'si', '22.00', '18.50', 'Verde'),
+(76, 'Sauvignon XA Domecq', 'Disponibilidad: En Inventario\r\nModelo: Vino Tinto\r\nPuntuación Promedio: No Votado', 'VinoTinto Sauvignon  Domecq XA.\r\nTipo: tinto\r\nPaís de origen: México, ensenada b.c.\r\nUva: cabernet', 31, 'img_pro_cat_3176', 'png', 'http://localhost/siv/images/productos_categorias/', '', 'si', '190.00', '185.00', '750 ml'),
+(77, 'Sangre de Cristo', 'Disponibilidad: En Inventario\r\nModelo: Vino Tinto\r\nPuntuación Promedio: No Votado', 'Vino Tinto Sangre de Cristo Lenior\r\n\r\nTipo: tinto\r\nPaís de origen: méxico, (cuatro ciénegas)\r\n\r\nP', 31, 'img_pro_cat_3177', 'png', 'http://localhost/siv/images/productos_categorias/', '', 'si', '190.00', '180.00', '750 ml'),
+(78, 'Casa Madero Merlot', 'Disponibilidad: En Inventario\r\nModelo: Vino Tinto\r\nPuntuación Promedio: No Votado', 'Casa Madero Merlot \r\nTipo: Tinto\r\nPaís de origen: México - Valle de Parras\r\nProductor: Casa Madero', 31, 'img_pro_cat_3178', 'png', 'http://localhost/siv/images/productos_categorias/', '', 'si', '220.00', '199.00', '750ml');
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

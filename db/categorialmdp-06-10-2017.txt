@@ -1,0 +1,67 @@
+-- phpMyAdmin SQL Dump
+-- version 4.0.4
+-- http://www.phpmyadmin.net
+--
+-- Servidor: localhost
+-- Tiempo de generación: 06-10-2017 a las 19:14:11
+-- Versión del servidor: 5.6.12-log
+-- Versión de PHP: 5.4.12
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+--
+-- Base de datos: `siv`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `categoria`
+--
+
+CREATE TABLE IF NOT EXISTS `categoria` (
+  `categoriaId` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(270) NOT NULL,
+  `descripcion` text NOT NULL,
+  `aquien` text NOT NULL,
+  `ventajas` text NOT NULL,
+  `url` varchar(255) NOT NULL,
+  `status` enum('Baja','Activo') NOT NULL DEFAULT 'Activo',
+  `anchura` int(11) NOT NULL,
+  `altura` int(11) NOT NULL,
+  `tipo` varchar(255) NOT NULL,
+  `imagen` varchar(255) NOT NULL,
+  PRIMARY KEY (`categoriaId`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=33 ;
+
+--
+-- Volcado de datos para la tabla `categoria`
+--
+
+INSERT INTO `categoria` (`categoriaId`, `nombre`, `descripcion`, `aquien`, `ventajas`, `url`, `status`, `anchura`, `altura`, `tipo`, `imagen`) VALUES
+(11, 'ALIMENTOS', 'Los alimentos se deben preparar, almacenar y manejar de manera adecuada para prevenir las intoxicaci', 'Público en General', 'Ventajas de los alimentos cocidos\r\n* Acaban con las bacterias. La mayoría de las bacterias mueren c', 'http://localhost/siv/images/categorias/', 'Activo', 0, 0, 'png', 'categoria11'),
+(18, 'HOTELES', 'Establecimiento de hostelería que ocupa un edificio total o parcialmente con uso exclusivo de sus s', 'publico en general', 'Comodidad', 'http://localhost/siv/images/categorias/', 'Activo', 0, 0, 'png', 'categoria18'),
+(20, 'ROPA', 'ConfecciOn y comercializaciOn de ropa deportiva', 'Publico en general', 'Ropa de calidad y buen surtido', 'http://localhost/siv/images/categorias/', 'Activo', 0, 0, 'png', 'categoria20'),
+(21, 'OBRA NEGRA', 'Comercialzacion de Materiales de construccion', 'Publico en General', 'Productos de calidad y buen precio', 'http://localhost/siv/images/categorias/', 'Activo', 0, 0, 'png', 'categoria21'),
+(22, 'CAFE', 'Produccion, proceso y beneficio de café', 'Publico en General', 'Producto de calidad', 'http://localhost/siv/images/categorias/', 'Activo', 0, 0, 'png', 'categoria22'),
+(23, 'TRANSPORTE', 'Transportes de pasajeros', 'Publico en General', 'Comodidad y buen servicio', 'http://localhost/siv/images/categorias/', 'Activo', 0, 0, 'png', 'categoria23'),
+(24, 'LACTEOS', 'Comercio al por mayor de productos lacteos, como crema, queso, mantequilla, yogurt y queso.', 'Publico en General', 'Producto fresco de alta calidad', 'http://localhost/siv/images/categorias/', 'Activo', 0, 0, 'png', 'categoria24'),
+(25, 'HELADOS Y PALETAS', 'Elaboración de helados y paletas', 'Escuelas y centro comerciales', 'Frutas tropicales y de alta calidad.', 'http://localhost/siv/images/categorias/', 'Activo', 0, 0, 'png', 'categoria25'),
+(26, 'NATURISTA', 'Productos naturales, farmaceuticos y envasado de té', 'Publico en General', 'Productos de alta Califad', 'http://localhost/siv/images/categorias/', 'Activo', 0, 0, 'png', 'categoria26'),
+(27, 'BEBIDAS', 'Producción, fabricación envasado de cerveza', 'Publico en genral', 'Producto Artesanal', 'http://localhost/siv/images/categorias/', 'Activo', 0, 0, 'png', 'categoria27'),
+(28, 'BEBIDAS HIDRATANTES', 'Elaboración de concentrados, polvos, jarabes y esencias de sabor para preparar refrescos, bebidas.', 'Publico en General', 'Producto artesanal', 'http://localhost/siv/images/categorias/', 'Activo', 0, 0, 'png', 'categoria28'),
+(29, 'DULCES', 'Productos naturales, a base de productos naturales.', 'Centro comerciales', 'El coco se destaca por su alto contenido en minerales: magnesio, fósforo, calcio y potasio, tambié', 'http://localhost/siv/images/categorias/', 'Activo', 0, 0, 'png', 'categoria29'),
+(30, 'SALSAS', 'Mezcla de sustancias comestibles trituradas y desleídas que se emplea para condimentar la comida, m', 'Publico en General', 'Producto de alta calidad', 'http://localhost/siv/images/categorias/', 'Activo', 0, 0, 'png', 'categoria30'),
+(31, 'VINOS Y LICORES', 'Encuentra las mejores marcas con las mejores promociones en nuestra tienda online.', 'Publico en General', 'Clasificación de productos artesanales y productos exportados.', 'http://localhost/siv/images/categorias/', 'Activo', 0, 0, 'png', 'categoria31'),
+(32, 'TOSTADAS', 'es una tortilla de maíz crujiente. Esto se logra secando las tortillas en el comal o al sol, o aunq', 'Publico en General', 'Producto Artesanal', 'http://localhost/siv/images/categorias/', 'Activo', 0, 0, 'png', 'categoria32');
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

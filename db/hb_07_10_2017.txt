@@ -1,0 +1,8 @@
+ALTER TABLE `usuario`
+	ADD COLUMN `fechaNacimiento` DATE NOT NULL AFTER `email`;
+ALTER TABLE `roles`
+	ADD COLUMN `status` ENUM('activo','eliminado') NOT NULL DEFAULT 'activo' AFTER `Description`;
+
+ALTER TABLE `municipio`
+	ADD COLUMN `codigo` INT(11) NOT NULL AFTER `delegacionId`;
+

@@ -1,0 +1,30 @@
+CREATE TABLE `encuesta` (
+  `encuestaId` int(11) NOT NULL,
+  `nombre` varchar(255) NOT NULL,
+  `fechaRegistro` date NOT NULL,
+  `usuarioregsitraId` int(11) NOT NULL,
+  `inicio` date NOT NULL,
+  `fin` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+ALTER TABLE  `encuesta` CHANGE  `usuarioregsitraId`  `usuarioregistraId` INT( 11 ) NOT NULL ;
+
+
+CREATE TABLE `pregunta` (
+  `preguntaId` int(11) NOT NULL,
+  `pregunta` text NOT NULL,
+  `tiporespuesta` enum('punto','opcional','abierta') NOT NULL,
+  `encuestaId` int(11) NOT NULL,
+  `rango` varchar(255) NOT NULL,
+  `opcional` text NOT NULL,
+  `numCaracter` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+ALTER TABLE `pregunta`
+  ADD PRIMARY KEY (`preguntaId`);
+
+ALTER TABLE `pregunta`
+  MODIFY `preguntaId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;COMMIT;

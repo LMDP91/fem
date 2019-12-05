@@ -1,0 +1,4 @@
+ALTER TABLE  `clientes` ADD  `sexo` ENUM(  'femenino',  'masculino' ) NOT NULL AFTER  `coloniaId` ;
+ALTER TABLE  `ventas` ADD  `coloniaId` INT( 11 ) NOT NULL AFTER  `usuarioId` ;
+
+

@@ -1,0 +1,68 @@
+﻿/*Estilo para menu de imagenes inicial del ciudadano*/
+
+.infos_bloc .content {
+	text-decoration:none;   
+    width:180px;
+    height: 180px;
+    /*background:#f6f6f6;*/
+    text-align:center;
+    min-height:150px;
+    font-family: 'Roboto', sans-serif;
+    font-weight:400;
+}
+
+.infos_bloc div.content {
+    display:block;
+    position: relative;
+    overflow:hidden;
+    -moz-transition: all .4s;
+    -webkit-transition: all .4s;
+    -o-transition: all .4s;
+    transition: all .4s;
+    cursor:pointer;
+}
+
+.infos_bloc div.content .overlay_bloc {
+    background-color:rgba(174, 182, 191, 0);
+    width:100%;
+    height:100%;
+    position:absolute;
+    top:0;
+    left:0;
+    z-index: 9900;
+    -moz-transition:all 1s;
+    -webkit-transition:all 1s;
+    -o-transition:all 1s;
+    transition:all 1s;
+}
+
+.infos_bloc div.content:hover .overlay_bloc {
+    display:block;
+    background-color:rgba(174, 182, 191, 0.7);
+}
+
+.infos_bloc div.content span {
+    background: rgba(0, 57, 171, 9);
+    width:100%;
+    height:50px;
+    color: #97bf0d;
+    text-transform:uppercase;
+    font-size:11px;
+    line-height:60px;
+    position:absolute;
+    display:block;
+    bottom:0px;
+    left:0;
+    z-index: 9910;
+    -moz-transition: all .4s;
+    -webkit-transition: all .4s;
+    -o-transition: all .4s;
+    transition: all .4s;
+}
+
+.infos_bloc div.content:hover span {
+    bottom:0;
+    height:60px;
+    color: #ffffff;
+}
+
