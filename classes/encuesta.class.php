@@ -433,36 +433,28 @@ class Encuesta extends Main
 					encuesta 
 				order by
 					encuestaId DESC ';
-
-			
 		$this->Util()->DB()->setQuery($sql);
-		$infoEncuesta = $this->Util()->DB()->GetRow();
-		
-		return $infoEncuesta;
+		return $this->Util()->DB()->GetRow();
 	}
 	/**
 	 * return array
 	 */
 	public function muestraPreguntas(){
 	
-		$sql = 'SELECT * 
+		$sql = "SELECT * 
 				from
 				encuesta 
-				order by
-				encuestaId DESC ';
+				where encuestaId ='".$this->encuestaId."' ";
 
 		$this->Util()->DB()->setQuery($sql);
 		$infoEncuesta = $this->Util()->DB()->GetRow();
-
 		$sql = 'SELECT * 
 				from
 				pregunta 
 				where
 				encuestaId = '.$infoEncuesta['encuestaId'].'';
-
 		$this->Util()->DB()->setQuery($sql);
 		$lst = $this->Util()->DB()->GetResult();
-
 		foreach($lst as $key=>$aux){
 			if($aux["tiporespuesta"]=="opcional"){
 				unset($opciones);
@@ -480,7 +472,6 @@ class Encuesta extends Main
 			}
 
 		}
-
 		return $lst;	
 	}
 	public function listEncuesta(){

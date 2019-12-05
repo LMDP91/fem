@@ -1,7 +1,7 @@
 <header id="header" style="background:white; ">
     <div class="container">
         <div class="four columns logo">
-       	 <a href="index"><img src="{$WEB_ROOT}/images/logosiv11.png" width="" id="img-logo" alt="logo"></a>
+       	 <a href="index"><img src="{$WEB_ROOT}/images/logo.png" width="" id="img-logo" alt="logo"></a>
 		</div>
         <div class="twelve columns top-inf alignright">
         </div>

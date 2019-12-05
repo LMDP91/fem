@@ -1,12 +1,24 @@
 var AJAX_PATH = WEB_ROOT+"/ajax/smarttest.php";
-
-
-
-
-
-
+$(function () {
+	$(".step").on("click",function () {
+		var id = $(this).data("id");
+		var name = $(this).data("name");
+		$.ajax({
+			type: "POST",
+			url: AJAX_PATH,
+			data: "type=getQuestions&id="+id,
+			beforeSend: function(){
+			},
+			success: function(response) {
+				$("#"+name).html(response);
+			},
+			error:function(){
+				alert(msgError);
+			}
+		});
+	});
+});
 function SaveEncuesta(Id){
-	
 	$.ajax({
 	  	type: "POST",
 	  	url: AJAX_PATH,
@@ -42,7 +54,6 @@ function SaveEncuesta(Id){
 }//enviarPedido
 
 function iniciarEncuesta(){
-	
 	$("#msjEncuesta").html('');
 	$("#div_encuesta").show();
 	$(".iniciar").hide();

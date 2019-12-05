@@ -49,7 +49,7 @@
                                         </li>
                                         {foreach from=$encuestas item=item key=key}
                                         <li>
-                                            <a href="#tab{$key+1+1}" data-toggle="tab" class="step">
+                                            <a href="#tab{$item.encuestaId}" data-toggle="tab" class="step" data-id="{$item.encuestaId}" data-name="tab{$item.encuestaId}">
                                                 <span class="number">{$key+1+1}</span>
                                                 <span class="desc">
                                                 <i class="fa fa-check"></i> {$item.nombre}
@@ -63,9 +63,9 @@
                                     </div>
                                     <div class="tab-content">
                                         <div class="alert alert-danger display-none">
-                                            <button class="close" data-dismiss="alert"></button> You have some form errors. Please check below. </div>
+                                            <button class="close" data-dismiss="alert"></button> Errores encontrados. </div>
                                         <div class="alert alert-success display-none">
-                                            <button class="close" data-dismiss="alert"></button> Your form validation is successful! </div>
+                                            <button class="close" data-dismiss="alert"></button> Validacion de formulario realizado! </div>
                                         <div class="tab-pane active" id="tab1">
                                             <h3>Datos personales</h3>
                                             <div class="form-group">
@@ -100,6 +100,9 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        {foreach from=$encuestas item=item key=key}
+                                            <div class="tab-pane active" id="tab{$item.encuestaId}"></div>
+                                        {/foreach}
                                     </div>
                                 </div>
                                 <div class="form-actions">
@@ -110,7 +113,7 @@
                                             <a href="javascript:;" class="btn btn-outline green button-next"> Siguiente
                                                 <i class="fa fa-angle-right"></i>
                                             </a>
-                                            <a href="javascript:;" class="btn green button-submit"> Submit
+                                            <a href="javascript:;" class="btn green button-submit"> Enviar
                                                 <i class="fa fa-check"></i>
                                             </a>
                                         </div>
