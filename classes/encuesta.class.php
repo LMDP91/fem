@@ -434,7 +434,10 @@ class Encuesta extends Main
 				order by
 					encuestaId DESC ';
 		$this->Util()->DB()->setQuery($sql);
-		return $this->Util()->DB()->GetRow();
+		$result = $this->Util()->DB()->GetRow();
+	    foreach($result as $key => $var){
+	        $result[$key]["nombre"] =  strtolower($var["nombre"]);
+        }
 	}
 	/**
 	 * return array

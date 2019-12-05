@@ -52,7 +52,7 @@
                                             <a href="#tab{$item.encuestaId}" data-toggle="tab" class="step" data-id="{$item.encuestaId}" data-name="tab{$item.encuestaId}">
                                                 <span class="number">{$key+1+1}</span>
                                                 <span class="desc">
-                                                <i class="fa fa-check"></i> {$item.nombre}
+                                                <i class="fa fa-check"></i> {$item.nombre|ucfirst}
                                             </span>
                                             </a>
                                         </li>
@@ -73,7 +73,7 @@
                                                     <span class="required"> * </span>
                                                 </label>
                                                 <div class="col-md-4">
-                                                    <input type="text" class="form-control" name="username" />
+                                                    <input type="text" class="form-control" name="name" />
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -81,22 +81,22 @@
                                                     <span class="required"> * </span>
                                                 </label>
                                                 <div class="col-md-4">
-                                                    <input type="password" class="form-control" name="password" id="submit_form_password" />
+                                                    <input type="text" class="form-control" name="firstLastName" id="firstLastName" />
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label col-md-3">Apellido Materno
                                                 </label>
                                                 <div class="col-md-4">
-                                                    <input type="password" class="form-control" name="rpassword" />
+                                                    <input type="password" class="form-control" name="secondLastName" id="secondLastName" />
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="control-label col-md-3">Fecha de nacimiento
+                                                <label class="control-label col-md-3">Edad
                                                     <span class="required"> * </span>
                                                 </label>
                                                 <div class="col-md-4">
-                                                    <input type="text" class="form-control" name="email" />
+                                                    <input type="text" class="form-control" name="edad" id="edad" />
                                                 </div>
                                             </div>
                                         </div>
