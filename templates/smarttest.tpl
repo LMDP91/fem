@@ -21,7 +21,7 @@
         <div class="container">
             <div class="container iniciar">
                 <p class="text-center">
-                	<h1>Por favor, Tómate unos minutos para compatir tus ideas con nosotros</h1>
+                	<h4>Estas preguntas deberan deberá resguardarse conforme a lo establecido bajo la Ley  General de Protección de Datos Personales en Posesión de Sujetos Obligados, Artículo 45 Fracción 1,  de la Constitución Política del Estado de Chiapas</h4>
                 </p>
             </div>
     </section>

@@ -19,7 +19,7 @@
 		</div>
 	</div>
 	 <!-- BEGIN PAGE TITLE-->
-		<h1 class="page-title">SmartTest
+		<h1 class="page-title">GUÍA DE DETECCIÓN DEL RIESGO DE VIOLENCIA FEMINICIDA
 			<small></small>
 		</h1>
 	 <!-- END PAGE TITLE-->
@@ -68,11 +68,14 @@
 						</li>
 					 </ul>
 					</div>-->	
-				</div>
+				</div>				
 			</div>
 			<div class="portlet-body" id="tblContent">
 			 {include file="{$DOC_ROOT}/templates/lists/question.tpl"}
 			</div>
 		</div>
+		<center>
+		    <b>Este documento deberá resguardarse conforme a lo establecido bajo la Ley  General de Protección de Datos Personales en Posesión de Sujetos Obligados, Artículo 45 Fracción 1,  de la Constitución Política del Estado de Chiapas</b>
+	    </center>
 	</div>
 	<!-- END PAGE CONTENT-->	
