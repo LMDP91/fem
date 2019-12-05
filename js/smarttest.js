@@ -11,6 +11,9 @@ $(function () {
 			},
 			success: function(response) {
 				$("#"+name).html(response);
+				if($("#slider").length>0)
+					$( "#slider" ).slider();
+
 			},
 			error:function(){
 				alert(msgError);
