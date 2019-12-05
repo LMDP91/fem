@@ -7,18 +7,12 @@
 <html lang="en" class="no-js"> <!--<![endif]-->
 <head>
 	{include file="{$DOC_ROOT}/templates/1-default-meta.tpl"}
-	{include file="{$DOC_ROOT}/templates/2-default-css.tpl"}
 	{include file="{$DOC_ROOT}/templates/header.tpl"}
+    {include file="{$DOC_ROOT}/templates/2-default-css.tpl"}
 
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script>
-        $(function () {
-            $("#slider").slider();
-        });
-    </script>
-</head>
+</head>s
 
 <body class="">
 <div id="wrap" class="colorskin-0">
@@ -31,61 +25,105 @@
                 </p>
             </div>
     </section>
-    <section class="container page-content">
-        <hr class="vertical-space2">
-        <section class="eleven columns">
-            <div class="shop-wrap">
-                <p class="result-count">{$InfoCategoria.info}</p>
-                <div class="shop-wrap">
-                    <div id="divRegistro">
-                        <div id="loader"></div>
-                        <div id="txtErrMsg" style="color:red"></div>
-                        <button class="button small iniciar" style="background:#008080" onclick="iniciarEncuesta()">
-                            Iniciar
-                        </button>
-                    </div>
-                    <div id='msjEncuesta'>
-                    </div>
-                    <div id='div_encuesta' style="display:none">
-                        <form id="frmGral">
-                            <input type='hidden' name='encuestaId' id='encuestaId' value='{$ultima.encuestaId}'/>
-                            {foreach from=$registros item=item key=key}
-                                <h3>{$key+1}.- {$item.pregunta}</h3>
-                                <br>
-                                <center>
-                                    {if $item.tiporespuesta eq 'punto'}
-                                        {$item.rango1}
-                                        {$item.rango2}
-                                        <div id="slider"></div>
-                                    {else if $item.tiporespuesta eq 'opcional'}
-                                        {foreach from=$item.opciones item=item2 key=key}
-                                            <input type='radio' name='check_{$item.preguntaId}'
-                                                   id='check_{$item.preguntaId}' value='{$item2}'/>
-                                            <font style='font-size:18px'>{$item2}</font>
-                                        {/foreach}
-                                    {else}
-                                        <textarea name='check_{$item.preguntaId}'
-                                                  style='width:100px !important; width:150px'></textarea>
-                                    {/if}
-                                    <br>
-                                    <br>
-                                </center>
-                            {/foreach}
-                        </form>
-                        <div id='msj'>
+    <div class="row">
+        <div class="container">
+            <div class="col-md-12">
+                <div class="portlet light bordered" id="form_wizard_1">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="icon-layers font-red"></i>
                         </div>
-                        <button class="button small" style="background:#008080" onclick="SaveEncuesta()">Enviar
-                            Encuesta
-                        </button>
+                    </div>
+                    <div class="portlet-body form">
+                        <form action="#" id="submit_form"  method="post" class="form-horizontal">
+                            <div class="form-wizard">
+                                <div class="form-body">
+                                    <ul class="nav nav-pills nav-justified steps">
+                                        <li>
+                                            <a href="#tab1" data-toggle="tab" class="step">
+                                                <span class="number">1</span>
+                                                <span class="desc">
+                                                <i class="fa fa-check"></i> Datos Personales
+                                            </span>
+                                            </a>
+                                        </li>
+                                        {foreach from=$encuestas item=item key=key}
+                                        <li>
+                                            <a href="#tab{$key+1+1}" data-toggle="tab" class="step">
+                                                <span class="number">{$key+1+1}</span>
+                                                <span class="desc">
+                                                <i class="fa fa-check"></i> {$item.nombre}
+                                            </span>
+                                            </a>
+                                        </li>
+                                        {/foreach}
+                                    </ul>
+                                    <div id="bar" class="progress progress-striped" role="progressbar">
+                                        <div class="progress-bar progress-bar-success"> </div>
+                                    </div>
+                                    <div class="tab-content">
+                                        <div class="alert alert-danger display-none">
+                                            <button class="close" data-dismiss="alert"></button> You have some form errors. Please check below. </div>
+                                        <div class="alert alert-success display-none">
+                                            <button class="close" data-dismiss="alert"></button> Your form validation is successful! </div>
+                                        <div class="tab-pane active" id="tab1">
+                                            <h3>Datos personales</h3>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">Nombre
+                                                    <span class="required"> * </span>
+                                                </label>
+                                                <div class="col-md-4">
+                                                    <input type="text" class="form-control" name="username" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">Apellido Paterno
+                                                    <span class="required"> * </span>
+                                                </label>
+                                                <div class="col-md-4">
+                                                    <input type="password" class="form-control" name="password" id="submit_form_password" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">Apellido Materno
+                                                </label>
+                                                <div class="col-md-4">
+                                                    <input type="password" class="form-control" name="rpassword" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">Fecha de nacimiento
+                                                    <span class="required"> * </span>
+                                                </label>
+                                                <div class="col-md-4">
+                                                    <input type="text" class="form-control" name="email" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-actions">
+                                    <div class="row">
+                                        <div class="col-md-offset-3 col-md-9">
+                                            <a href="javascript:;" class="btn default button-previous">
+                                                <i class="fa fa-angle-left"></i> Anterior </a>
+                                            <a href="javascript:;" class="btn btn-outline green button-next"> Siguiente
+                                                <i class="fa fa-angle-right"></i>
+                                            </a>
+                                            <a href="javascript:;" class="btn green button-submit"> Submit
+                                                <i class="fa fa-check"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </form>
                     </div>
                 </div>
-                <hr class="vertical-space1">
-                <div class="pagination2">
-                </div>
-                <hr class="vertical-space2">
-        </section>
-    </section>
-
+            </div>
+        </div>
+    </div>
 </div>
 {include file="{$DOC_ROOT}/templates/footer.tpl"}
 {include file="{$DOC_ROOT}/templates/3-default-js.tpl"}

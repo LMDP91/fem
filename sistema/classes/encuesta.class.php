@@ -115,11 +115,9 @@ class Encuesta extends Main
 	
 	public function getListEncuesta(){
 
-		$sql = 'SELECT * FROM 1encuesta';
+		$sql = 'SELECT * FROM encuesta';
 		$this->Util()->DB()->setQuery($sql);
-		$results =  $this->Util()->DB()->GetResult();
-	    
-	    return $results;
+		return $this->Util()->DB()->GetResult();
 	}
 	
 	public function Enumerate(){

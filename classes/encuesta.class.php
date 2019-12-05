@@ -115,7 +115,7 @@ class Encuesta extends Main
 	
 	public function getListEncuesta(){
 
-		$sql = 'SELECT * FROM 1encuesta';
+		$sql = 'SELECT * FROM encuesta';
 		$this->Util()->DB()->setQuery($sql);
 		$results =  $this->Util()->DB()->GetResult();
 	    
@@ -144,7 +144,6 @@ class Encuesta extends Main
 				WHERE empresaId = '.$infoQuien["empresaId"].' '.$filtro.'
 				ORDER BY encuestaId ASC
 				'.$sqlLim;
-		// exit;
 		
 		$this->Util()->DB()->setQuery($sql);
 		$data['result'] = $this->Util()->DB()->GetResult();
@@ -484,6 +483,15 @@ class Encuesta extends Main
 
 		return $lst;	
 	}
+	public function listEncuesta(){
+        $sql = 'SELECT * 
+				from
+				encuesta 
+				order by
+				encuestaId DESC ';
+        $this->Util()->DB()->setQuery($sql);
+        return $this->Util()->DB()->GetRow();
+    }
 	public function SaveEncuestaCliente(){
 						
 
