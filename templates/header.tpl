@@ -13,7 +13,7 @@
   ================================================== -->
 	<link rel="stylesheet" href="{$WEB_ROOT}/css/style.css?kdkdkdmdmdmdmdmd" type="text/css"  media="all">
 
-<link href="http://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700|Roboto+Slab:300,400" rel="stylesheet" type="text/css">
+	<link href="http://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700|Roboto+Slab:300,400" rel="stylesheet" type="text/css">
 
 
 	<!-- JS
@@ -23,9 +23,3 @@
 	<script src="js/modernizr.custom.11889.js" type="text/javascript"></script>
 	<![endif]-->
 	<!-- HTML5 Shiv events (end)-->
-      	
-	
-	
-	<!-- Favicons
-  ================================================== -->
-<!-- <link rel="icon" type="image/x-icon" href="{$WEB_ROOT}/images/favicon.ico"  >

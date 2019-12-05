@@ -1,0 +1,2 @@
+<link href="{$WEB_ROOT}/sistema/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="{$WEB_ROOT}/sistema/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />

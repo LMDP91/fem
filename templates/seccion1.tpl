@@ -1,114 +1,59 @@
-<section class="container" >
-<hr class="vertical-space3">
-	<!-- Start Page Content -->
-    <div class="row">
-      <div class="seven columns"> <img src="images/slide-emfrich/66.jpeg" alt="f">
-        <hr class="vertical-space1">
+<section id="headline">
+  <div class="container">
+    <h3><font color="#7F0000">Guia para deteccion de violencia</font></h3>
+  </div>
+</section>
+<section class="container page-content" >
+  <section id="main-content">
+    <div class="eleven columns">
+      <font color="#7F0000"></font>
+      <br>
+      <p>Proponemos una guia para deteccion de violencia</p>
+      <!-- Question #1 -->
+      <span class="acc-trigger active"><a href="#"><h3>Guia 1</h3></a></span>
+      <div class="acc-container">
+        <div class="content">
+          <p>Cubrir las necesidades de nuestros clientes brindando la mejor atención personalizada y un excelente servicio contribuyan a la organización de nuestros clientes.
+          </p>
+        </div>
       </div>
-      <div class="nine columns">
-        <hr class="vertical-space1">
-        <div class="eight columns">
-          <h3><strong>ACCIONES DE "EMFRICH"</strong></h3><!--
-          <h5 class="magic"> Give us a chance and we will
-            prove our efficiency! We will show you the way to Success!</h5>-->
+      <!-- Question #2 -->
+      <span class="acc-trigger"><a href="#"><h3>Guia 2</h3></a></span>
+      <div class="acc-container">
+        <div class="content">
+          <p>Ser una de las cadenas desarrolladora de software de mayor preferencia entre los consumidores del Estado de Chiapas, siendo reconocido por nuestro trabajo constante y responsable como organización de excelencia.</p>
         </div>
-        <hr class="vertical-space2">
-        <div class="row column omega">
-		<!-- Start Icon Boxes -->
-          <div class="one_half">
-            <article class="icon-box3"> <i class="fa-cube"></i><br>
-              <h5><strong>CHULETA AHUMADA</strong></h5>
-              <p>
-				suele contener parte de una vértebra y parte de su correspondiente costilla, y en general es lo bastante grande como para ser servida como porción individual para una persona.
-			  </p>
-            </article>
-          </div>
-          <div class="one_half column-last">
-            <article class="icon-box3"> <i class="fa-desktop"></i><br>
-              <h5><strong>CANAL DE CERDO</strong></h5>
-              <p>
-			    Este servicio fue desarrollado con el fin de mantener en óptimas condiciones todas las herramientas de trabajo de tu empresa
-			 </p>
-            </article>
-          </div>
+      </div>
+      <span class="acc-trigger"><a href="#"><h3>Guia 3</h3></a></span>
+      <div class="acc-container">
+        <div class="content">
+          <p>a) Trabajo en equipo y compromiso
+            <br>
+            Aportamos nuestro talento y mejor actitud para generar mejores soluciones y resultados que beneficien a nuestros clientes, proveedores
+            y colaboradores
+          </p>
+          <p>
+            b) Confianza<br>
+            Porque nuestros actos son la mejor señal para fortalecer las relaciones comerciales y personales
+          </p>
+          <p>
+            c) Respeto<br>
+            Ante la diversidad de creencias, ideales y actitudes personales en alineación con las normas de urbanidad y sociales
+          </p>
+          <p>
+            d) Honestidad y Transparencia<br>
+            Como forma de actuar en nuestro diario operar para que siempre los mejores resultados se puedad manifestar
+          </p>
+          <p>
+            e) Calidad de Productos<br>
+            Ofreciendo una gran variedad de productos para la salud y la higiene personal que tengan como distintivo la calidad y efectividad que el
+            cliente requiere
+          </p>
         </div>
-        <br class="clear">
-        <div class="row column omega">
-          <div class="one_half">
-            <article class="icon-box3"> <i class="fa-globe"></i><br>
-              <h5><strong>CANAL DE RES</strong></h5>
-              <p>Todo lo que necesitas saber antes de invertir en software y hardware para tu empresa lo encontraras en esta solución</p>
-            </article>
-          </div>
-          <!--<div class="one_half column-last">
-            <div class="icon-box3"> <i class="fa-dashboard"></i><br>
-              <h5><strong>Server Speedup</strong></h5>
-              <p>Innovative design always develops in tandem with innovative technology, and can never be an end in itself. Morlem ipsum dolor</p>
-            </div>
-          </div>-->
-        </div>
-		<!-- /end- Icon Boxes -->
-        <hr class="vertical-space1">
       </div>
     </div>
-	
-	<!--
-	<div class="sixteen columns">
-      <hr>
-      <div class="aligncenter">
-	  <hr class="vertical-space1">
-        <h1 class="mex-title">What We Do</h1>
-      </div>
-      <div id="left-tab">
-        <div class="tabbable tabs-left">
-          <ul class="nav nav-tabs left-navi">
-            <li class="active"><a href="#lA" data-toggle="tab">Exercitation shorts</a></li>
-            <li><a href="#lB" data-toggle="tab">PBR leggings</a></li>
-            <li><a href="#lC" data-toggle="tab">Etsy mixtape</a></li>
-            <li><a href="#lA" data-toggle="tab">Exercitation</a></li>
-            <li><a href="#lB" data-toggle="tab">DIY salvia</a></li>
-          </ul>
-		 
-          <div class="tab-content">
-            <article class="tab-pane active" id="lA">
-              <div class="two_third"> <br>
-                <h5><strong>Food truck fixie locavore</strong></h5>
-                <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth ad vinyl cillum PBR.</p>
-                <div class="one_half">
-                  <ul class="arrow magic">
-                    <li>Donec sed odio dui. Nulla vitae</li>
-                    <li>Growing collections of tips</li>
-                    <li>Nullam id dolor id nibh ultricies</li>
-                  </ul>
-                </div>
-                <div class="one_half column-last">
-                  <ul class="check magic">
-                    <li>Cosby sweater eu banh mi</li>
-                    <li>Maecenas sed justo varius velit</li>
-                    <li>Pretium et arcu Sed perspiciatis</li>
-                  </ul>
-                </div>
-              </div>
-              <div class="one_third column-last"><img src="images/biz-pic1.jpg" alt=""></div>
-            </article>
-            <article class="tab-pane" id="lB">
-              <div class="two_third"> <br>
-                <h5><strong>Etsy mixtape wayfarers</strong></h5>
-                <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork.<br>
-                  Williamsburg banh mi whatever gluten-free, carles pitchfork biodiesel fixie etsy retro mlkshk vice blog. Scenester cred you probably haven't heard of them, vinyl craft beer blog stumptown. Pitchfork sustainable tofu synth chambray yr.</p>
-              </div>
-              <div class="one_third column-last"><img src="images/biz-pic2.jpg" alt=""></div>
-            </article>
-            <article class="tab-pane" id="lC">
-              <div class="two_third"> <br>
-                <h5><strong>Etsy mixtape wayfarers</strong></h5>
-                <p>Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin. Cred vinyl keffiyeh DIY salvia PBR, banh mi before they sold out farm-to-table VHS viral locavore cosby sweater. Lomo wolf viral, mustache readymade thundercats keffiyeh craft beer marfa ethical. Wolf salvia freegan, sartorial keffiyeh echo park vegan.</p>
-              </div>
-              <div class="one_third column-last"><img src="images/biz-pic3.jpg" alt=""></div>
-            </article>
-          </div>
-        </div>
-      </div>
-    </div>-->
-    <!-- /end-Who We Are -->
+  </section><!-- end-main-conten -->
+  <aside class="four columns offset-by-one sidebar">
+    <img src="{$WEB_ROOT}/images/5.png" width="900" id="img-logo" alt="logo">
+  </aside>
 </section>

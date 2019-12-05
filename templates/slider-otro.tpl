@@ -27,22 +27,14 @@
           <h4 class="ls-s3 l1-s1" style="position: absolute; top:266px; left: 50%; border-color:#253042; color:#253042; font-weight:400; slidedirection : bottom; slideoutdirection : left; durationin : 3000; durationout : 750; easingin : easeInOutQuint; easingout : easeInBack; delayin : 500;">Looks beautiful on smartphones and tablets</h4>
           <a class="button red ls-s8" href="#" style="position: absolute; top:370px; left: 50%; color:#253042; border-color:#253042; slidedirection : bottom; slideoutdirection : bottom; durationin : 3000; durationout : 750; easingin : easeInOutQuint; easingout : easeInOutQuint; delayin : 600;">Purchase Now</a>-->
 		</div>
-       
-       
         <div class="ls-layer" style="slidedirection: right; slideoutdirection : top; slidedelay: 5000; durationin: 1500; durationout: 1500; delayout: 500;"> 
     
 			<img src="images/slide-pics/4.jpg" class="ls-bg" alt="">
-     
-
-     
                <h1 class="ls-s3" style="position: absolute; top:100px; left: 700px; color:#fff; slidedirection : top; slideoutdirection : top; durationin : 3000; durationout : 750; easingin : easeInOutQuint; easingout : easeInBack; delayin : 600;">Soluciones</h1><!--
-      
+
           <h4 class="ls-s3 l1-s1" style="position: absolute; top:256px; left: 700px; color:#fff; border-color:#fff; font-weight:400; slidedirection : bottom; slideoutdirection : bottom; durationin : 3000; durationout : 750; easingin : easeInOutQuint; easingout : easeInBack; delayin : 700;">Every element is cohesive and intentional</h4>
-     
 		<a class="button green ls-s8" href="#" style="position: absolute; top:354px; left: 700px; slidedirection : bottom; slideoutdirection : bottom; durationin : 3000; durationout : 750; easingin : easeInOutQuint; easingout : easeInOutQuint; delayin : 800;">Purchase Now</a>  --> 
 	  </div>
-       
-      
       </div>
     </div>
   </section><!-- end-hero-->
