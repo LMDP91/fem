@@ -7,7 +7,17 @@
             <div id="slider"></div>
         {elseif $item.tiporespuesta eq 'opcional'}
             {foreach from=$item.opciones item=item2 key=key}
-                <input  class="form-control" type='radio' name='check_{$item.preguntaId}' id='check_{$item.preguntaId}' value='{$item2}'/><font style='font-size:18px'>{$item2}</font>
+                <div class="md-radio-inline">
+                    <div class="md-radio">
+                        <input type="radio" name='check_{$item.preguntaId}' id='check_{$item.preguntaId}' value='{$item2}' class="md-radiobtn">
+                        <label for="check_{$item.preguntaId}">
+                            <span class="inc"></span>
+                            <span class="check"></span>
+                            <span class="box"></span>
+                            {$item2}
+                        </label>
+                    </div>
+                </div>
             {/foreach}
         {else}
             <textarea name='check_{$item.preguntaId}'  class="form-control"></textarea>
