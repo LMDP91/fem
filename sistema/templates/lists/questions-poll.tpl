@@ -11,7 +11,6 @@
             <input type="hidden" id="pollId" name="pollId" value="{$info.encuestaId}">
             <div class="form-body">
                 {foreach from=$preguntas item=item key=key}
-
                    <div class="form-group">
                    <label class="font-hg">{$key+1}.- {$item.pregunta}</label>
                    {if $item.tiporespuesta eq 'punto'}
@@ -19,7 +18,6 @@
                        {$item.rango2}
                        <div id="slider"></div>
                    {elseif $item.tiporespuesta eq 'opcional'}
-                       <div class="form-body">
                            <div class="form-group form-md-radios has-success">
                                <div class="col-md-12">
                                    <div class="md-radio-inline">
