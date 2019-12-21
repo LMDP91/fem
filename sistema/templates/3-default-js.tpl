@@ -30,8 +30,14 @@
 <script src="{$WEB_ROOT}/assets/global/scripts/app.min.js" type="text/javascript"></script>
 <!-- END THEME GLOBAL SCRIPTS -->
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
-{if $page=="doc_crear"}
- <script src="{$WEB_ROOT}/assets/pages/scripts/form-wizard.min.js" type="text/javascript"></script>
+{if $page=="do-poll"}
+ <script src="{$WEB_ROOT}/assets/global/plugins/select2/js/select2.full.min.js" type="text/javascript"></script>
+ <script src="{$WEB_ROOT}/assets/global/plugins/bootstrap-wizard/jquery.bootstrap.wizard.min.js" type="text/javascript"></script>
+ <script src="{$WEB_ROOT}/assets/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
+ <script src="{$WEB_ROOT}/assets/pages/scripts/form-wizard.js" type="text/javascript"></script>
+{/if}
+{if $page=="do-pl"}
+ <script src="{$WEB_ROOT}/assets/pages/scripts/form-samples.min.js" type="text/javascript"></script>
 {/if}
 <script src="{$WEB_ROOT}/assets/pages/scripts/components-bootstrap-switch.min.js" type="text/javascript"></script>
 <script src="{$WEB_ROOT}/assets/pages/scripts/table-datatables-buttons.min.js" type="text/javascript"></script>

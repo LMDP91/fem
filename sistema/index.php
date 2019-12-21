@@ -23,10 +23,10 @@
 		'nota',
 		'colonia',
 
-		#pedidos
-        'rankin-pedido',
-		'sales-articulo',
 		#catalogos
+        'poll',
+		    'question',
+            'poll-analytics',
 		'cliente',
 		'estado',
 		'municipio',
@@ -37,24 +37,13 @@
 		'imagen',
         'download-formato',
 
-		'pedido',
-		'detalle-pedido',
-
 		'imagenes',
 		
-		#documentos
-		'doc_crear',
-		'doc_lista',
-		'birthday',
-		'age-ubication',
-		'sex-ubication',
+		#encuestasrealizadas
 		'customer-basic',
-		'order-ubication',
 		'geolocation',
-		'poll',
-		'question',
-		'poll-analytics',
-		'ranking-product',
+        'do-poll'
+
 		
 	);
 	

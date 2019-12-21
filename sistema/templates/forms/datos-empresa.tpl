@@ -12,7 +12,6 @@
 		{else} 
 		<input type="hidden" name="type" value="saveDatosEmpresa" />
 		{/if}
-
 		<div class="form-body">
 		    <div class="row">
                 <div class="col-md-6">
@@ -24,7 +23,6 @@
                             {else}
                                 <input class="form-control" name="nombre" id="nombre" value="{$datosempresa.nombre}">
                             {/if}
-
                         </div>
                     </div>
                  </div>

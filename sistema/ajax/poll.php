@@ -8,32 +8,19 @@
 	session_start();
 	
 	$page = 'poll';
-	
-	
+
 	$smarty->assign('page',$page);
-	
-	// $_POST["type"]= $_GET["type"];
 	switch($_POST['type']){
 	
 		case 'add':
-					
 				$encuesta->setId($_POST['id']);
 				$info = $encuesta->Info();
-				
-				// echo '<pre>'; print_r($info);
-				// exit;
 				echo 'ok[#]';	
 				$smarty->assign('info',$info);				
 				$smarty->assign('titleFrm','Agregar cliente');				
 				$smarty->display(DOC_ROOT.'/templates/boxes/poll.tpl');
-																
 		break;
-		
-		
 		case 'addQuestion':
-				
-				
-				
 				$encuesta->setId($_POST['id']);
 				$info = $encuesta->InfoPregunta();
 
@@ -47,9 +34,7 @@
 				$o3 = $r[2];
 				$o4 = $r[3];
 				$o5 = $r[4];
-			// echo '<pre>'; print_r($info);
-				// exit;
-						
+
 				$smarty->assign('o1',$o1);				
 				$smarty->assign('o2',$o2);				
 				$smarty->assign('o3',$o3);				
@@ -63,11 +48,8 @@
 				$smarty->assign('encuestaId',$_POST['Id']);				
 				$smarty->assign('titleFrm','Agregar Pregunta');				
 				$smarty->display(DOC_ROOT.'/templates/boxes/question.tpl');
-																
 		break;
-		
 		case 'edit':
-				
 				$cliente->setId($_POST['id']);
 				$info = $cliente->Info();
 				// $info = $util->EncodeRow($info);	
@@ -75,17 +57,13 @@
 				$smarty->assign('titleFrm','Editar cliente');
 				$smarty->assign('info',$info);				
 				$smarty->display(DOC_ROOT.'/templates/boxes/add_catalogo.tpl');
-																
 			break;
 		case 'save':
-
 				$encuesta->setNombre($_POST['nombre']);
 				$encuesta->setInicio($_POST['inicio']);
 				$encuesta->setFin($_POST['fin']);
 				$encuesta->setId($_POST['encuestaId']);
-				
 				$success = $encuesta->Save();
-				
 				if($success){									
 					echo 'ok[#]';     					
 				}else{
@@ -94,7 +72,6 @@
 				}
 				
 		break;
-		
 		case 'SaveQuestions':
 		
 				if($_POST["tipo"]=="punto"){
@@ -148,60 +125,92 @@
 				}
 		
 		break;
-		 
 		case 'update':
-
 		        $cliente->setId($_POST['id']);
 				$cliente->setNombre($_POST['nombre']);
 				$cliente->setPaterno($_POST['apaterno']);
 				$cliente->setMaterno($_POST['amaterno']);
 				$cliente->setEmail($_POST['email']);
 				$success = $cliente->Update();
-				if($success){									
-					echo 'ok[#]';									
+				if($success){
+					echo 'ok[#]';
 				}else{
 					echo "fail[#]";					
 					$util->ShowErrors();					
 				}
-				
-			break;
+		break;
 								
 		case 'DeleteReg':
 				
 				$encuesta->setId($_POST['id']);
-				if($encuesta->Delete()){					
-					echo 'ok[#]';				
-				}else
-				{
+				if($encuesta->Delete())
+					echo 'ok[#]';
+				else
 					echo 'fail[#]';
-				}
-				
 	    break;
-	    case 'activar':
-				$cliente->setId($_POST['id']);
-				if($cliente->Activar()){					
-					echo 'ok[#]';				
-				}else
-				{
-					echo 'fail[#]';
-				}
-				
-	    break;
-		
-		
-		
-		case 'DeleteQuestion':
-				
-				$encuesta->setId($_POST['id']);
-				if($encuesta->DeleteQuestion()){					
-					echo 'ok[#]';				
-				}else
-				{
-					echo 'fail[#]';
-				}
-				
-	    break;
-		
-}//switch
 
-?>
+	    case 'activar':
+            $cliente->setId($_POST['id']);
+            if($cliente->Activar())
+                echo 'ok[#]';
+            else
+                echo 'fail[#]';
+	    break;
+		case 'DeleteQuestion':
+            $encuesta->setId($_POST['id']);
+            if($encuesta->DeleteQuestion())
+                echo 'ok[#]';
+            else
+                echo 'fail[#]';
+	    break;
+        case "getQuestions":
+            $encuesta->setEncuestaId($_POST["id"]);
+            $info = $encuesta->Info();
+            $preguntas =  $encuesta->questionsByPoll();
+            $smarty->assign('preguntas',$preguntas);
+            $smarty->assign('info',$info);
+            $smarty->assign('victimaId',$_POST["victimaId"]);
+            $smarty->display(DOC_ROOT.'/templates/lists/questions-poll.tpl');
+        break;
+        case 'saveVictima':
+            $victima->setNombre($_POST["nombre"]);
+            $victima->setAparterno($_POST["firstLastName"]);
+            $victima->setAmaterno($_POST["secondLastName"]);
+            $victima->setEdad($_POST["edad"]);
+            $victima->setEstadoCivil($_POST["estadoCivil"]);
+            $victima->setNacionalidad($_POST["nacionalidad"]);
+            $victima->setGradoEstudio($_POST["gradoEstudio"]);
+            $victima->setOcupacion($_POST["ocupacion"]);
+            $victima->setLugarNacimiento($_POST["lugarDeNacimiento"]);
+            $victima->setMunicipio($_POST["municipio"]);
+            $victima->setColonia($_POST["colonia"]);
+            if($id = $victima->save()){
+                echo "ok[#]";
+                echo $id;
+            }else{
+                echo "fail[#]";
+                $util->ShowErrors();
+            }
+        break;
+        case 'updateVictima':
+            $victima->setVictimaId($_POST["id"]);
+            $victima->setNombre($_POST["nombre"]);
+            $victima->setAparterno($_POST["firstLastName"]);
+            $victima->setAmaterno($_POST["secondLastName"]);
+            $victima->setEdad($_POST["edad"]);
+            $victima->setEstadoCivil($_POST["estadoCivil"]);
+            $victima->setNacionalidad($_POST["nacionalidad"]);
+            $victima->setGradoEstudio($_POST["gradoEstudio"]);
+            $victima->setOcupacion($_POST["ocupacion"]);
+            $victima->setLugarNacimiento($_POST["lugarDeNacimiento"]);
+            $victima->setMunicipio($_POST["municipio"]);
+            $victima->setColonia($_POST["colonia"]);
+            if($id = $victima->update()){
+                echo "ok[#]";
+                echo $id;
+            }else{
+                echo "fail[#]";
+                $util->ShowErrors();
+            }
+            break;
+}

@@ -103,7 +103,7 @@ class Encuesta extends Main
 		
 	public function Info(){
 		
-		$sql = 'SELECT *, encuestaId AS idReg FROM encuesta WHERE encuestaId = "'.$this->id.'"';
+		$sql = 'SELECT *, encuestaId AS idReg FROM encuesta WHERE encuestaId = "'.$this->encuestaId.'"';
 		$this->Util()->DB()->setQuery($sql);
 		$info = $this->Util()->DB()->GetRow();
 				
@@ -123,14 +123,7 @@ class Encuesta extends Main
 	public function Enumerate(){
 		
 		$filtro ="";
-		
-		// $usuario = new Usuario;
-		// $usuario->setId($_SESSION['Usr']["usuarioId"]);
-		// $infoQuien = $usuario->quienIngreso();
-		
-		
-		
-		
+
 		$sql = 'SELECT COUNT(*)	FROM encuesta WHERE 1 '.$filtro.'';
 		$this->Util()->DB()->setQuery($sql);
 		$total = $this->Util()->DB()->GetSingle();
@@ -142,32 +135,18 @@ class Encuesta extends Main
 				WHERE 1 '.$filtro.'
 				ORDER BY encuestaId ASC
 				'.$sqlLim;
-		// exit;
-		
+
 		$this->Util()->DB()->setQuery($sql);
 		$data['result'] = $this->Util()->DB()->GetResult();
-		
-	
-		
 		$data['pages'] = $resPage['pages'];
 		$data['info'] = $resPage['info'];
-					
 		return $data;
-		
 	}//Enumerate
 	
 	public function Save(){
-						
-				
-						
 		if($this->Util()->PrintErrors()){ 
 			return false; 
 		}
-		
-		// $usuario =  new Usuario;
-		// $usuario->setId($_SESSION['Usr']["usuarioId"]);
-		// $infoQuien = $usuario->quienIngreso();
-		
 		if($this->id){
 			 $sql = 'UPDATE encuesta SET 
 				nombre = "'.utf8_decode($this->nombre).'", 
@@ -193,26 +172,14 @@ class Encuesta extends Main
 				"'.$this->fin.'"
 			)';
 		}
-		
-		
-		
-		// exit;
 		$this->Util()->DB()->setQuery($sql);
 		$this->id = $this->Util()->DB()->InsertData();
 			
 		$this->Util()->setError(10141, 'complete', '');
 		$this->Util()->PrintErrors();
-		
 		return true;
-		
 	}//Save
-	
-	
-	
 	public function SaveQuestions(){
-						
-				
-						
 		if($this->Util()->PrintErrors()){ 
 			return false; 
 		}
@@ -249,19 +216,10 @@ class Encuesta extends Main
 			$this->Util()->DB()->setQuery($sql);
 			$this->id = $this->Util()->DB()->InsertData();
 		}
-		
-		
-		// exit;
-		
-			
 		$this->Util()->setError(10112, 'complete', '');
 		$this->Util()->PrintErrors();
-		
 		return true;
-		
 	}//Save
-	
-		
 	public function Update(){
 						
 		if($this->Util()->PrintErrors()){ 
@@ -306,10 +264,8 @@ class Encuesta extends Main
 		
 		return true;
 		
-	}//Delete
-	
-	
-	public function DeleteQuestion(){
+	}//Delet
+    public function DeleteQuestion(){
 		
 		$sql = 'DELETE FROM pregunta WHERE preguntaId = "'.$this->id.'"';
 		$this->Util()->DB()->setQuery($sql);
@@ -319,15 +275,9 @@ class Encuesta extends Main
 		$this->Util()->PrintErrors();
 		
 		return true;
-		
 	}//Delete
-	
-	
-	
 	public function EnumeratePreguntas(){
-		
 		$filtro ="";
-		
 		if($this->id){
 			$filtro .=" and encuestaId = ".$this->id."";
 		}
@@ -347,105 +297,83 @@ class Encuesta extends Main
 		
 		$this->Util()->DB()->setQuery($sql);
 		$data['result'] = $this->Util()->DB()->GetResult();
-		
-	
-		
 		$data['pages'] = $resPage['pages'];
 		$data['info'] = $resPage['info'];
 					
 		return $data;
-		
 	}//EnumeratePreguntas
+    public function questionsByPoll(){
+        $sql = "SELECT * 
+				from
+				encuesta 
+				where encuestaId ='".$this->encuestaId."' ";
+
+        $this->Util()->DB()->setQuery($sql);
+        $infoEncuesta = $this->Util()->DB()->GetRow();
+        $sql = 'SELECT * 
+				from
+				pregunta 
+				where
+				encuestaId = '.$infoEncuesta['encuestaId'].'';
+        $this->Util()->DB()->setQuery($sql);
+        $lst = $this->Util()->DB()->GetResult();
+        foreach($lst as $key=>$aux){
+            if($aux["tiporespuesta"]=="opcional"){
+                unset($opciones);
+                $op = explode("_",$aux["opcional"]);
+                for($i=0;$i<=5;$i++){
+                    if($op[$i]<>""){
+                        $opciones[] = $op[$i];
+                    }
+                }
+                $lst[$key]["opciones"] = $opciones;
+            }else if($aux["tiporespuesta"]=="punto"){
+                $r = explode("_",$aux["rango"]);
+                $lst[$key]["rango1"] = $r[0];
+                $lst[$key]["rango2"] = $r[1];
+            }
+
+        }
+        return $lst;
+    }
 	
-	public function preguntasalCliente(){
-		
-		 $sql = '
+	public function preguntasalCliente()
+    {
+        $sql = '
 			SELECT 
 				* 
 			FROM 
 				1pregunta as p
 			left join 1encuesta as e on e.encuestaId = p.encuestaId 
-			WHERE  e.encuestaId = 3 '.$filtro.'';
-		$this->Util()->DB()->setQuery($sql);
-		$lst = $this->Util()->DB()->GetResult();
-		
-		
-		foreach($lst as $key=>$aux){
-			
-			
-			if($aux["tiporespuesta"]=="opcional"){
-				unset($opciones);
-				$op = explode("_",$aux["opcional"]);
-				for($i=0;$i<=5;$i++){
-					if($op[$i]<>""){
-						$opciones[] = $op[$i];
-					}
-				}
-				$lst[$key]["opciones"] = $opciones;
-			}
-		}
-		
+			WHERE  e.encuestaId = 3 ' . $filtro . '';
+        $this->Util()->DB()->setQuery($sql);
+        $lst = $this->Util()->DB()->GetResult();
+        foreach ($lst as $key => $aux) {
+            if ($aux["tiporespuesta"] == "opcional") {
+                unset($opciones);
+                $op = explode("_", $aux["opcional"]);
+                for ($i = 0; $i <= 5; $i++) {
+                    if ($op[$i] <> "") {
+                        $opciones[] = $op[$i];
+                    }
+                }
+                $lst[$key]["opciones"] = $opciones;
+            }
+        }
+        return $lst;
+    }
 
-		
-		return $lst;
-		
-	}
-	
-	
-	
-	public function saveRespuestas(){
-						
-				
-						
-		if($this->Util()->PrintErrors()){ 
-			return false; 
-		}
-		
-		foreach($_POST as $key=>$aux){
-			
-			$r = explode("_",$key);
-		
-		
-			if($r[0]=="answer"){
-
-				$this->setRespuesta($aux);
-				 $sql = 'INSERT INTO 1resultado (
-						preguntaId, 
-						respuesta, 
-						usuarioId
-					)
-					VALUES(
-						"'.$r[1].'",
-						"'.$this->respuesta.'",
-						"0"
-					)';
-
-					$this->Util()->DB()->setQuery($sql);
-					$this->id = $this->Util()->DB()->InsertData();
-			}
-		}
-		
-		
-		
-		return true;
-		
-	}//saveRespuestas
-	
-	
 	public function totalesRespuesta(){
-	
 		$sql = 'SELECT * 
 				from
 					1pregunta 
 				where
 					encuestaId = '.$this->id;
-
 			
 		$this->Util()->DB()->setQuery($sql);
 		$ls = $this->Util()->DB()->GetResult();
 		
 		foreach($ls as $key=>$aux){
-			
 			$sql = '
 				SELECT 
 					*,
@@ -454,8 +382,6 @@ class Encuesta extends Main
 					1resultado as r12
 				WHERE
 					r12.preguntaId = '.$aux["preguntaId"].' group by r12.respuesta';
-
-			
 			$this->Util()->DB()->setQuery($sql);
 			$lstRes = $this->Util()->DB()->GetResult();
 			
@@ -468,22 +394,15 @@ class Encuesta extends Main
 	}
 	
 	public function InfoPregunta(){
-		
-		 $sql = 'SELECT *, preguntaId AS idReg FROM pregunta WHERE preguntaId = "'.$this->id.'"';
+		$sql = 'SELECT *, preguntaId AS idReg FROM pregunta WHERE preguntaId = "'.$this->id.'"';
 		$this->Util()->DB()->setQuery($sql);
 		$info = $this->Util()->DB()->GetRow();
-		
 		return $info;
-		
 	}
-	
-	
 	public function resultadosPreguntas(){
-		
 		$sql = 'SELECT *, preguntaId AS idReg FROM pregunta WHERE encuestaId = "'.$this->id.'" and tiporespuesta <> "abierta"';
 		$this->Util()->DB()->setQuery($sql);
 		$info = $this->Util()->DB()->GetResult();
-		
 		foreach($info as $key=>$aux){
 			$sql = 'SELECT respuesta,count(*) as total FROM resultado WHERE preguntaId = '.$aux['preguntaId'].' group by respuesta';
 			$this->Util()->DB()->setQuery($sql);
@@ -492,9 +411,7 @@ class Encuesta extends Main
 		}
 		return $info;
 	}
-	
 	public function resultadosAbiertas(){
-		
 		$sql = 'SELECT * FROM resultado as r
 		left join pregunta as p on p.preguntaId = r.preguntaId
 		WHERE encuestaId = "'.$this->id.'" and tiporespuesta = "abierta"';
@@ -503,8 +420,7 @@ class Encuesta extends Main
 		
 		return $info;
 	}
-	
-						
+
 }
 
 ?>

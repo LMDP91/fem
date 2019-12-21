@@ -47,20 +47,18 @@ class User extends Main
 		
 		
 	public function AllowAccess($page = ''){
-	
-		$Usr = $_SESSION['Usr'];
-						
-		if(!$Usr['isLogged']){
-			header('Location: '.WEB_ROOT.'/login');
-			exit;
-		}
-				
-		if($Usr['roleId'] != 1 && $page != ''){			
-			if(!$this->AllowAccessModule($page)){
-				header('Location: '.WEB_ROOT);
-				exit;
-			}
-		}
+        $User = $_SESSION['Usr'];
+
+        if(!$User['isLogged']){
+            header('Location: '.WEB_ROOT.'/login');
+            exit;
+        }
+        if($page != ''&& !$User['role_id'] && $User['role_id']!=1){
+            if(!$this->allow_access_module($page)){
+                header('Location: '.WEB_ROOT);
+                exit;
+            }
+        }
 				
 	}//AllowAccess
 
@@ -68,31 +66,15 @@ class User extends Main
 		
 	}
 	
-	public function AllowAccessModule($page){
-		
+	public function allow_access_module($page){
+		global $objRole;
 		$Usr = $_SESSION['Usr'];
-		
-		$allowPages = array();
-		
-		switch($Usr['roleId']){
-			
-			case 1:
-			case 2:
-			case 3:
-				$allowPages = array(
-					'homepage',
-					'personal',
-					'customer'
-				);
-				break;
-		
-		}
-			
-		if(in_array($page,$allowPages))
-			return true;
-		else
-			return false;
-		
+        $objRole->setRoleId($Usr["role_id"]);
+        $allowPages = $objRole->permisoSegunRol();
+        if(in_array($page,$allowPages))
+            return true;
+        else
+            return false;
 	}//AllowAccessModule
 	
 	public function DoLoginCheck(){
@@ -123,31 +105,20 @@ class User extends Main
 		$row = $this->Util()->DB()->GetRow();
 			
 		if($row){
-			
-			// $name = explode(' ',$row['nombre']);
-			
 			$card['usuarioId'] = $row['usuarioId'];	
 			$card['role_id'] = $row['role_id'];
             $card['sucursalId'] = $row['sucursalId'];
 	        $card['usuario'] = $row['usuario'];
             $card['email'] = $row['email'];
-			$card['isLogged'] = true;;			
-			
-			// $card['roleId'] = ($card['tipo'] == 'admin') ? 1 : 2;
-			
+			$card['isLogged'] = true;;
 			$_SESSION['Usr'] = $card;
-			
 			return true;
-				
 		}else{					
 			
 			$this->Util()->setError(10006, 'error', '');
 			$this->Util()->PrintErrors();
-			
 		}//else
-	
 		return false;
-		
 	}//DoLogin
 	
 	public function DoLogout(){		

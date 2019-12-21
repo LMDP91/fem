@@ -28,15 +28,14 @@ var FormWizard = function () {
             var error = $('.alert-danger', form);
             var success = $('.alert-success', form);
 
-           /* form.validate({
+           /*form.validate({
                 doNotHideMessage: true, //this option enables to show the error/success messages on tab switch.
                 errorElement: 'span', //default input error message container
                 errorClass: 'help-block help-block-error', // default input error message class
                 focusInvalid: false, // do not focus the last invalid input
                 rules: {
                     //account
-                    username: {
-                        minlength: 5,
+                    nombre: {
                         required: true
                     },
                     password: {
@@ -147,8 +146,7 @@ var FormWizard = function () {
                     //add here some ajax code to submit your form or just call form.submit() if you want to submit the form without ajax
                 }
 
-            });
-*/
+            });*/
             var displayConfirm = function() {
                 $('#tab4 .form-control-static', form).each(function(){
                     var input = $('[name="'+$(this).attr("data-display")+'"]', form);
@@ -173,6 +171,8 @@ var FormWizard = function () {
 
             var handleTitle = function(tab, navigation, index) {
                 var total = navigation.find('li').length;
+                var forms = navigation.find('form').length;
+                console.log(forms);
                 var current = index + 1;
                 // set wizard title
                 $('.step-title', $('#form_wizard_1')).text('Step ' + (index + 1) + ' of ' + total);
@@ -212,12 +212,12 @@ var FormWizard = function () {
                     if (form.valid() == false) {
                         return false;
                     }
-                    
                     handleTitle(tab, navigation, clickedIndex);
                 },
                 onNext: function (tab, navigation, index) {
                     success.hide();
                     error.hide();
+                    console.log(navigation);
 
                     if (form.valid() == false) {
                         return false;

@@ -310,7 +310,7 @@ abstract class BaseRbac extends JModel
 		if ($NewDescription !== null)
 			$Data ['Description'] = $NewDescription;
 
-        return $this->{$this->type ()}->editData ( $Data, "ID=?", $ID ) == 1;
+        return $this->{$this->type ()}->editData( $Data, "ID=?", $ID ) == 1;
 	}
 
 	/**
