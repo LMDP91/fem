@@ -3,8 +3,6 @@
     $user->AllowAccess(19);
     $user->AllowAccess(20);
 
-
-
     $victima->setVictimaId($_GET["id"]);
     $dataVictima = $victima->Info();
 

@@ -13,9 +13,10 @@ $rbac =  new Rbac;
 
 include_once(DOC_ROOT.'/classes/db.class.php');
 $db = new DB;
-
+require 'vendor/autoload.php';
 include_once(DOC_ROOT.'/classes/error.class.php');
 $error = new Error;
+
 
 include_once(DOC_ROOT.'/classes/util.class.php');
 $util = new Util;
@@ -67,15 +68,13 @@ $encuesta = new Encuesta;
 include_once(DOC_ROOT.'/classes/victima.class.php');
 $victima = new Victima;
 
+include_once(DOC_ROOT.'/classes/questions.class.php');
+$question = new Question;
+
 include_once(DOC_ROOT.'/classes/class.phpmailer.php');
 include_once(DOC_ROOT.'/classes/class.smtp.php');
 include_once(DOC_ROOT.'/classes/sendmail.class.php');
 
-include_once(DOC_ROOT.'/libs/pdf/dompdf_config.inc.php');
-
-
-//include_once(DOC_ROOT.'/libs/pdf/fpdf.php');
-include_once(DOC_ROOT.'/libs/pdf/fpdf.php');
 
  /* pChart library inclusions */ 
  // include_once(DOC_ROOT."/libs/pChart/class/pData.class.php"); 

@@ -174,7 +174,7 @@
 		</ul>
       </li>
     {/if}
-	<li class="nav-item {if $page =='report' || $page =='geolocation' || $page =='do-poll'}active open{/if}">
+	<li class="nav-item {if $page =='report' || $page =='geolocation' || $page =='do-poll' || $page =='done-polls'}active open{/if}">
 		<a href="javascript:;" class="nav-link nav-toggle">
 			<i class="icon-list"></i>
 			<span class="title">Encuestas Aplicadas</span>
@@ -194,12 +194,20 @@
 					</a>
 				</li>
 			{/if}
-			<li class="nav-item {if $page=='poll' || $page=='poll-analytics'}active open{/if}">
+			{if in_array('4001',$privilegios) or $Usr.role_id eq 1}
+				<li class="nav-item {if $page=='done-polls'}active open{/if}">
+					<a class="nav-link " href="{$WEB_ROOT}/done-polls">
+						<i class="icon-list"></i>
+						<span class="title">Encuestas realizadas</span>
+					</a>
+				</li>
+			{/if}
+			<!-- class="nav-item {if $page=='poll' || $page=='poll-analytics'}active open{/if}">
 				<a class="nav-link " href="{$WEB_ROOT}/poll">
 					<i class="icon-list"></i>
 					<span class="title">Estadistica</span>
 				</a>
-			</li>
+			</li-->
 			<li class="nav-item {if $page =='geolocation'}active open{/if}" >
 				<a class="nav-link " href="{$WEB_ROOT}/geolocation">
 					<i class="icon-map"></i>

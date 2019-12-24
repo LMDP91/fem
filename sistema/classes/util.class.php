@@ -190,7 +190,7 @@ class Util extends Error
 	}	
 
 	function ValidateRequireField($string, $field = '')
-	{				
+	{
 		if(trim($string) == ""){
 			$this->setError(10013, "error", "", $field);
 			return false;

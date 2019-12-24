@@ -10,35 +10,39 @@ class Encuesta extends Main
 	private $opcional;
 	private $encuestaId;
 	private $respuesta;
+	private $contexto;
 
-	
-	
 	public function setEncuestaId($value){
 		$this->Util()->ValidateInteger($value);
 		$this->encuestaId = $value;
 	}
-	
 	public function setId($value){
 		$this->Util()->ValidateInteger($value);
 		$this->id = $value;
 	}
-	
-	
+
+	public function getEncuestaId(){
+	    return $this->encuestaId;
+    }
+
 	public function setNombre($value){	
 		if($this->Util()->ValidateRequireField($value, 'Nombre')){
 			$this->Util()->ValidateString($value, 100, 0, '');
 			$this->nombre = $value;
 		}		
 	}
-	
-	
-	public function setRespuesta($value){	
 
+	public function setRespuesta($value){
 			$this->Util()->ValidateString($value, 100, 0, '');
 			$this->respuesta = $value;
-		
 	}
-	
+	public function setContexto($value){
+        $this->Util()->ValidateRequireField($value, 'Tipo de contexto');
+        $this->contexto = $value;
+    }
+    public function getContexto(){
+	    return $this->contexto;
+    }
 	public function setPregunta($value){	
 		if($this->Util()->ValidateRequireField($value, 'Pregunta')){
 			$this->Util()->ValidateString($value, 100, 0, '');
@@ -302,40 +306,7 @@ class Encuesta extends Main
 					
 		return $data;
 	}//EnumeratePreguntas
-    public function questionsByPoll(){
-        $sql = "SELECT * 
-				from
-				encuesta 
-				where encuestaId ='".$this->encuestaId."' ";
 
-        $this->Util()->DB()->setQuery($sql);
-        $infoEncuesta = $this->Util()->DB()->GetRow();
-        $sql = 'SELECT * 
-				from
-				pregunta 
-				where
-				encuestaId = '.$infoEncuesta['encuestaId'].'';
-        $this->Util()->DB()->setQuery($sql);
-        $lst = $this->Util()->DB()->GetResult();
-        foreach($lst as $key=>$aux){
-            if($aux["tiporespuesta"]=="opcional"){
-                unset($opciones);
-                $op = explode("_",$aux["opcional"]);
-                for($i=0;$i<=5;$i++){
-                    if($op[$i]<>""){
-                        $opciones[] = $op[$i];
-                    }
-                }
-                $lst[$key]["opciones"] = $opciones;
-            }else if($aux["tiporespuesta"]=="punto"){
-                $r = explode("_",$aux["rango"]);
-                $lst[$key]["rango1"] = $r[0];
-                $lst[$key]["rango2"] = $r[1];
-            }
-
-        }
-        return $lst;
-    }
 	
 	public function preguntasalCliente()
     {
@@ -420,6 +391,11 @@ class Encuesta extends Main
 		
 		return $info;
 	}
+	public function totalQuestionsPoll(){
+	    $sql = "select count(*) from pregunta where encuestaId = '".$this->getEncuestaId()."'";
+	    $this->Util()->DB()->setQuery($sql);
+	    return $this->Util()->DB()->GetSingle();
+    }
 
 }
 

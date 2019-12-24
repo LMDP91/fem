@@ -6,7 +6,7 @@
         </div>
     </div>
     <div class="portlet-body">
-        <form enctype="multipart/form-data" name="frmDatosPersonales" id="frmDatosPersonales" method="post" action="#" onsubmit="return false" >
+        <form enctype="multipart/form-data" name="frmDatosPersonales" id="frmDatosPersonales" method="post" onsubmit="return false" >
             {if $post}
                 <input type="hidden" name="type" id="type" value="updateVictima">
                 <input type="hidden" name="id" id="id" value="{$post.victimaId}">
@@ -97,7 +97,7 @@
                         <div align="center" id="txtErrMsg" class="alert alert-danger" style="display:none"></div>
                     </div>
                     <div class="col-md-6">
-                        <button type="submit" class="btn green btnSaveDataVictima" >{if $post}Actualizar{else}Guardar{/if}</button>
+                        <button type="submit" class="btn green " id="btnSaveDataVictima" >{if $post}Actualizar{else}Guardar{/if}</button>
                     </div>
                 </div>
             </div>

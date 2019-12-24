@@ -39,50 +39,68 @@
 					</div>
 				</div>
 				<div class="portlet-body form">
-					<!--form action="#" class="form-horizontal" method="post" id="submit_form" -->
-						<div class="form-wizard">
-							<div class="form-body">
-								<ul class="nav nav-pills nav-justified steps">
-									<li>
-										<a href="#tab1" data-toggle="tab" >Datos Personales</a>
-									</li>
-									{foreach from=$encuestas item=item key=key}
-										<li>
-											<a href="#tab{$item.encuestaId}" data-toggle="tab" data-id="{$item.encuestaId}" data-name="tab{$item.encuestaId}">
-												{$item.nombre|ucfirst}
-											</a>
-										</li>
-									{/foreach}
-								</ul>
-								<!--div id="bar" class="progress progress-striped" role="progressbar">
-									<div class="progress-bar progress-bar-success"></div>
-								</div> -->
-								<div class="tab-content">
-									<div class="tab-pane active" id="tab1">
-										{include file="{$DOC_ROOT}/templates/forms/frm-datos-personales.tpl"}
-									</div>
-									{foreach from=$encuestas item=item key=key}
-										<div class="tab-pane" id="tab{$item.encuestaId}">
-										</div>
-									{/foreach}
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label class="control-label col-md-3"><span class="reqIcon"></span>Tipo de contexto</label>
+								<div class="col-md-9">
+									<select name="tipoContexto" id="tipoContexto" class="form-control">
+										<option value="">Seleccionar contexto</option>
+										<option value="Urbano" {if $post.tipo eq "Urbano"}selected{/if}>Urbano</option>
+										<option value="Indigena" {if $post.tipo eq "Indigena"}selected{/if}>Indigena</option>
+									</select>
 								</div>
 							</div>
-							<!--div class="form-actions">
-								<div class="row">
-									<div class="col-md-offset-3 col-md-9">
-										<a href="javascript:;" class="btn default button-previous">
-											<i class="fa fa-angle-left"></i> Atras </a>
-										<a href="javascript:;" class="btn btn-outline green button-next"> Continuar
-											<i class="fa fa-angle-right"></i>
-										</a>
-										<a href="javascript:;" class="btn green button-submit"> Guardar
-											<i class="fa fa-check"></i>
-										</a>
-									</div>
-								</div>
-							</div-->
 						</div>
-					<!--/form-->
+					</div>
+					<div class="form-wizard" {if !$post}style="display: none"{/if}>
+						<div class="form-body">
+
+							<ul class="nav nav-pills nav-justified steps">
+								<li>
+									<a href="#tab1" data-toggle="tab" >Datos Personales</a>
+								</li>
+								{foreach from=$encuestas item=item key=key}
+									<li {if $post.tipo neq $item.tipo}style="display: none"{/if} class="{$item.tipo}">
+										<a href="#tab{$item.encuestaId}" data-toggle="tab" data-id="{$item.encuestaId}" data-name="tab{$item.encuestaId}" >
+											{$item.nombre|ucfirst}
+										</a>
+									</li>
+								{/foreach}
+								<li>
+									<a href="#tabVerResultado" data-toggle="tab" id="showResultado">
+										Ver Resultado
+									</a>
+								</li>
+							</ul>
+							<div class="tab-content">
+								<div class="tab-pane active" id="tab1">
+									{include file="{$DOC_ROOT}/templates/forms/frm-datos-personales.tpl"}
+								</div>
+								{foreach from=$encuestas item=item key=key}
+									<div class="tab-pane dinamic-child"  id="tab{$item.encuestaId}">
+									</div>
+								{/foreach}
+								<div class="tab-pane" id="tabVerResultado">
+								</div>
+							</div>
+						</div>
+						<!--div class="form-actions">
+							<div class="row">
+								<div class="col-md-offset-3 col-md-9">
+									<a href="javascript:;" class="btn default button-previous">
+										<i class="fa fa-angle-left"></i> Atras </a>
+									<a href="javascript:;" class="btn btn-outline green button-next"> Continuar
+										<i class="fa fa-angle-right"></i>
+									</a>
+									<a href="javascript:;" class="btn green button-submit"> Guardar
+										<i class="fa fa-check"></i>
+									</a>
+								</div>
+							</div>
+						</div-->
+					</div>
+				<!--/form-->
 				</div>
 		</div>
 	</div>

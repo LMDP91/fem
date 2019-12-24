@@ -14,65 +14,67 @@ class Victima extends main
     private $municipio;
     private $colonia;
     private $victimaId;
+    private $tipo;
 
     public function setVictimaId($value){
         $this->Util()->ValidateInteger($value);
         $this->victimaId= $value;
     }
     public function setNombre($value){
-        if($this->Util()->ValidateRequireField($value, 'Nombre')){
-            $this->nombre = $value;
-        }
+        $this->Util()->ValidateRequireField($value, 'Nombre');
+        $this->nombre = $value;
+
     }
     public function setAparterno($value){
-        if($this->Util()->ValidateRequireField($value, 'Apellido Paterno')){
-            $this->apaterno = $value;
-        }
+        $this->Util()->ValidateRequireField($value, 'Apellido Paterno');
+        $this->apaterno = $value;
+
     }
     public function setAmaterno($value){
-        if($this->Util()->ValidateRequireField($value, 'Apellido Materno')){
-            $this->amaterno = $value;
-        }
+        $this->Util()->ValidateRequireField($value, 'Apellido Materno');
+        $this->amaterno = $value;
+
     }
     public function setEdad($value){
-        if($this->Util()->ValidateRequireField($value, 'Edad')){
-            $this->edad = $value;
-        }
+        $this->Util()->ValidateRequireField($value, 'Edad');
+        $this->edad = $value;
+
     }
     public function setEstadoCivil($value){
-        if($this->Util()->ValidateRequireField($value, 'Estado Civil')){
-            $this->estadoCivil = $value;
-        }
+        $this->Util()->ValidateRequireField($value, 'Estado Civil');
+        $this->estadoCivil = $value;
     }
     public function setNacionalidad($value){
-        if($this->Util()->ValidateRequireField($value, 'Nacionalidad')){
-            $this->nacionalidad = $value;
-        }
+        $this->Util()->ValidateRequireField($value, 'Nacionalidad');
+        $this->nacionalidad = $value;
+
     }
     public function setGradoEstudio($value){
-        if($this->Util()->ValidateRequireField($value, 'Grado de Estudios')){
-            $this->gradoEstudio = $value;
-        }
+        $this->Util()->ValidateRequireField($value, 'Grado de Estudios');
+        $this->gradoEstudio = $value;
     }
     public function setOcupacion($value){
-        if($this->Util()->ValidateRequireField($value, 'Ocupacion')){
-            $this->ocupacion = $value;
-        }
+        $this->Util()->ValidateRequireField($value, 'Ocupacion');
+        $this->ocupacion = $value;
+
     }
     public function setLugarNacimiento($value){
-        if($this->Util()->ValidateRequireField($value, 'Lugar de Nacimiento')){
-            $this->lugarNacimiento = $value;
-        }
+        $this->Util()->ValidateRequireField($value, 'Lugar de Nacimiento');
+        $this->lugarNacimiento = $value;
     }
     public function setMunicipio($value){
-        if($this->Util()->ValidateRequireField($value, 'Municipio')){
-            $this->municipio = $value;
-        }
+        $this->Util()->ValidateRequireField($value, 'Municipio');
+        $this->municipio = $value;
     }
     public function setColonia($value){
-        if($this->Util()->ValidateRequireField($value, 'Colonia')){
-            $this->colonia = $value;
-        }
+        $this->Util()->ValidateRequireField($value, 'Colonia');
+        $this->colonia = $value;
+
+    }
+    public function setTipo($value){
+        $this->Util()->ValidateRequireField($value, 'Tipo contexto');
+        $this->tipo = $value;
+
     }
     public function save(){
         if($this->Util()->PrintErrors()){
@@ -89,8 +91,9 @@ class Victima extends main
         $lugarNacimiento = $this->lugarNacimiento;
         $municipio = $this->municipio;
         $colonia = $this->colonia;
+        $tipo = $this->tipo;
 
-        $sql ="insert into victima(
+       $sql ="insert into victima(
                     nombre,
                     apaterno,
                     amaterno,
@@ -101,7 +104,8 @@ class Victima extends main
                     ocupacion,
                     lugarNacimiento,
                     municipio,
-                    colonia
+                    colonia,
+                    tipo
                     )values(
                      '$nombre',
                      '$apaterno',
@@ -113,12 +117,13 @@ class Victima extends main
                      '$ocupacion',
                      '$lugarNacimiento',
                      '$municipio',
-                     '$colonia'
+                     '$colonia',
+                     '$tipo'
                     )";
         $this->Util()->DB()->setQuery($sql);
-        $this->Util()->DB()->InsertData();
+        $id = $this->Util()->DB()->InsertData();
 
-        return true;
+        return $id;
     }
     public function update(){
         if($this->Util()->PrintErrors()){
@@ -136,6 +141,7 @@ class Victima extends main
         $lugarNacimiento = $this->lugarNacimiento;
         $municipio = $this->municipio;
         $colonia = $this->colonia;
+        $tipoContexto = $this->tipoContexto;
 
        $sql ="update victima set 
                     nombre = '$nombre',
@@ -148,7 +154,8 @@ class Victima extends main
                     ocupacion = '$ocupacion',
                     lugarNacimiento = '$lugarNacimiento',
                     municipio = '$municipio',
-                    colonia = '$colonia'
+                    colonia = '$colonia',
+                    tipoContexto = '$tipoContexto'
                     where victimaId ='".$this->victimaId."' ";
         $this->Util()->DB()->setQuery($sql);
         $this->Util()->DB()->UpdateData();
@@ -159,5 +166,16 @@ class Victima extends main
         $sql  = "select * from victima where victimaId= '".$this->victimaId."' ";
         $this->Util()->DB()->setQuery($sql);
         return $this->Util()->DB()->GetRow();
+    }
+    public function Enumerate(){
+        global $question;
+        $sql  = "select * from victima ";
+        $this->Util()->DB()->setQuery($sql);
+        $victimas = $this->Util()->DB()->GetResult();
+        foreach($victimas as $key=> $value){
+              $question->setVictimaId($value["victimaId"]);
+              $victimas[$key]["completePoll"] = $question->validateFullResolvePoll();
+        }
+        return $victimas;
     }
 }

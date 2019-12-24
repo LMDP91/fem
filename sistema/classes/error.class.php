@@ -91,6 +91,7 @@ class Error
 			return true;
 		}
 		return false;
+
 	}
 	
 	public function PrintErrors2()

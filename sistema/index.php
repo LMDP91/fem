@@ -42,7 +42,9 @@
 		#encuestasrealizadas
 		'customer-basic',
 		'geolocation',
-        'do-poll'
+        'do-poll',
+        'poll-result-pdf',
+        'done-polls'
 
 		
 	);

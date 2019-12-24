@@ -83,7 +83,7 @@
 				}
 				else if($_POST["tipo"]=="opcional"){
 			
-					for($i=1;$i<=5;$i++){
+					for($i=1;$i<=4;$i++){
 						if($_POST["res_".$i]==""){
 							$va  = $va + 1;
 						}
@@ -99,7 +99,7 @@
 				$idReg = $_POST['encuestaId'];
 				
 				$rango = $_POST["de"]."_".$_POST["a"];
-				$opcional = $_POST["res_1"]."_".$_POST["res_2"]."_".$_POST["res_3"]."_".$_POST["res_4"]."_".$_POST["res_5"];
+				$opcional = $_POST["res_1"]."_".$_POST["res_2"]."_".$_POST["res_3"]."_".$_POST["res_4"];
 								
 
 				$encuesta->setEncuestaId($_POST["encuestaId"]);
@@ -164,11 +164,13 @@
                 echo 'fail[#]';
 	    break;
         case "getQuestions":
-            $encuesta->setEncuestaId($_POST["id"]);
-            $info = $encuesta->Info();
-            $preguntas =  $encuesta->questionsByPoll();
+            $question->setEncuestaId($_POST["id"]);
+            $question->setVictimaId($_POST["victimaId"]);
+            $info = $question->Info();
+            $preguntas =  $question->questionsByPoll();
             $smarty->assign('preguntas',$preguntas);
             $smarty->assign('info',$info);
+            $smarty->assign('pollVictimaId',$question->getPollVictimaId());
             $smarty->assign('victimaId',$_POST["victimaId"]);
             $smarty->display(DOC_ROOT.'/templates/lists/questions-poll.tpl');
         break;
@@ -184,12 +186,13 @@
             $victima->setLugarNacimiento($_POST["lugarDeNacimiento"]);
             $victima->setMunicipio($_POST["municipio"]);
             $victima->setColonia($_POST["colonia"]);
+            $victima->setTipo($_POST["tipoContexto"]);
             if($id = $victima->save()){
                 echo "ok[#]";
                 echo $id;
             }else{
                 echo "fail[#]";
-                $util->ShowErrors();
+                $error->ShowErrors();
             }
         break;
         case 'updateVictima':
@@ -205,12 +208,13 @@
             $victima->setLugarNacimiento($_POST["lugarDeNacimiento"]);
             $victima->setMunicipio($_POST["municipio"]);
             $victima->setColonia($_POST["colonia"]);
+            $victima->setTipo($_POST["tipoContexto"]);
             if($id = $victima->update()){
                 echo "ok[#]";
                 echo $id;
             }else{
                 echo "fail[#]";
-                $util->ShowErrors();
+                $error->ShowErrors();
             }
             break;
 }
