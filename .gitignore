@@ -10,7 +10,7 @@
 /sistema/ajax/templates_c
 /sistema/templates_c
 /sistema/config.php
-
+/sistema/vendor
 libs/pdf/lib/fonts/*.afm.php
 libs/pdf/lib/fonts/*.ufm.php
 libs/pdf/lib/fonts/log.htm
