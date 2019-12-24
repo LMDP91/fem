@@ -13,10 +13,13 @@ class PdfService extends Question{
 
     }
     public function generate($type="view",$fileName="resultado"){
+        global $victima;
+        $victima->setVictimaId($this->getVictimaId());
+        $info = $victima->Info();
         $resultados = $this->getResultPollVictima();
 
-
         $this->smarty->assign('encuestas', $resultados);
+        $this->smarty->assign('info', $info);
         $dompdf = new Dompdf();
         ob_clean();
         $html = $this->smarty->fetch(DOC_ROOT.'/templates/reports/poll-result-pdf.tpl');

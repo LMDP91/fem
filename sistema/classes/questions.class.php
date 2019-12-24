@@ -11,6 +11,9 @@ class Question extends Encuesta
         $this->Util()->ValidateRequireField($value, 'Favor de ingresar los datos personales');
         $this->victimaId = $value;
     }
+    public function getVictimaId(){
+        return $this->victimaId;
+    }
     public function resetCurrentAnswers(){
         $this->currentAnswers = [];
     }

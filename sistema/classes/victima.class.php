@@ -174,6 +174,7 @@ class Victima extends main
         $victimas = $this->Util()->DB()->GetResult();
         foreach($victimas as $key=> $value){
               $question->setVictimaId($value["victimaId"]);
+              $question->setContexto($value["tipo"]);
               $victimas[$key]["completePoll"] = $question->validateFullResolvePoll();
         }
         return $victimas;
