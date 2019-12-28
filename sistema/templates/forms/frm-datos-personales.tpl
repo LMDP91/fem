@@ -87,6 +87,19 @@
                             <input class="form-control" name="colonia" id="colonia" value="{$post.colonia}">
                         </div>
                     </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label><span class="reqIcon"> * </span> Fecha incidente</label>
+                            <input class="form-control" name="fechaIncidente" id="fechaIncidente" onclick="Calendario(this)" value="{$post.fechaIncidente}">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <input type="hidden" name="latLng" id="latLng" value="{$post.cordenada}">
+                    <label for=""><span class="reqIcon">* </span> Ubicar en el mapa el lugar aproximado de los hechos.</label>
+                    <div class="col-md-12" id="map" style="height:500px; width: 100%">
+
+                    </div>
                 </div>
             </div>
             <div class="form-actions">

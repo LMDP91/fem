@@ -15,6 +15,8 @@ class Victima extends main
     private $colonia;
     private $victimaId;
     private $tipo;
+    private $cordenada;
+    private $fechaIncidente;
 
     public function setVictimaId($value){
         $this->Util()->ValidateInteger($value);
@@ -23,6 +25,16 @@ class Victima extends main
     public function setNombre($value){
         $this->Util()->ValidateRequireField($value, 'Nombre');
         $this->nombre = $value;
+
+    }
+    public function setFechaIncidente($value){
+        $this->Util()->ValidateRequireField($value, 'Fecha incidente');
+        $this->fechaIncidente = $value;
+
+    }
+    public function setCordenada($value){
+        $this->Util()->ValidateRequireField($value, 'Favor de ubicar en el mapa, el lugar aproximado de los hechos');
+        $this->cordenada = $value;
 
     }
     public function setAparterno($value){
@@ -92,8 +104,10 @@ class Victima extends main
         $municipio = $this->municipio;
         $colonia = $this->colonia;
         $tipo = $this->tipo;
+        $cordenada = $this->cordenada;
+        $fechaIncidente = $this->fechaIncidente;
 
-       $sql ="insert into victima(
+        $sql ="insert into victima(
                     nombre,
                     apaterno,
                     amaterno,
@@ -105,7 +119,9 @@ class Victima extends main
                     lugarNacimiento,
                     municipio,
                     colonia,
-                    tipo
+                    tipo,
+                    cordenada,
+                    fechaIncidente
                     )values(
                      '$nombre',
                      '$apaterno',
@@ -118,7 +134,9 @@ class Victima extends main
                      '$lugarNacimiento',
                      '$municipio',
                      '$colonia',
-                     '$tipo'
+                     '$tipo',
+                     '$cordenada',
+                     '$fechaIncidente'
                     )";
         $this->Util()->DB()->setQuery($sql);
         $id = $this->Util()->DB()->InsertData();
@@ -141,9 +159,11 @@ class Victima extends main
         $lugarNacimiento = $this->lugarNacimiento;
         $municipio = $this->municipio;
         $colonia = $this->colonia;
-        $tipoContexto = $this->tipoContexto;
+        $tipo = $this->tipo;
+        $cordenada = $this->cordenada;
+        $fechaIncidente = $this->fechaIncidente;
 
-       $sql ="update victima set 
+        $sql ="update victima set 
                     nombre = '$nombre',
                     apaterno = '$apaterno',
                     amaterno = '$amaterno',
@@ -155,7 +175,9 @@ class Victima extends main
                     lugarNacimiento = '$lugarNacimiento',
                     municipio = '$municipio',
                     colonia = '$colonia',
-                    tipoContexto = '$tipoContexto'
+                    tipo = '$tipo',
+                    fechaIncidente  = '$fechaIncidente',
+                    cordenada = '$cordenada'
                     where victimaId ='".$this->victimaId."' ";
         $this->Util()->DB()->setQuery($sql);
         $this->Util()->DB()->UpdateData();
@@ -179,4 +201,17 @@ class Victima extends main
         }
         return $victimas;
     }
+    public function EnumerateVictimasForMaps(){
+        $filtro ="";
+        $sql = 'SELECT * FROM victima ';
+        $this->Util()->DB()->setQuery($sql);
+        $result = $this->Util()->DB()->GetResult();
+        foreach($result as $key => $value){
+           $latLng =  explode(",",$value["cordenada"]);
+           $result[$key]["lat"] = $latLng[0];
+           $result[$key]["lng"] = $latLng[1];
+        }
+        return $result;
+
+    }//orderUbicationReport
 }

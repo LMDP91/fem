@@ -13,20 +13,12 @@
 	
 		case 'datas':
 								
-			$ltsPartidos = $cliente->ubicacionPedidos();
-			// echo '<pre>'; print_R($ltsPartidos);
-			// exit;
-			foreach($ltsPartidos as $key=>$aux){
-				$datasem1[] = array ($aux['nombre'], $aux['x'],$aux['y']);
+			$victimas = $victima->EnumerateVictimasForMaps();
+			foreach($victimas as $key=>$aux){
+				$datasem1[] = array ($aux['fechaIncidente'], $aux['lat'],$aux['lng']);
 			}
-			
-			// @$datasem1[]  = array ("'La Especial'", 16.7472113, -93.1187726);
-			// @$datasem1[]  = array ("'2a Oriente'", 16.749802, -93.115205);
-			// @$datasem1[]  = array ("'La Chiapaneca'", 16.748474, -93.115898);
-
 			header("Content-type: text/x-json");
-			print json_encode($datasem1);	
-																
+			print json_encode($datasem1);
 		break;
 		
 		

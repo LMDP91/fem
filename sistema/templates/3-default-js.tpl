@@ -35,6 +35,7 @@
  <script src="{$WEB_ROOT}/assets/global/plugins/bootstrap-wizard/jquery.bootstrap.wizard.min.js" type="text/javascript"></script>
  <script src="{$WEB_ROOT}/assets/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
  <script src="{$WEB_ROOT}/assets/pages/scripts/form-wizard.js" type="text/javascript"></script>
+
 {/if}
 {if $page=="do-pl"}
  <script src="{$WEB_ROOT}/assets/pages/scripts/form-samples.min.js" type="text/javascript"></script>
@@ -53,5 +54,6 @@
 <!-- {if $page=="login"}
 <script src="{$WEB_ROOT}/assets/pages/scripts/login.min.js" type="text/javascript"></script>   
 {/if} -->
+<script src="{$WEB_ROOT}/js/maps.js?{$time}" type="text/javascript"></script>
 <script src="{$WEB_ROOT}/js/{$page}.js?{$time}" type="text/javascript"></script>
 <!-- END THEME LAYOUT SCRIPTS -->

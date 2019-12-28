@@ -187,6 +187,8 @@
             $victima->setMunicipio($_POST["municipio"]);
             $victima->setColonia($_POST["colonia"]);
             $victima->setTipo($_POST["tipoContexto"]);
+            $victima->setCordenada($_POST["latLng"]);
+            $victima->setFechaIncidente($_POST["fechaIncidente"]);
             if($id = $victima->save()){
                 echo "ok[#]";
                 echo $id;
@@ -209,9 +211,11 @@
             $victima->setMunicipio($_POST["municipio"]);
             $victima->setColonia($_POST["colonia"]);
             $victima->setTipo($_POST["tipoContexto"]);
+            $victima->setCordenada($_POST["latLng"]);
+            $victima->setFechaIncidente($_POST["fechaIncidente"]);
             if($id = $victima->update()){
                 echo "ok[#]";
-                echo $id;
+                echo $_POST["id"];
             }else{
                 echo "fail[#]";
                 $error->ShowErrors();

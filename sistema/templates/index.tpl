@@ -5,7 +5,7 @@
 <head>
 	{include file="{$DOC_ROOT}/templates/1-default-meta.tpl"}
 	{include file="{$DOC_ROOT}/templates/2-default-css.tpl"}
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC85iwEXPOlJsw4CKpkGMxmnq4aLz48Eo4&sensor=true"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAAnqTo73i_KpH32wfpQbFVZOTUPuSIZ1A&sensor=true"></script>
 </head>
 <body  class="page-header-fixed page-sidebar-closed-hide-logo page-content-white">
 <!-- <body class="page-header-fixed page-sidebar-closed-hide-logo page-content-white page-boxed"> --> <!-- agregar container para page boxed-->
