@@ -37,7 +37,7 @@
  <script src="{$WEB_ROOT}/assets/pages/scripts/form-wizard.js" type="text/javascript"></script>
 
 {/if}
-{if $page=="done-polls"}
+{if $page=="done-polls" || $page eq "statistics"}
  <script src="{$WEB_ROOT}/assets/global/plugins/amchart/core.js"></script>
  <script src="{$WEB_ROOT}/assets/global/plugins/amchart/charts.js"></script>
  <script src="{$WEB_ROOT}/assets/global/plugins/amchart/themes/animated.js"></script>

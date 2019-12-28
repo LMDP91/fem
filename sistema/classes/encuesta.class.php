@@ -13,14 +13,18 @@ class Encuesta extends Main
 	private $contexto;
 	private $riesgo;
 
+	//filtros;
+    private $anio;
+    private $mes;
+
 	public function setEncuestaId($value){
 		$this->Util()->ValidateInteger($value);
 		$this->encuestaId = $value;
 	}
-	public function setId($value){
-		$this->Util()->ValidateInteger($value);
-		$this->id = $value;
-	}
+    public function setId($value){
+        $this->Util()->ValidateInteger($value);
+        $this->id = $value;
+    }
 
 	public function getEncuestaId(){
 	    return $this->encuestaId;
@@ -109,6 +113,12 @@ class Encuesta extends Main
 		$this->Util()->ValidateString($value, 100, 0, '');
 		$this->activo = $value;
 	}
+    public function setAnio($value){
+        $this->anio = $value;
+    }
+    public function setMes($value){
+        $this->mes = $value;
+    }
 		
 	public function Info(){
 		
@@ -403,6 +413,23 @@ class Encuesta extends Main
 	    $sql = "select count(*) from pregunta where encuestaId = '".$this->getEncuestaId()."'";
 	    $this->Util()->DB()->setQuery($sql);
 	    return $this->Util()->DB()->GetSingle();
+    }
+    public function getDataForChartGeneral(){
+	    $filtro = "";
+
+	    if((int)$this->anio)
+	        $filtro .=" and year(c.fechaIncidente)= '".(int)$this->anio."' ";
+
+        if((int)$this->mes)
+            $filtro .=" and month(c.fechaIncidente) = '".(int)$this->mes."' ";
+
+	    $sql  =" select  b.nombre,b.encuestaId,COUNT(*)AS total  from pollVictima a 
+                inner join victima c on a.victimaId=c.victimaId
+                inner join encuesta b on a.encuestaId = b.encuestaId 
+                where a.status ='Finalizado' $filtro  group by a.encuestaId
+                ";
+        $this->Util()->DB()->setQuery($sql);
+        return $this->Util()->DB()->GetResult();
     }
 
 }

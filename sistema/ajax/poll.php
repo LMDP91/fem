@@ -221,5 +221,18 @@
                 echo "fail[#]";
                 $error->ShowErrors();
             }
-            break;
+        break;
+        case 'searchGrafica':
+            $encuesta->setAnio($_POST["anio"]);
+            $encuesta->setMes($_POST["mes"]);
+            $results =$encuesta->getDataForChartGeneral();
+            $dataJson = [];
+            foreach ($results as $var)
+            {
+                $card["clave"] = $var["nombre"];
+                $card["value"] = $var["total"];
+                $dataJson[] = $card;
+            }
+            echo json_encode($dataJson);
+        break;
 }

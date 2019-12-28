@@ -41,7 +41,9 @@
 				</div>
 			</div>
 			<div class="portlet-body" id="tblContent">
-			 {include file="{$DOC_ROOT}/templates/lists/statistics.tpl"}
+				{include file="{$DOC_ROOT}/templates/forms/filtro-chart-general.tpl"}
+				 <div id="chart-general">
+				 </div>
 			</div>
 		</div>
 	</div>

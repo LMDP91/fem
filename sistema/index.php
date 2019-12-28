@@ -45,7 +45,7 @@
         'do-poll',
         'poll-result-pdf',
         'done-polls',
-        'stastics',
+        'statistics',
 
 		
 	);
