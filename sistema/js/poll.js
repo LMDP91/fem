@@ -49,9 +49,8 @@ function EditReg(id){
 	$.ajax({
 	  	type: "POST",
 	  	url: AJAX_PATH,
-	  	data: "type=add&id="+id,		
-	  	success: function(response) {	
-		console.log(response)		
+	  	data: "type=add&id="+id,
+	  	success: function(response) {
 			var splitResp = response.split("[#]");
 									
 			if(splitResp[0] == "ok")

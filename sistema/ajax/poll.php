@@ -13,7 +13,7 @@
 	switch($_POST['type']){
 	
 		case 'add':
-				$encuesta->setId($_POST['id']);
+				$encuesta->setEncuestaId($_POST['id']);
 				$info = $encuesta->Info();
 				echo 'ok[#]';	
 				$smarty->assign('info',$info);				

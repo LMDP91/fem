@@ -44,7 +44,8 @@
 		'geolocation',
         'do-poll',
         'poll-result-pdf',
-        'done-polls'
+        'done-polls',
+        'stastics',
 
 		
 	);
