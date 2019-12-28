@@ -32,11 +32,13 @@ function drawChartGeneral() {
                 var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
                 categoryAxis.dataFields.category = "clave";
                 categoryAxis.renderer.grid.template.location = 0;
-                categoryAxis.renderer.minGridDistance = 30;
+                categoryAxis.renderer.labels.template.rotation = -90;
+                categoryAxis.renderer.labels.template.horizontalCenter = "left";
+                categoryAxis.renderer.minGridDistance = 5;
 
                 categoryAxis.renderer.labels.template.adapter.add("dy", function(dy, target) {
                     if (target.dataItem && target.dataItem.index & 2 == 2) {
-                        return dy + 25;
+                        return dy + 5;
                     }
                     return dy;
                 });
@@ -52,7 +54,7 @@ function drawChartGeneral() {
                 series.columns.template.fillOpacity = .8;
 
                 var columnTemplate = series.columns.template;
-                columnTemplate.strokeWidth = 2;
+                columnTemplate.strokeWidth = 1;
                 columnTemplate.strokeOpacity = 1;
 
 

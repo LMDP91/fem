@@ -42,7 +42,7 @@
 			</div>
 			<div class="portlet-body" id="tblContent">
 				{include file="{$DOC_ROOT}/templates/forms/filtro-chart-general.tpl"}
-				 <div id="chart-general">
+				 <div id="chart-general" style="height: 600px">
 				 </div>
 			</div>
 		</div>
