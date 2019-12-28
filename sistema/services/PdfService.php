@@ -15,13 +15,16 @@ class PdfService extends Question{
     public function generate($type="view",$fileName="resultado"){
         global $victima;
         $victima->setVictimaId($this->getVictimaId());
+
         $info = $victima->Info();
         $resultados = $this->getResultPollVictima();
 
+        $this->smarty->assign('resultGeneral',  $victima->getResultPollByVictima());
         $this->smarty->assign('encuestas', $resultados);
         $this->smarty->assign('info', $info);
         $dompdf = new Dompdf();
-        ob_clean();
+
+        $this->smarty->assign('logo', DOC_ROOT."/images/escudo.png");
         $html = $this->smarty->fetch(DOC_ROOT.'/templates/reports/poll-result-pdf.tpl');
         $dompdf->loadHtml($html);
         $dompdf->setPaper('A4', 'portrait');

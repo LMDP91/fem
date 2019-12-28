@@ -20,6 +20,17 @@
 					</div>
 							
 				</div>
+			  <div class="form-group">
+				  <label class="control-label col-md-3"><span class="reqIcon"> * </span>Tipo de Riesgo</label>
+				  <div class="col-md-9">
+					  <select name="riesgo" id="riesgo" class="form-control">
+						  <option value=""></option>
+						  <option value="Severo" {if $info.riesgo eq 'Severo'} selected {/if}>Severo</option>
+						  <option value="Moderado" {if $info.riesgo eq 'Moderado'} selected {/if}>Moderado</option>
+						  <option value="Bajo" {if $info.riesgo eq 'Bajo'} selected {/if}>Baja</option>
+					  </select>
+				  </div>
+			  </div>
 
 				<div class="form-group">
 					<label class="control-label col-md-3"><span class="reqIcon"> * </span>Tipo</label>

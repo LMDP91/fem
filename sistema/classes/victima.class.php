@@ -214,4 +214,42 @@ class Victima extends main
         return $result;
 
     }//orderUbicationReport
+
+    function getResultPollByVictima(){
+        $resultados = [];
+        $sql = "SELECT resultadoEncuesta,COUNT(resultadoEncuesta) as total FROM pollVictima WHERE victimaId='".$this->victimaId."' GROUP BY resultadoEncuesta";
+        $this->Util()->DB()->setQuery($sql);
+        $result = $this->Util()->DB()->GetResult();
+        foreach($result as $key=>$value){
+            $resultados[$value["resultadoEncuesta"]] = $value["total"];
+        }
+
+        if(!empty($resultados)){
+            if(array_key_exists("Severo",$resultados)){
+                if($resultados["Severo"]==1){
+                    return 75;
+                }elseif($resultados["Severo"]>1){
+                    return 100;
+                }
+            }
+            if(array_key_exists("Moderado",$resultados)){
+                if($resultados["Moderado"]==1){
+                    return 35;
+                }elseif($resultados["Severo"]>1){
+                    return 74;
+                }
+            }
+            if(array_key_exists("Bajo",$resultados)){
+                if($resultados["Bajo"]==1){
+                    return 0;
+                }elseif($resultados["Bajo"]>1){
+                    return 34;
+                }
+            }
+
+
+
+        }
+        return 0;
+    }
 }

@@ -20,6 +20,9 @@
                     <a href="{$WEB_ROOT}/poll-result-pdf/id/{$item.victimaId}" class="btn btn-xs green-dark"  title="Ver reporte" target="_blank">
                         <i class="fa fa-file" ></i>
                     </a>
+                    <a href="javascript:;" class="btn btn-xs green btn-chart" id="{$item.victimaId}"  title="Ver grafica">
+                        <i class="fa fa-bar-chart" ></i>
+                    </a>
                 {/if}
             </div>
             </td>

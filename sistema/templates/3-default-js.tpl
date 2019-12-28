@@ -37,8 +37,10 @@
  <script src="{$WEB_ROOT}/assets/pages/scripts/form-wizard.js" type="text/javascript"></script>
 
 {/if}
-{if $page=="do-pl"}
- <script src="{$WEB_ROOT}/assets/pages/scripts/form-samples.min.js" type="text/javascript"></script>
+{if $page=="done-polls"}
+ <script src="{$WEB_ROOT}/assets/global/plugins/amchart/core.js"></script>
+ <script src="{$WEB_ROOT}/assets/global/plugins/amchart/charts.js"></script>
+ <script src="{$WEB_ROOT}/assets/global/plugins/amchart/themes/animated.js"></script>
 {/if}
 <script src="{$WEB_ROOT}/assets/pages/scripts/components-bootstrap-switch.min.js" type="text/javascript"></script>
 <script src="{$WEB_ROOT}/assets/pages/scripts/table-datatables-buttons.min.js" type="text/javascript"></script>

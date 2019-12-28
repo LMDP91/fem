@@ -39,4 +39,11 @@ switch($_POST["type"]){
             $smarty->display(DOC_ROOT."/templates/boxes/show-options-result.tpl");
         }
     break;
+    case "showChart":
+        echo "ok[#]";
+        $smarty->display(DOC_ROOT."/templates/boxes/modal-chart.tpl");
+        echo "[#]";
+        $victima->setVictimaId($_POST["id"]);
+        echo $victima->getResultPollByVictima();
+    break;
 }

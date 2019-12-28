@@ -11,6 +11,7 @@ class Encuesta extends Main
 	private $encuestaId;
 	private $respuesta;
 	private $contexto;
+	private $riesgo;
 
 	public function setEncuestaId($value){
 		$this->Util()->ValidateInteger($value);
@@ -39,6 +40,10 @@ class Encuesta extends Main
 	public function setContexto($value){
         $this->Util()->ValidateRequireField($value, 'Tipo de contexto');
         $this->contexto = $value;
+    }
+    public function setRiesgo($value){
+        $this->Util()->ValidateRequireField($value, 'Tipo riesgo');
+        $this->riesgo = $value;
     }
     public function getContexto(){
 	    return $this->contexto;
@@ -155,7 +160,7 @@ class Encuesta extends Main
 			 $sql = 'UPDATE encuesta SET 
 				nombre = "'.utf8_decode($this->nombre).'", 
 				inicio = "'.($this->inicio).'", 
-				fin = "'.($this->fin).'"
+				fin = "'.($this->fin).'"}
 				WHERE encuestaId = "'.$this->id.'"';
 			$this->Util()->DB()->setQuery($sql);
 			$this->Util()->DB()->UpdateData();
@@ -194,6 +199,7 @@ class Encuesta extends Main
 				tiporespuesta = "'.($this->tipoencuesta).'",
 				rango = "'.($this->rango).'",
 				opcional = "'.($this->opcional).'",
+				riesgo = "'.($this->riesgo).'", 
 				numCaracter = "'.($this->numcaracter).'"
 				WHERE preguntaId = "'.$this->id.'"';
 				
@@ -206,6 +212,7 @@ class Encuesta extends Main
 				tiporespuesta, 
 				encuestaId, 
 				rango, 
+				riesgo,
 				opcional, 
 				numCaracter
 			)
@@ -214,6 +221,7 @@ class Encuesta extends Main
 				"'.$this->tipoencuesta.'",
 				"'.$this->encuestaId.'",
 				"'.$this->rango.'",
+				"'.$this->riesgo.'",
 				"'.$this->opcional.'",
 				"'.$this->numcaracter.'"
 			)';

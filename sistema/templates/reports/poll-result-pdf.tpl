@@ -4,13 +4,17 @@
         <style type="text/css">
             body {
                 font-family: helvetica, Sans-Serif;
-                font-size: 11px;
+                font-size: 12px;
                 line-height: 1;
             }
+            #page-wrap {
+                width: 700px;
+                margin: 0 auto;
+                page-break-inside: avoid;
+            }
             table {
-                font-size: 14px;
+                font-size: 12px;
                 line-height: 20px;
-                border:1px solid;
             }
             table.outline-table {
                 border: 2px solid #ccc;
@@ -48,37 +52,57 @@
         </style>
     </head>
     <body>
-    <table width="100%">
-       <tr>
-           <td width="10%"><b>Nombre completo</b></td>
-           <td width="35%">{$info.nombre} {$info.apaterno} {$amaterno}</td>
-           <td width="10%"><b>Edad</b></td>
-           <td>{$info.edad}</td>
-       </tr>
-        <tr>
-            <td width="35%"><b>Municipio</b></td>
-            <td width="35%">{$info.municipio}</td>
-            <td width="10%"><b>Zona</b></td>
-            <td>{$info.tipo}</td>
-        </tr>
-        <tr>
-            <td  colspan="2"><b>Diagnostico</b></td>
-            <td></td>
-        </tr>
-    </table>
-    {foreach from=$encuestas item=encu key=kenc}
-        <h3>{$encu.nombre}</h3>
-        {foreach from=$encu.preguntas item=item key=key}
-            <div class="form-group">
-            <label class="font-hg">{$key+1}.- {$item.pregunta}</label>
-            {if $item.tiporespuesta eq 'punto'}
-                {$item.rango1}
-                {$item.rango2}
-                <div id="slider"></div>
-            {elseif $item.tiporespuesta eq 'opcional'}
-                <div class="form-group form-md-radios has-success">
-                    <div class="col-md-12">
-                        <div class="md-radio-inline">
+    <div class="page-wrap">
+        <table width="100%">
+            <tbody>
+            <tr>
+                <td rowspan="2" width="30%" valign="middle" style="text-align: center">
+                    <img src={$logo}" width="130px">
+                </td>
+                <td width="70%" valign="top">
+                    <div style="text-transform: uppercase;font-weight: bold;text-align: center">
+                        <p>Fiscalia General del Estado de Chiapas</p>
+                        <p>Guia para la identificacion de riesgo de violencia feminicida</p>
+                    </div>
+
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <table width="100%">
+            <tr class="border-bottom">
+                <td width="10%"><b>Nombre completo</b></td>
+                <td width="35%">{$info.nombre} {$info.apaterno} {$amaterno}</td>
+                <td width="10%"><b>Edad</b></td>
+                <td>{$info.edad}</td>
+            </tr>
+            <tr class="border-bottom">
+                <td width="35%"><b>Municipio</b></td>
+                <td width="35%">{$info.municipio}</td>
+                <td width="10%"><b>Zona</b></td>
+                <td>{$info.tipo}</td>
+            </tr>
+            <tr class="border-bottom">
+                <td  colspan="2"><b>Diagnostico</b></td>
+                <td colspan="2">{if $resultGeneral>=75}Riesgo Severo{elseif $resultGeneral>34&&$resultGeneral<75}Riesgo moderado{else}Riesgo bajo{/if}
+
+                </td>
+            </tr>
+        </table>
+        {foreach from=$encuestas item=encu key=kenc}
+            <table width="100%" >
+                    <tr class="border-bottom">
+                        <td><b>Encuesta</b></td>
+                        <td>{$encu.nombre}</td>
+                    </tr>
+                    <tr class="border-bottom">
+                        <td><b>Resultado encuesta</b></td>
+                        <td>{$encu.resultado}</td>
+                    </tr>
+                <tbody>
+                {foreach from=$encu.preguntas item=item key=key}
+                    <tr><td colspan="2">{$key+1}.- {$item.pregunta}</td></tr>
+                    <tr><td colspan="2">
                             {foreach from=$item.opciones item=item2 key=key}
                                 <div class="md-radio">
                                     <input type="radio" name="question_{$item.preguntaId}" id="question_{$item.preguntaId}_{$key}" value='{$item2}' class="md-radiobtn" {if $item.currentAnswer eq $item2}checked{/if}>
@@ -86,18 +110,17 @@
                                         <span class="inc"></span>
                                         <span class="check"></span>
                                         <span class="box"></span>
-                                        {$item2}
+                                        {$item2|strtolower|ucfirst}
                                     </label>
                                 </div>
                             {/foreach}
-                        </div>
-                    </div>
-                </div>
-                </div>
-            {else}
-                <textarea name='check_{$item.preguntaId}'  class="form-control"></textarea>
-            {/if}
+                        </td>
+                    </tr>
+                {/foreach}
+                </tbody>
+            </table>
         {/foreach}
-    {/foreach}
+    </div>
+
     </body>
 </html>

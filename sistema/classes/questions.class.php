@@ -80,6 +80,8 @@ class Question extends Encuesta
         $this->Util()->DB()->setQuery($sql);
         $this->Util()->DB()->UpdateData();
 
+        $this->generateResultPoll($this->pollVictimaId);
+
         $this->Util()->setError(0,"complete","Se ha guardado correctamente");
         $this->Util()->PrintErrors();
 
@@ -169,8 +171,39 @@ class Question extends Encuesta
         foreach($encuestas as $key =>$value){
             $this->setEncuestaId($value["encuestaId"]);
             $this->setVictimaId($this->victimaId);
+            $encuestas[$key]["resultado"] = $this->getResultPoll();
             $encuestas[$key]["preguntas"] = $this->questionsByPoll();
         }
         return $encuestas;
+    }
+    public function getResultPoll(){
+        $sql  ="select resultadoEncuesta from pollVictima where encuestaId='".$this->getEncuestaId()."' and victimaId = '".$this->victimaId."' ";
+        $this->Util()->DB()->setQuery($sql);
+        return  !$this->Util()->DB()->GetSingle()? "Pendiente" : $this->Util()->DB()->GetSingle();
+    }
+    public function generateResultPoll($pollVictimaId){
+        $frecuencias = ["Siempre"=>3,"Frecuente"=>2,"Por lo menos una vez"=>1,"Nunca"=>0];
+        $resultados = [];
+
+        $sql = "select a.*,b.riesgo from answerPollVictima a inner join pregunta b on a.preguntaId=b.preguntaId where a.pollVictimaId = '$pollVictimaId' ";
+        $this->Util()->DB()->setQuery($sql);
+        $answers = $this->Util()->DB()->GetResult();
+        foreach($answers as $key => $var){
+            $resultados[$var["riesgo"]] += $frecuencias[ucfirst(strtolower($var["respuesta"]))];
+        }
+
+        $resultadoEncuesta  ="";
+        if(!empty($resultados)){
+            if($resultados["Severo"]>0)
+                $resultadoEncuesta = "Severo";
+            elseif($resultados["Moderado"]>0)
+                $resultadoEncuesta = "Moderado";
+            else
+                 $resultadoEncuesta = "Bajo";
+        }
+
+        $sql  ="update pollVictima set resultadoEncuesta ='$resultadoEncuesta' where pollVictimaId = '".$this->pollVictimaId."' ";
+        $this->Util()->DB()->setQuery($sql);
+        $this->Util()->DB()->UpdateData();
     }
 }

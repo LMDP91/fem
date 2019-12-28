@@ -46,5 +46,6 @@ var CustomerMaps =  function(){
     };
 }();
 $(function(){
+    if($("#map").length)
     CustomerMaps.init("map");
 });
