@@ -14,7 +14,9 @@
 		</div>
 	</div>
 	 <!-- BEGIN PAGE TITLE-->
-		<h1 class="page-title"> Bienvenidos
+		<h1 class="page-title"> <center>
+		Bienvenidos al sistema de detección del riesgo de violencia feminicida de tipo íntimo, familiar y sexual en mujeres.
+			                    </center>
 			<small></small>
 		</h1>
 	 <!-- END PAGE TITLE-->

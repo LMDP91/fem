@@ -14,12 +14,12 @@
 				<a href="#">Configuracion</a>
 				<i class="fa fa-circle"></i>
 			</li>
-			<li><a href="#">Datos empresa</a></li>
+			<li><a href="#">Dependencia</a></li>
 		</ul>
 		</div>
 	</div>
 	 <!-- BEGIN PAGE TITLE-->
-		<h1 class="page-title">Datos empresa
+		<h1 class="page-title">Datos de la dependencia
 			<small></small>
 		</h1>
 	 <!-- END PAGE TITLE-->

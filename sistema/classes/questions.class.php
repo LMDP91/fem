@@ -48,7 +48,7 @@ class Question extends Encuesta
 
     public function savePollVictima(){
         $sql = "insert into pollVictima(encuestaId,victimaId,fechaAplicacion)
-                values('".$this->getEncuestaId()."','".$this->victimaId."','".date("Y-m-d")."')";
+                values('".$this->getEncuestaId()."','".$this->getVictimaId()."','".date("Y-m-d")."')";
         $this->Util()->DB()->setQuery($sql);
         $last = $this->Util()->DB()->InsertData();
         $this->setPollVictimaId($last);

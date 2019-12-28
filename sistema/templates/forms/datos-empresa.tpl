@@ -1,7 +1,7 @@
 <div class="portlet-title">
 	<div class="caption">
 		<i class="icon-settings font-green"></i>
-		Agregar o actualizar datos de la empresa
+		Agregar o actualizar datos de la dependencia
 	</div>
 </div>
 <div class="portlet-body form">
@@ -16,7 +16,7 @@
 		    <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label class="control-label col-md-3"><span class="reqIcon"> * </span>Nombre / Razon social</label>
+                        <label class="control-label col-md-3"><span class="reqIcon"> * </span>Nombre</label>
                         <div class="col-md-9">
                             {if !$datosempresa}
                                 <input class="form-control" name="nombre" id="nombre">

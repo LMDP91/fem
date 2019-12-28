@@ -214,6 +214,12 @@
 					<span class="title">Geolocalizacion</span>
 				</a>
 			</li>
+			<li class="nav-item {if $page=='statistics'}active open{/if}" >
+				<a class="nav-link " href="{$WEB_ROOT}/statistics">					
+					<i class="icon-bar-chart"></i>
+					<span class="title">Estadistiaca</span>
+				</a>
+			</li>
 		</ul>
 	</li>
 </ul>
