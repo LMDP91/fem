@@ -23,8 +23,8 @@
 					max-height: 100px;" >
 			</td>
             <td><div align="center">
-                {if in_array('edit_producto',$privilegios) or $typeUser==1}
-				<a class="btn btn-xs red" href="javascript:void(0)" onClick="EditReg({$item.imagenId})" title="Editar producto">
+                {if in_array(38,$privilegios) or $Usr.rolId eq 1}
+				<a class="btn btn-xs red" href="javascript:void(0)" onClick="EditReg({$item.imagenId})" title="Editar">
 					<i class="fa fa-pencil-square-o" ></i>
 				</a> 
                 {/if}

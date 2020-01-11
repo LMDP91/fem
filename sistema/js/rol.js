@@ -1,14 +1,73 @@
 var AJAX_PATH = WEB_ROOT+"/ajax/rol.php";
 
+$(document).on('click','.spanConfig',function () {
+	$.ajax({
+		type: "POST",
+		url: AJAX_PATH,
+		data:{id:this.id,type:'open_config'},
+		success: function(response) {
+			$("#draggable").html(response);
+			$('#saveConfig').on('click',function(){
+				SaveConfig();
+			});
+			TogglePermisos();
+		},
+		error:function(){
+			alert(msgError);
+		}
+	});
+	$("#draggable").modal("show");
+});
+function TogglePermisos(){
+	$('.deepList').on('click',function(){
+		if($("ul#"+this.id).is(':visible')){
+			$("#"+this.id).html('[+]-');
+			$("ul#"+this.id).removeClass('siShow');
+		}
+		else
+		{
+			$('#'+this.id).html('[-]-');
+			$("ul#"+this.id).addClass('siShow');
+		}
+
+	});
+}
+function SaveConfig(){
+	var fd =  new FormData(document.getElementById("frmPermisos"));
+	$.ajax({
+		url:AJAX_PATH,
+		method:'post',
+		data:fd,
+		processData: false,
+		contentType: false,
+		type: 'POST',
+		beforeSend: function(){
+			$("#loader").html(LOADER);
+			$("#txtErrMsg").hide(0);
+			$('#saveConfig').hide();
+		},
+		success: function(response){
+			var splitResp = response.split("[#]");
+			if(splitResp[0]=='ok'){
+				$("#draggable").modal("hide");
+			}
+			else{
+				$("#loader").hide();
+				$('#saveConfig').show();
+				$("#txtErrMsg").show();
+				$("#txtErrMsg").html(splitResp[1]);
+			}
+		}
+	});
+}
+
 function AddReg(){
-	
 	$.ajax({
 	  	type: "POST",
 	  	url: AJAX_PATH,
 	  	data: "type=add",		
 	  	success: function(response) {			
 			var splitResp = response.split("[#]");
-									
 			if(splitResp[0] == "ok")
 				$("#draggable").html(splitResp[1]);
 			else
@@ -28,10 +87,8 @@ function EditReg(id){
 	  	type: "POST",
 	  	url: AJAX_PATH,
 	  	data: "type=edit&id="+id,		
-	  	success: function(response) {	
-		console.log(response)		
+	  	success: function(response) {
 			var splitResp = response.split("[#]");
-									
 			if(splitResp[0] == "ok")
 				$("#draggable").html(splitResp[1]);
 			else
@@ -57,7 +114,10 @@ function DeleteReg(id){
             success:function(response){
                 var splitResp = response.split("[#]");
                 if(splitResp[0] == "ok")
-               	 location.reload();
+               	{
+					$("#message_success").html(splitResp[1]);
+					$("#tblContent").html(splitResp[2]);
+				}
                 else
                  alert(msgFail);
             },
@@ -79,15 +139,13 @@ function SaveReg(){
 	  	success: function(response) {
 			console.log(response)		
 			var splitResp = response.split("[#]");
-
 			$("#loader").html("");
-			
 			if(splitResp[0] == "ok"){
 				$("#draggable").modal("hide");
-				  location.reload();
+				$("#message_success").html(splitResp[1]);
+				$("#tblContent").html(splitResp[2]);
 				
 			}else if(splitResp[0] == "fail"){
-				console.log(splitResp[0]);
 				$("#txtErrMsg").show();
 				$("#txtErrMsg").html(splitResp[1]);				
 			}else{

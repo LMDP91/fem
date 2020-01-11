@@ -84,9 +84,7 @@
             </tr>
             <tr class="border-bottom">
                 <td  colspan="2"><b>Diagnostico</b></td>
-                <td colspan="2">{if $resultGeneral>=75}Riesgo Severo{elseif $resultGeneral>34&&$resultGeneral<75}Riesgo moderado{else}Riesgo bajo{/if}
-
-                </td>
+                <td colspan="2"  style="text-align: left">Violencia {$resultGeneral}</td>
             </tr>
         </table>
         {foreach from=$encuestas item=encu key=kenc}

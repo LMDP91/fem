@@ -37,7 +37,7 @@
 	<link href="{$WEB_ROOT}/assets/layouts/layout/css/themes/light2.min.css" rel="stylesheet" type="text/css" id="style_color" />
 {/if}
 
-<link href="{$WEB_ROOT}/assets/layouts/layout/css/custom.min.css" rel="stylesheet" type="text/css" />
+<link href="{$WEB_ROOT}/assets/layouts/layout/css/custom.css" rel="stylesheet" type="text/css" />
 <!-- END THEME LAYOUT STYLES -->
 <!--
 <link rel="shortcut icon" href="favicon.ico" /> -->

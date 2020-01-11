@@ -215,41 +215,27 @@ class Victima extends main
 
     }//orderUbicationReport
 
-    function getResultPollByVictima(){
-        $resultados = [];
-        $sql = "SELECT resultadoEncuesta,COUNT(resultadoEncuesta) as total FROM pollVictima WHERE victimaId='".$this->victimaId."' GROUP BY resultadoEncuesta";
+    function getResultPollByVictima($onlyPuntos =  false){
+        $sql = "SELECT sum(puntos) as puntos FROM pollVictima WHERE victimaId='".$this->victimaId."'  group by victimaId ";
         $this->Util()->DB()->setQuery($sql);
-        $result = $this->Util()->DB()->GetResult();
-        foreach($result as $key=>$value){
-            $resultados[$value["resultadoEncuesta"]] = $value["total"];
-        }
+        $puntos = $this->Util()->DB()->GetSingle();
 
-        if(!empty($resultados)){
-            if(array_key_exists("Severo",$resultados)){
-                if($resultados["Severo"]==1){
-                    return 75;
-                }elseif($resultados["Severo"]>1){
-                    return 100;
-                }
-            }
-            if(array_key_exists("Moderado",$resultados)){
-                if($resultados["Moderado"]==1){
-                    return 35;
-                }elseif($resultados["Severo"]>1){
-                    return 74;
-                }
-            }
-            if(array_key_exists("Bajo",$resultados)){
-                if($resultados["Bajo"]==1){
-                    return 0;
-                }elseif($resultados["Bajo"]>1){
-                    return 34;
-                }
-            }
+        if($onlyPuntos)
+            return $puntos;
 
+        $sql = "SELECT resultadoEncuesta FROM pollVictima WHERE victimaId='".$this->victimaId."' and resultadoEncuesta = 'Severa' ";
+        $this->Util()->DB()->setQuery($sql);
+        $isSevero  = $this->Util()->DB()->GetSingle();
 
+        if($isSevero)
+            return $isSevero;
 
-        }
-        return 0;
+        if($puntos>=164.76)
+            return "Severa";
+        elseif($puntos>158.01&&$puntos<=164.75)
+            return "Moderada";
+        else
+            return "Baja";
+
     }
 }

@@ -107,6 +107,7 @@
 				$encuesta->setTipoEncuesta($_POST['tipo']);
 				$encuesta->setRango($rango);
                 $encuesta->setRiesgo($_POST["riesgo"]);
+                $encuesta->setOrden($_POST["orden"]);
 				$encuesta->setOpcional($opcional);
 				if($_POST['caracter']){
 					$encuesta->setNumCaracter($_POST['caracter']);

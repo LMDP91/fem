@@ -17,23 +17,24 @@
             <td>{$item.nombre}</td>
             <td>{$item.fechaRegistro}</td>
             <td>{$item.inicio} - {$item.fin}</td>
-			<td><div align="center">
-				<a href="javascript:void(0)" class="btn btn-xs yellow"  onClick="EditReg({$item.encuestaId})" title="Editar">
-					<i class="fa fa-pencil-square-o" ></i> 
-				</a>
-				
-				 <a class="btn btn-xs red" href="javascript:void(0)" onClick="DeleteReg({$item.encuestaId})" title="Eliminar">
-					<i class="fa fa-trash" aria-hidden="true"></i>
-				</a>
-								
-				<a class="btn btn-xs blue" href="{$WEB_ROOT}/question/x/{$item.encuestaId}"  title="AGREGAR PREGUNTAS">
-					<i class="fa fa-plus" aria-hidden="true"></i>
-				</a>
-				
-				<a class="btn btn-xs green" href="{$WEB_ROOT}/poll-analytics/x/{$item.encuestaId}" title="Ver Resultados">
-					<i class="fa fa-bar-chart" aria-hidden="true"></i>
-				</a>
-            </div>
+			<td>
+                <div align="center">
+                    {if in_array(22,$privilegios) or $Usr.rolId eq 1}
+                        <a href="javascript:void(0)" class="btn btn-xs yellow"  onClick="EditReg({$item.encuestaId})" title="Editar">
+                            <i class="fa fa-pencil-square-o" ></i>
+                        </a>
+                    {/if}
+                    {if in_array(23,$privilegios) or $Usr.rolId eq 1}
+                         <a class="btn btn-xs red" href="javascript:void(0)" onClick="DeleteReg({$item.encuestaId})" title="Eliminar">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                        </a>
+                    {/if}
+                    {if in_array(39,$privilegios) or $Usr.rolId eq 1}
+                        <a class="btn btn-xs blue" href="{$WEB_ROOT}/question/x/{$item.encuestaId}"  title="Agregar preguntas">
+                            <i class="fa fa-plus" aria-hidden="true"></i>
+                        </a>
+                    {/if}
+                </div>
             </td>
         </tr>
         {foreachelse}

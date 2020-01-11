@@ -1516,6 +1516,21 @@ class Util extends Error
 
 	    return $val;
     }
+    function ConvertToLineal($array = [],$field = ""){
+        $newArray = array();
+        if(!is_array($array))
+            $array = [];
+
+        foreach($array as $k=>$val){
+            if($field == 'email'){
+                if($this->Util()->ValidateEmail($val[$field]))
+                    $newArray[] =  $val[$field];
+            }else{
+                $newArray[] =  $val[$field];
+            }
+        }
+        return $newArray;
+    }
 	
 }
 

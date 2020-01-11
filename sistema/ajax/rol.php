@@ -1,126 +1,114 @@
 <?php
 /*echo "<pre>"; print_r($_POST);
 exit;*/
-	include_once('../init.php');
-	include_once('../config.php');
-	include_once(DOC_ROOT.'/libraries.php');
+include_once('../init.php');
+include_once('../config.php');
+include_once(DOC_ROOT . '/libraries.php');
 
-	session_start();
-	
-	$page = 'rol';
-	
-	
-	$smarty->assign('page',$page);
-	
-	// $_POST["type"]= $_GET["type"];
-	switch($_POST['type']){
-	
-		case 'add':
-				echo 'ok[#]';	
-				$smarty->assign('titleFrm','Agregar Rol');				
-				$smarty->display(DOC_ROOT.'/templates/boxes/add_catalogo.tpl');
-																
-			break;
-		
-		case 'edit':
-				$objRole->setId($_POST['id']);
-				$info = $objRole->Info();
-				// $info = $util->EncodeRow($info);	
-				echo 'ok[#]';
-				$smarty->assign('titleFrm','Editar Rol');
-				$smarty->assign('info',$info);				
-				$smarty->display(DOC_ROOT.'/templates/boxes/add_catalogo.tpl');
-																
-			break;
-		case 'save':
-				if($util->ValidateRequireField($_POST["descripcion"],"Descripcion"))
-		       	{
-					$util->ValidateString($value, 100, 0, '');
-		      	}
-		      	if($util->ValidateRequireField($_POST["nombre"],"Nombre corto"))
-		       	{
-					$util->ValidateString($value, 100, 0, '');
-		      	}
-		      	if($util->PrintErrors()){ 
-		      		echo "fail[#]";					
-					$util->ShowErrors();	
-				}
-				else
-				{
+session_start();
 
-                   $perm_id = $rbac->Roles->add($_POST['nombre'],$_POST['descripcion']);
-                   if($perm_id){
-                   	 $util->setError(10129, 'complete', '');
-		             $util->PrintErrors();
-                   	 echo 'ok[#]';
-                    }
-                    else{
-                    	echo 'fail[#]';
-                    }
-					
-				}
-				
-				
-				
-			break;
-		case 'update':
-		        /*echo "<pre"*/
-		        if($util->ValidateRequireField($_POST["descripcion"],"Descripcion"))
-		       	{
-					$util->ValidateString($value, 100, 0, '');
-		      	}
-		      	if($util->ValidateRequireField($_POST["nombre"],"Nombre corto"))
-		       	{
-					$util->ValidateString($value, 100, 0, '');
-		      	}
-		      	if($util->PrintErrors()){ 
-		      		echo "fail[#]";					
-					$util->ShowErrors();	
-				}
-				else
-				{
-                   $perm_id = $rbac->Roles->edit($_POST["id"],$_POST['nombre'],$_POST['descripcion']);
-                   if($perm_id){
-                   	 $util->setError(10129, 'complete', '');
-		             $util->PrintErrors();
-                   	 echo 'ok[#]';
-                    }
-                    else{
-                    	echo 'fail[#]';
-                    }
-					
-				}
-			break;
-		case 'saveConfig':
-			$objRole->setId($_POST["role_id"]);
-			if($objRole->asignarRoles()){
-				echo "ok[#]";
-			}else{
-				echo "fail[#]";
-			}
-			 
-		break;
+$page = 'rol';
 
-		case 'deleteRol':
-				$objRole->setId($_POST['id']);
-				if($objRole->Delete()){					
-					echo 'ok[#]';				
-				}else
-				    echo "fail[#]";
-				
-	    break;
-		
-		case 'loadPage':
-		
-				$cat_tramite->setPage($_POST['p']);								
-				$registros = $cat_tramite->Enumerate();
-				$util->PrintErrors2();
-				echo 'ok[#]';			
-				$smarty->assign('registros',$registros);
-				$smarty->display(DOC_ROOT.'/templates/lists/'.$page.'.tpl');
-				
-		break;
-		
+
+$smarty->assign('page', $page);
+
+// $_POST["type"]= $_GET["type"];
+switch ($_POST['type']) {
+    case 'open_config':
+        $id = $_POST['id'];
+        $objRole->setRoleId($id);
+        $role = $objRole->Info();
+        $modulos = $objRole->getConfigRol();
+
+        $roles = $objRole->Enumerate();
+        $smarty->assign('roles', $roles);
+        $smarty->assign('info', $role);
+        $smarty->assign('modulos', $modulos);
+        $smarty->display(DOC_ROOT . '/templates/boxes/config_rol.tpl');
+        break;
+
+    case 'add':
+        echo 'ok[#]';
+        $smarty->assign('titleFrm', 'Agregar Rol');
+        $smarty->display(DOC_ROOT . '/templates/boxes/add_catalogo.tpl');
+        break;
+
+    case 'edit':
+        $objRole->setRoleId($_POST['id']);
+        $info = $objRole->Info();
+        echo 'ok[#]';
+        $smarty->assign('titleFrm', 'Editar Rol');
+        $smarty->assign('info', $info);
+        $smarty->display(DOC_ROOT . '/templates/boxes/add_catalogo.tpl');
+
+        break;
+    case 'save':
+        $objRole->setName($_POST['nombre']);
+        if($objRole->Save())
+        {
+            $roles = $objRole->Enumerate();
+            $smarty->assign('roles',$roles);
+            echo "ok[#]";
+            $smarty->display(DOC_ROOT.'/templates/boxes/messages.tpl');
+            echo "[#]";
+            $smarty->display(DOC_ROOT.'/templates/lists/rol.tpl');
+        }
+        else{
+            echo "fail[#]";
+            $smarty->display(DOC_ROOT.'/templates/boxes/messages_no_format.tpl');
+        }
+        break;
+    case 'update':
+        $objRole->setRoleId($_POST['id']);
+        $objRole->setName($_POST['nombre']);
+        if($objRole->Update())
+        {
+            $roles = $objRole->Enumerate();
+            $smarty->assign('roles',$roles);
+            echo "ok[#]";
+            $smarty->display(DOC_ROOT.'/templates/boxes/messages.tpl');
+            echo "[#]";
+            $smarty->display(DOC_ROOT.'/templates/lists/rol.tpl');
+        }
+        else{
+            echo "fail[#]";
+            $smarty->display(DOC_ROOT.'/templates/boxes/messages_no_format.tpl');
+        }
+        break;
+    case 'save_config':
+        $objRole->setRoleId($_POST["id"]);
+        if ($objRole->saveConfigRol()) {
+            echo "ok[#]";
+        } else {
+            echo "fail[#]";
+        }
+        break;
+
+    case 'deleteRol':
+        $objRole->setRoleId($_POST['id']);
+        if ($objRole->Delete()) {
+            $roles = $objRole->Enumerate();
+            $smarty->assign('roles',$roles);
+            echo "ok[#]";
+            $smarty->display(DOC_ROOT.'/templates/boxes/messages.tpl');
+            echo "[#]";
+            $smarty->display(DOC_ROOT.'/templates/lists/rol.tpl');
+        } else
+            echo "fail[#]";
+
+        break;
+
+    case 'loadPage':
+
+        $cat_tramite->setPage($_POST['p']);
+        $registros = $cat_tramite->Enumerate();
+        $util->PrintErrors2();
+        echo 'ok[#]';
+        $smarty->assign('registros', $registros);
+        $smarty->display(DOC_ROOT . '/templates/lists/' . $page . '.tpl');
+
+        break;
+
 }//switch
 
 ?>

@@ -6,8 +6,10 @@
 	$encuesta->setId($_GET['x']);
 	$data = $encuesta->EnumeratePreguntas();
 	
-	$encuesta->setId($_GET['x']);
+	$encuesta->setEncuestaId($_GET['x']);
 	$info = $encuesta->Info();
+
+    $util->PrintErrors2();
 
 	if(!empty($clientes))
 		$smarty->assign('datatable_flag',true);

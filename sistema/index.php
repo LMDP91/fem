@@ -15,7 +15,6 @@
         'homepage',		
 		'config',
 		'rol',
-		'config_role',
 		'perm_accion',
 		'usuario',
 		'cat_electronico',
@@ -68,12 +67,6 @@
 	
 	$smarty->assign('pageTpl', $pageTpl);
 	$smarty->assign('lang', $lang);
-	
-	$usr = $_SESSION['Usr'];
-    $objRole->setRoleId($_SESSION['Usr']["role_id"]);
-    $lstAccesos = $objRole->permisoSegunRol();
-    $smarty->assign('privilegios',$lstAccesos);
-	$smarty->assign('usr',$usr);
 
 	$smarty->assign('miColor',$miColor);
 	$smarty->assign('FOOTER', FOOTER);

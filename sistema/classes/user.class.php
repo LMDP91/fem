@@ -53,7 +53,7 @@ class User extends Main
             header('Location: '.WEB_ROOT.'/login');
             exit;
         }
-        if($page != ''&& !$User['role_id'] && $User['role_id']!=1){
+        if($page != '' && !$User['rolId'] && $User['rolId']!=1){
             if(!$this->allow_access_module($page)){
                 header('Location: '.WEB_ROOT);
                 exit;
@@ -61,16 +61,10 @@ class User extends Main
         }
 				
 	}//AllowAccess
-
-	public function __construct() {
-		
-	}
-	
 	public function allow_access_module($page){
 		global $objRole;
-		$Usr = $_SESSION['Usr'];
-        $objRole->setRoleId($Usr["role_id"]);
-        $allowPages = $objRole->permisoSegunRol();
+        $objRole->setRoleId($_SESSION['Usr']["rolId"]);
+        $allowPages = $objRole->GetPermisosByRol();
         if(in_array($page,$allowPages))
             return true;
         else
@@ -106,7 +100,7 @@ class User extends Main
 			
 		if($row){
 			$card['usuarioId'] = $row['usuarioId'];	
-			$card['role_id'] = $row['role_id'];
+			$card['rolId'] = $row['role_id'];
             $card['sucursalId'] = $row['sucursalId'];
 	        $card['usuario'] = $row['usuario'];
             $card['email'] = $row['email'];

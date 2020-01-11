@@ -33,10 +33,12 @@
 				   <span class="caption-subject font-green sbold">Encuesta </span>
 				 </div>  
 				<div class="actions">
-				    <div class="btn-group btn-group-devided" data-toggle="buttons"> 
-					<a href="javascript:;" class="btn btn-circle sbold green" onClick="AddReg()">
-						<i class="fa fa-plus"></i>Agregar
-					</a>
+				    <div class="btn-group btn-group-devided" data-toggle="buttons">
+					{if in_array(21,$privilegios) or $Usr.rolId eq 1}
+						<a href="javascript:;" class="btn btn-circle sbold green" onClick="AddReg()">
+							<i class="fa fa-plus"></i>Agregar
+						</a>
+					{/if}
 					</div>
 				</div>
 			</div>

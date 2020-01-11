@@ -12,6 +12,7 @@ class Encuesta extends Main
 	private $respuesta;
 	private $contexto;
 	private $riesgo;
+	private $orden;
 
 	//filtros;
     private $anio;
@@ -48,6 +49,10 @@ class Encuesta extends Main
     public function setRiesgo($value){
         $this->Util()->ValidateRequireField($value, 'Tipo riesgo');
         $this->riesgo = $value;
+    }
+    public function setOrden($value){
+        $this->Util()->ValidateRequireField($value, 'Orden');
+        $this->orden = $value;
     }
     public function getContexto(){
 	    return $this->contexto;
@@ -209,7 +214,8 @@ class Encuesta extends Main
 				tiporespuesta = "'.($this->tipoencuesta).'",
 				rango = "'.($this->rango).'",
 				opcional = "'.($this->opcional).'",
-				riesgo = "'.($this->riesgo).'", 
+				riesgo = "'.($this->riesgo).'",
+				orden = "'.($this->orden).'", 
 				numCaracter = "'.($this->numcaracter).'"
 				WHERE preguntaId = "'.$this->id.'"';
 				
@@ -223,6 +229,7 @@ class Encuesta extends Main
 				encuestaId, 
 				rango, 
 				riesgo,
+				orden,
 				opcional, 
 				numCaracter
 			)
@@ -232,13 +239,14 @@ class Encuesta extends Main
 				"'.$this->encuestaId.'",
 				"'.$this->rango.'",
 				"'.$this->riesgo.'",
+				"'.$this->orden.'",
 				"'.$this->opcional.'",
 				"'.$this->numcaracter.'"
 			)';
 			$this->Util()->DB()->setQuery($sql);
 			$this->id = $this->Util()->DB()->InsertData();
 		}
-		$this->Util()->setError(10112, 'complete', '');
+		$this->Util()->setError(10112, 'complete', 'Registro actualizado');
 		$this->Util()->PrintErrors();
 		return true;
 	}//Save

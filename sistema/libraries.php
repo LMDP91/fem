@@ -1,15 +1,9 @@
 <?php
-
-use PhpRbac\Rbac;
 include_once(DOC_ROOT.'/properties/errors.es.php');
-
 require(DOC_ROOT.'/libs/Smarty.class.php');
 require(DOC_ROOT.'/libs/nusoap.php');
 include_once(DOC_ROOT."/libs/qr/qrlib.php");
 include_once(DOC_ROOT."/libs/PHPExcel/Classes/PHPExcel.php");
-include_once(DOC_ROOT."/libs/PhpRbac/src/PhpRbac/Rbac.php");
-
-$rbac =  new Rbac;
 
 include_once(DOC_ROOT.'/classes/db.class.php');
 $db = new DB;
@@ -75,20 +69,15 @@ include_once(DOC_ROOT.'/classes/class.phpmailer.php');
 include_once(DOC_ROOT.'/classes/class.smtp.php');
 include_once(DOC_ROOT.'/classes/sendmail.class.php');
 
-
- /* pChart library inclusions */ 
- // include_once(DOC_ROOT."/libs/pChart/class/pData.class.php"); 
- // include_once(DOC_ROOT."/libs/pChart/class/pDraw.class.php"); 
- // include_once(DOC_ROOT."/libs/pChart/class/pPie.class.php"); 
- // include_once(DOC_ROOT."/libs/pChart/class/pImage.class.php"); 
- 
-include_once(DOC_ROOT.'/libs/jpgraph/src/jpgraph.php');
-include_once(DOC_ROOT.'/libs/jpgraph/src/jpgraph_line.php');
-include_once(DOC_ROOT.'/libs/jpgraph/src/jpgraph_pie.php');
-include_once(DOC_ROOT.'/libs/jpgraph/src/jpgraph_bar.php');
-
-
 $smarty = new Smarty;
+$Usr = $_SESSION['Usr'];
+if($Usr["rolId"]==1)
+    $objRole->setAdmin(1);
+
+$objRole->setRoleId($Usr['roleId']);
+$permissions = $objRole->GetPermisosByRol();
+$smarty->assign('privilegios', $permissions);
+$smarty->assign('Usr', $Usr);
 
 $smarty->assign('WEB_ROOT_P',WEB_ROOT_P);
 $smarty->assign('DOC_ROOT',DOC_ROOT);

@@ -34,10 +34,12 @@
 				   <span class="caption-subject font-green sbold">Nombre de la encuesta: {$info.nombre}</span>
 				 </div>  
 				<div class="actions">
-				    <div class="btn-group btn-group-devided" data-toggle="buttons"> 
-					<a href="javascript:;" class="btn btn-circle sbold green" onClick="AddReg({$encuestaId})">
-						<i class="fa fa-plus"></i> Agregar
-					</a>
+				    <div class="btn-group btn-group-devided" data-toggle="buttons">
+						{if in_array(40,$privilegios) or $Usr.rolId eq 1}
+							<a href="javascript:;" class="btn btn-circle sbold green" onClick="AddReg({$encuestaId})">
+								<i class="fa fa-plus"></i> Agregar
+							</a>
+						{/if}
 					</div>
 				</div>
 			</div>

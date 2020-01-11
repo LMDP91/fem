@@ -1,5 +1,4 @@
 var urlLoc = document.location.hostname;
-console.log("lalal"+urlLoc);
 if(urlLoc == "localhost")
 	var WEB_ROOT = "http://" + urlLoc + "/feminicidio/sistema";
 else if(urlLoc == "192.168.1.200")

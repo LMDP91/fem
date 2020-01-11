@@ -182,28 +182,44 @@ class Question extends Encuesta
         return  !$this->Util()->DB()->GetSingle()? "Pendiente" : $this->Util()->DB()->GetSingle();
     }
     public function generateResultPoll($pollVictimaId){
-        $frecuencias = ["Siempre"=>3,"Frecuente"=>2,"Por lo menos una vez"=>1,"Nunca"=>0];
-        $resultados = [];
+        $frecuencias = ["Siempre"=>1,"Frecuentemente"=>.75,"Por lo menos una vez"=>.50,"Nunca"=>.25];
+        $sumMat = 0;
+        $totalPreguntas =0;
 
-        $sql = "select a.*,b.riesgo from answerPollVictima a inner join pregunta b on a.preguntaId=b.preguntaId where a.pollVictimaId = '$pollVictimaId' ";
+        $sql = "select a.*,b.riesgo,b.orden from answerPollVictima a inner join pregunta b on a.preguntaId=b.preguntaId where a.pollVictimaId = '$pollVictimaId' ";
         $this->Util()->DB()->setQuery($sql);
         $answers = $this->Util()->DB()->GetResult();
         foreach($answers as $key => $var){
-            $resultados[$var["riesgo"]] += $frecuencias[ucfirst(strtolower($var["respuesta"]))];
+            $sumMat =$sumMat + (float)$var["orden"] + (float) $frecuencias[ucfirst(strtolower($var["respuesta"]))];
+            $totalPreguntas++;
         }
-
-        $resultadoEncuesta  ="";
-        if(!empty($resultados)){
-            if($resultados["Severo"]>0)
-                $resultadoEncuesta = "Severo";
-            elseif($resultados["Moderado"]>0)
-                $resultadoEncuesta = "Moderado";
-            else
-                 $resultadoEncuesta = "Bajo";
-        }
-
-        $sql  ="update pollVictima set resultadoEncuesta ='$resultadoEncuesta' where pollVictimaId = '".$this->pollVictimaId."' ";
+        $resultadoEncuesta = $this->getValueResultByPoint($totalPreguntas,$sumMat);
+        $sql  ="update pollVictima set resultadoEncuesta ='$resultadoEncuesta', puntos = '$sumMat' where pollVictimaId = '".$this->pollVictimaId."' ";
         $this->Util()->DB()->setQuery($sql);
         $this->Util()->DB()->UpdateData();
+    }
+    function getValueResultByPoint($totalQuestion =0,$point= 0){
+        switch ($totalQuestion){
+            case 12:
+                if($point>=84)
+                    return "Severa";
+                elseif($point>81.01&&$point<=83.9)
+                    return "Moderada";
+                else return "Baja";
+            case 9:
+                if($point>=49.6)
+                    return "Severa";
+                elseif($point>47.26&&$point<=49.5)
+                    return "Moderada";
+                else return "Baja";
+            case 7:
+                if($point>=31.6)
+                    return "Severa";
+                elseif($point>29.76&&$point<=31.5)
+                    return "Moderada";
+                else return "Baja";
+            default:
+                return "Baja";
+        }
     }
 }

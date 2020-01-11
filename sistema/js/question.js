@@ -52,17 +52,17 @@ function AddReg(Id){
 	
 }//AddReg
 function EditReg(id){
-	
 	$.ajax({
 	  	type: "POST",
 	  	url: AJAX_PATH,
 	  	data: "type=addQuestion&id="+id,		
-	  	success: function(response) {	
-		console.log(response)		
+	  	success: function(response) {
 			var splitResp = response.split("[#]");
 									
 			if(splitResp[0] == "ok")
+			{
 				$("#draggable").html(splitResp[1]);
+			}
 			else
 				alert(msgFail);
 		},
@@ -85,15 +85,11 @@ function SaveReg(){
 			$("#txtErrMsg").hide(0);
 		},
 	  	success: function(response) {
-			console.log(response)		
 			var splitResp = response.split("[#]");
-
 			$("#loader").html("");
-			
 			if(splitResp[0] == "ok"){
 				$("#draggable").modal("hide");
 				location.reload();
-				
 			}else if(splitResp[0] == "fail"){
 				console.log(splitResp[0]);
 				$("#txtErrMsg").show();

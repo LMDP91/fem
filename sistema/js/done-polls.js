@@ -13,7 +13,6 @@ $(function(){
                         $("#draggable").modal("show");
                         $("#draggable").html(splitResp[1]);
                         drawChart(splitResp[2]);
-
                     }
                 },
                 error:function(){
@@ -26,24 +25,19 @@ $(function(){
 
 function drawChart(value) {
     am4core.ready(function() {
-
 // Themes begin
         am4core.useTheme(am4themes_animated);
 // Themes end
-
-
-
 // create chart
         var chart = am4core.create("modal-chart", am4charts.GaugeChart);
         chart.innerRadius = -15;
 
         var axis = chart.xAxes.push(new am4charts.ValueAxis());
         axis.min = 0;
-        axis.max = 100;
+        axis.max = 179;
         axis.strictMinMax = true;
 
         var colorSet = new am4core.ColorSet();
-
         var gradient = new am4core.LinearGradient();
         gradient.stops.push({color:am4core.color("yellow")})
         gradient.stops.push({color:am4core.color("orange")})
