@@ -87,24 +87,25 @@ class DB
 
  	public function DatabaseConnect(){
 	
-    	$this->conn_id = mysql_connect($this->sqlHost, $this->sqlUser, $this->sqlPassword, 1);
-		mysql_set_charset('utf8');
-    	mysql_select_db($this->sqlDatabase, $this->conn_id) or die("<br/>".mysql_error()."<br/>");
+    	$this->conn_id = new mysqli($this->sqlHost, $this->sqlUser, $this->sqlPassword) or die(mysqli_error($this->conn_id));
+		mysqli_set_charset('utf8');
+		mysqli_query( $this->conn_id,"SET SESSION sql_mode = 'NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' ");
+    	mysqli_select_db($this->conn_id,$this->sqlDatabase) or die("<br/>".mysqli_error($this->conn_id)."<br/>");
   	}
 	
 	public function ExecuteQuery(){
 	
-  		if(!$this->conn_id)
-   	  		$this->DatabaseConnect();
-			
-		$this->sqlResult = mysql_query($this->query, $this->conn_id);			
+		if(!$this->conn_id)
+		$this->DatabaseConnect();
+	
+		$this->sqlResult = mysqli_query( $this->conn_id,$this->query)  or die (trigger_error(mysqli_error($this->conn_id)));
 	}
 	
   	function GetResult(){
 	
   		$retArray = array();
 		$this->ExecuteQuery();		
-	  	while($rs=mysql_fetch_assoc($this->sqlResult)){
+	  	while($rs=mysqli_fetch_assoc($this->sqlResult)){
 	    	$retArray[] = $rs;
 		}
     	$this->CleanQuery();
@@ -115,7 +116,7 @@ class DB
 	
   		$retArray = array();
 		$this->ExecuteQuery();		
-	  	while($rs=mysql_fetch_assoc($this->sqlResult)){
+	  	while($rs=mysqli_fetch_assoc($this->sqlResult)){
 	    	if($field!="")
 	    	   $retArray[] = $rs[$field];
 	    	else
@@ -131,33 +132,38 @@ class DB
   
 		$this->ExecuteQuery();
 				
-		return mysql_num_rows($this->sqlResult);
+		return mysqli_num_rows($this->sqlResult);
   	}
 
   	function GetRow(){
 	
 		$this->ExecuteQuery();
-		$rs=mysql_fetch_assoc($this->sqlResult);
+		$rs=mysqli_fetch_assoc($this->sqlResult);
     	$this->CleanQuery();
 
     return $rs;
   }
 
  	 function GetSingle(){
-	 
-		$this->ExecuteQuery();
-		$rs=@mysql_result($this->sqlResult, 0);
-		if(!$rs)
-			$rs = 0;			
-    	$this->CleanQuery();
-
-    	return $rs;
+		 $this->ExecuteQuery();
+	
+			$rs = @mysqli_fetch_array($this->sqlResult);
+	
+			if(!$rs) {
+				return 0;
+			}
+	
+			$rs = $rs[0];
+	
+			$this->CleanQuery();
+	
+			return $rs;
   	}
 
   	function InsertData(){
   
 		$this->ExecuteQuery();
-		$last_id=mysql_insert_id($this->conn_id);
+		$last_id=mysqli_insert_id($this->conn_id);
     	$this->CleanQuery();
 
     	return $last_id;
@@ -166,7 +172,7 @@ class DB
   	function UpdateData(){
 	
 		$this->ExecuteQuery();
-		$return = mysql_affected_rows($this->conn_id);
+		$return = mysqli_affected_rows($this->conn_id);
   		$this->CleanQuery();
 
     	return $return;
@@ -177,14 +183,14 @@ class DB
 	}
 	
   	function CleanQuery(){
-    	@mysql_free_result($this->sqlResult);
+    	@mysqli_free_result($this->sqlResult);
   	}
 	
 	function EnumSelect( $table , $field ){
 		$this->query = "SHOW COLUMNS FROM `$table` LIKE '$field' ";
 		$this->ExecuteQuery();
 
-		$row = mysql_fetch_array( $this->sqlResult , MYSQL_NUM );
+		$row = mysqli_fetch_array( $this->sqlResult , MYSQL_NUM );
 		$regex = "/'(.*?)'/";
 
 		preg_match_all( $regex , $row[1], $enum_array );
@@ -194,7 +200,7 @@ class DB
 	}
 	function EscapeString()
 	{
-		$return = mysql_real_escape_string($this->dataString);
+		$return = mysqli_real_escape_string($this->dataString);
 		return $return;
 	}
 		

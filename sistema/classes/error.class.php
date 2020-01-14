@@ -1,6 +1,6 @@
 <?php
 
-class Error
+class CustomError
 {
 	private $type = array();
 	private $errorField = array();

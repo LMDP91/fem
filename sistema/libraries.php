@@ -9,7 +9,7 @@ include_once(DOC_ROOT.'/classes/db.class.php');
 $db = new DB;
 require 'vendor/autoload.php';
 include_once(DOC_ROOT.'/classes/error.class.php');
-$error = new Error;
+$error = new CustomError;
 
 
 include_once(DOC_ROOT.'/classes/util.class.php');
@@ -68,6 +68,19 @@ $question = new Question;
 include_once(DOC_ROOT.'/classes/class.phpmailer.php');
 include_once(DOC_ROOT.'/classes/class.smtp.php');
 include_once(DOC_ROOT.'/classes/sendmail.class.php');
+
+
+ /* pChart library inclusions */ 
+ // include_once(DOC_ROOT."/libs/pChart/class/pData.class.php"); 
+ // include_once(DOC_ROOT."/libs/pChart/class/pDraw.class.php"); 
+ // include_once(DOC_ROOT."/libs/pChart/class/pPie.class.php"); 
+ // include_once(DOC_ROOT."/libs/pChart/class/pImage.class.php"); 
+ 
+/*include_once(DOC_ROOT.'/libs/jpgraph/src/jpgraph.php');
+include_once(DOC_ROOT.'/libs/jpgraph/src/jpgraph_line.php');
+include_once(DOC_ROOT.'/libs/jpgraph/src/jpgraph_pie.php');
+include_once(DOC_ROOT.'/libs/jpgraph/src/jpgraph_bar.php');*/
+
 
 $smarty = new Smarty;
 $Usr = $_SESSION['Usr'];
