@@ -10,9 +10,9 @@ class Encuesta extends Main
 	private $opcional;
 	private $encuestaId;
 	private $respuesta;
-	private $contexto;
 	private $riesgo;
 	private $orden;
+	private $contexto;
 
 	//filtros;
     private $anio;
@@ -37,7 +37,6 @@ class Encuesta extends Main
 			$this->nombre = $value;
 		}		
 	}
-
 	public function setRespuesta($value){
 			$this->Util()->ValidateString($value, 100, 0, '');
 			$this->respuesta = $value;

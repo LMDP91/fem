@@ -18,7 +18,17 @@
 					</div>
 							
 				</div>
-
+				<div class="form-group">
+					<label class="control-label col-md-3"><span class="reqIcon"> * </span>Contexto</label>
+					<div class="col-md-9">
+							<select class="form-control" name="contexto">
+								<option value="Todos" {if $info.tipo eq "Todos"}selected{/if}>Todos</option>	
+								<option value="Urbano" {if $info.tipo eq "Urbano"}selected{/if}>Urbano</option>
+								<option value="Indigena" {if $info.tipo eq "Indigena"}selected{/if}>Indigena</option>
+							</select>	
+					</div>
+							
+				</div>
 				<div class="form-group">
 					<label class="control-label col-md-3"><span class="reqIcon"> * </span>Inicio</label>
 					<div class="col-md-9">
