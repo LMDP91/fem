@@ -218,19 +218,19 @@ class Question extends Encuesta
             case 9:
                 if($point>=49.5)
                     return "Severa";
-                elseif($point>47.26&&$point<=49.4)
+                elseif($point>48.16&&$point<=49.4)
                     return "Moderada";
                 else return "Baja";
             case 7:
                 if($point>=31.5)
                     return "Severa";
-                elseif($point>29.76&&$point<=31.4)
+                elseif($point>30.66&&$point<=31.4)
                     return "Moderada";
                 else return "Baja";
             case 6:
                 if($point>=24)
                     return "Severa";
-                elseif($point>22.6&&$point<=23.9)
+                elseif($point>23.5&&$point<=23.9)
                     return "Moderada";
                 else return "Baja";
             case 13:
@@ -239,14 +239,20 @@ class Question extends Encuesta
                 elseif($point>95.5&&$point<=97.4)
                     return "Moderada";
                 else return "Baja";
+            case 8:
+                if($point>=41.1)
+                    return "Severa";
+                elseif($point>39&&$point<=41)
+                    return "Moderada";
+                else return "Baja";
             default:
                 return "Baja";
         }
     }
     function getValueInChart($totalQuestion =0,$point= 0){
         $porcent = number_format(100/3,4);
-        $maxs = [12=>90,9=>54,7=>35,6=>27,13=>104];
-        $mins = [12=>81,9=>47.25,7=>29.75,6=>22.5,13=>94.25];
+        $maxs = [12=>90,9=>54,7=>35,6=>27,13=>104,8=>44];
+        $mins = [12=>81,9=>47.25,7=>29.75,6=>22.5,13=>94.25,8=>38];
         $factor = $maxs[$totalQuestion]-$mins[$totalQuestion];
         $currentFactor = $point-$mins[$totalQuestion];
         $porcentOverPorcent = ($currentFactor * $porcent)/$factor;
@@ -272,32 +278,32 @@ class Question extends Encuesta
         $labels = [];
         foreach($this->dataChart as $var){
             $porcentOver100 =  number_format((($var["porcentInChart"]*100)/33.3333),4);
-            $data[] = $porcentOver100;
+            $data[] = number_format($porcentOver100,2);
             $labels[] = substr($var["nombre"],9,10);
         }
         /* Create and populate the pData object */
         $MyData = new pData();
         $MyData->addPoints($data,"puntos");
-        $MyData->setAxisName(0,"Porcenaje de violencia (%)");
+        $MyData->setAxisName(0,"Porcentaje de violencia (%)");
         $MyData->addPoints($labels,"tipos");
         $MyData->setSerieDescription("tipos","Browsers");
         $MyData->setAbscissa("tipos");
         $MyData->setAbscissaName("Tipos de violencia");
-        $MyData->setAxisDisplay(0,AXIS_FORMAT_DEFAULT,1);
+        $MyData->setAxisDisplay(0,AXIS_FORMAT_CUSTOM,"XAxisFormat");
 
         /* Create the pChart object */
-        $myPicture = new pImage(800,320,$MyData);
+        $myPicture = new pImage(800,400,$MyData);
 
         /* Write the chart title */
         $myPicture->setFontProperties(array("FontName"=>DOC_ROOT."/libs/pChart/fonts/Forgotte.ttf","FontSize"=>15));
-        $myPicture->drawText(30,15,"Grafica de resultado de encuestas",array("FontSize"=>20));
+        $myPicture->drawText(150,25,"Grafica de resultado por tipo de encuesta aplicado.",array("FontSize"=>22));
 
         /* Define the default font */
         $myPicture->setFontProperties(array("FontName"=>DOC_ROOT."/libs/pChart/fonts/pf_arma_five.ttf","FontSize"=>10));
 
         /* Set the graph area */
-        $myPicture->setGraphArea(100,60,750,300);
-        $myPicture->drawGradientArea(100,60,800,320,DIRECTION_HORIZONTAL,array("StartR"=>200,"StartG"=>200,"StartB"=>200,"EndR"=>255,"EndG"=>255,"EndB"=>255,"Alpha"=>30));
+        $myPicture->setGraphArea(100,60,750,250);
+        $myPicture->drawGradientArea(100,60,800,250,DIRECTION_HORIZONTAL,array("StartR"=>200,"StartG"=>200,"StartB"=>200,"EndR"=>255,"EndG"=>255,"EndB"=>255,"Alpha"=>30));
 
         /* Draw the chart scale */
         $AxisBoundaries = array(0=>array("Min"=>0,"Max"=>100));
@@ -308,8 +314,10 @@ class Question extends Encuesta
         $myPicture->setShadow(TRUE,array("X"=>1,"Y"=>1,"R"=>0,"G"=>0,"B"=>0,"Alpha"=>10));
 
         /* Draw the chart */
-        $myPicture->drawBarChart(array("DisplayValues"=>TRUE,"DisplayShadow"=>TRUE,"DisplayPos"=>LABEL_POS_INSIDE,"Rounded"=>TRUE,"Surrounding"=>30));
-
+        $Palette = array("0"=>array("R"=>224,"G"=>100,"B"=>46,"Alpha"=>100),
+                 "1"=>array("R"=>224,"G"=>100,"B"=>46,"Alpha"=>100),
+                 "2"=>array("R"=>224,"G"=>100,"B"=>46,"Alpha"=>100));
+        $myPicture->drawBarChart(array("DisplayValues"=>TRUE,"DisplayShadow"=>TRUE,"DisplayPos"=>LABEL_POS_INSIDE,"Rounded"=>TRUE,"Surrounding"=>30,"OverrideColors"=>$Palette));
         /* Render the picture (choose the best way) */
        // $myPicture->autoOutput("pictures/example.drawBarChart.poll.png");
         $v = $this->getVictimaId();

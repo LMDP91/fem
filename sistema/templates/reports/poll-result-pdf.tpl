@@ -53,6 +53,9 @@
             .encuBreak{
                 page-break-inside: avoid;
             }
+            .mayuscula{
+                text-transform: uppercase;
+            }
         </style>
     </head>
     <body>
@@ -75,36 +78,36 @@
         </table>
         <table width="100%">
             <tr class="border-bottom">
-                <td width="10%"><b>Nombre completo</b></td>
-                <td width="35%">{$info.nombre} {$info.apaterno} {$amaterno}</td>
-                <td width="10%"><b>Edad</b></td>
-                <td>{$info.edad}</td>
+                <td width="10%" class="mayuscula"><b>Nombre completo</b></td>
+                <td width="35%" class="mayuscula">{$info.nombre} {$info.apaterno} {$amaterno}</td>
+                <td width="10%" class="mayuscula"><b>Edad</b></td>
+                <td class="mayuscula">{$info.edad}</td>
             </tr>
             <tr class="border-bottom">
-                <td width="35%"><b>Municipio</b></td>
-                <td width="35%">{$info.municipio}</td>
-                <td width="10%"><b>Zona</b></td>
-                <td>{$info.tipo}</td>
+                <td width="35%" class="mayuscula"><b>Municipio</b></td>
+                <td width="35%" class="mayuscula">{$info.municipio}</td>
+                <td width="10%" class="mayuscula"><b>Zona</b></td>
+                <td class="mayuscula">{$info.tipo}</td>
             </tr>
             <tr class="border-bottom">
-                <td  colspan="2"><b>Diagnostico</b></td>
-                <td colspan="2"  style="text-align: left">Violencia {$resultGeneral}</td>
+                <td  colspan="2" class="mayuscula"><b>Diagnostico</b></td>
+                <td colspan="2"  style="text-align: left" class="mayuscula">Violencia {$resultGeneral}</td>
             </tr>
         </table>
         {foreach from=$encuestas item=encu key=kenc}
             <table width="100%" class="encuBreak" >
                 {if $encu.tipo neq "Todos"}
                     <tr class="border-bottom">
-                        <td><b>Encuesta</b></td>
-                        <td>{$encu.nombre}</td>
+                        <td class="mayuscula"><b>Encuesta</b></td>
+                        <td class="mayuscula">{$encu.nombre}</td>
                     </tr>
                     <tr class="border-bottom">
-                        <td><b>Resultado encuesta</b></td>
-                        <td>{$encu.resultado}</td>
+                        <td class="mayuscula"><b>Resultado encuesta</b></td>
+                        <td class="mayuscula">{$encu.resultado}</td>
                     </tr>
                 {else}
                     <tr>
-                        <td colspan="2"><b>{$encu.nombre}</b></td>
+                        <td colspan="2" class="mayuscula"><b>{$encu.nombre}</b></td>
                     </tr>
                 {/if}
                 <tbody>
@@ -133,6 +136,7 @@
         <table>
             <tr>
                 <td>
+                    <br>
                     <img src={$chart}" width="650px">
                 </td>
             </tr>
