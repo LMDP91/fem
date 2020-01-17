@@ -1,7 +1,7 @@
 var urlLoc = document.location.hostname;
 if(urlLoc == "localhost")
-	var WEB_ROOT = "http://" + urlLoc + ":8080/feminicidio/sistema";
-else if(urlLoc == "192.168.1.200")
+	var WEB_ROOT = "http://" + urlLoc + "/feminicidio/sistema";
+else if(urlLoc == "192.168.1.3")
 	var WEB_ROOT = "http://" + urlLoc + "/feminicidio/sistema";
 else
 	var WEB_ROOT = "http://" + urlLoc + "/feminicidio/sistema";

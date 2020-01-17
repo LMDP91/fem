@@ -88,9 +88,10 @@ class DB
  	public function DatabaseConnect(){
 	
     	$this->conn_id = new mysqli($this->sqlHost, $this->sqlUser, $this->sqlPassword) or die(mysqli_error($this->conn_id));
-		mysqli_set_charset('utf8');
+        mysqli_set_charset($this->conn_id,'utf8');
 		mysqli_query( $this->conn_id,"SET SESSION sql_mode = 'NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' ");
     	mysqli_select_db($this->conn_id,$this->sqlDatabase) or die("<br/>".mysqli_error($this->conn_id)."<br/>");
+
   	}
 	
 	public function ExecuteQuery(){

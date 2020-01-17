@@ -70,11 +70,11 @@ include_once(DOC_ROOT.'/classes/class.smtp.php');
 include_once(DOC_ROOT.'/classes/sendmail.class.php');
 
 
- /* pChart library inclusions */ 
- // include_once(DOC_ROOT."/libs/pChart/class/pData.class.php"); 
- // include_once(DOC_ROOT."/libs/pChart/class/pDraw.class.php"); 
- // include_once(DOC_ROOT."/libs/pChart/class/pPie.class.php"); 
- // include_once(DOC_ROOT."/libs/pChart/class/pImage.class.php"); 
+ /* pChart library inclusions */
+  include_once(DOC_ROOT."/libs/pChart/class/pData.class.php");
+  include_once(DOC_ROOT."/libs/pChart/class/pDraw.class.php");
+  include_once(DOC_ROOT."/libs/pChart/class/pPie.class.php");
+  include_once(DOC_ROOT."/libs/pChart/class/pImage.class.php");
  
 /*include_once(DOC_ROOT.'/libs/jpgraph/src/jpgraph.php');
 include_once(DOC_ROOT.'/libs/jpgraph/src/jpgraph_line.php');

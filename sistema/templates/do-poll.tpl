@@ -61,7 +61,7 @@
 									<a href="#tab1" data-toggle="tab" >Datos Personales</a>
 								</li>
 								{foreach from=$encuestas item=item key=key}
-									<li {if $post.tipo neq $item.tipo}style="display: none"{/if} class="{$item.tipo}">
+									<li {if $post.tipo neq $item.tipo && $item.tipo neq "Todos"}style="display: none"{/if} class="{$item.tipo}">
 										<a href="#tab{$item.encuestaId}" data-toggle="tab" data-id="{$item.encuestaId}" data-name="tab{$item.encuestaId}" >
 											{$item.nombre|ucfirst}
 										</a>

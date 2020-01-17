@@ -15,6 +15,7 @@
             table {
                 font-size: 12px;
                 line-height: 20px;
+                padding-bottom: 15px;
             }
             table.outline-table {
                 border: 2px solid #ccc;
@@ -48,6 +49,9 @@
             }
             tr.right td, td.right {
                 text-align: right;
+            }
+            .encuBreak{
+                page-break-inside: avoid;
             }
         </style>
     </head>
@@ -88,7 +92,8 @@
             </tr>
         </table>
         {foreach from=$encuestas item=encu key=kenc}
-            <table width="100%" >
+            <table width="100%" class="encuBreak" >
+                {if $encu.tipo neq "Todos"}
                     <tr class="border-bottom">
                         <td><b>Encuesta</b></td>
                         <td>{$encu.nombre}</td>
@@ -97,11 +102,17 @@
                         <td><b>Resultado encuesta</b></td>
                         <td>{$encu.resultado}</td>
                     </tr>
+                {else}
+                    <tr>
+                        <td colspan="2"><b>{$encu.nombre}</b></td>
+                    </tr>
+                {/if}
                 <tbody>
                 {foreach from=$encu.preguntas item=item key=key}
                     <tr><td colspan="2">{$key+1}.- {$item.pregunta}</td></tr>
                     <tr><td colspan="2">
                             {foreach from=$item.opciones item=item2 key=key}
+                                {if $item.currentAnswer eq $item2}
                                 <div class="md-radio">
                                     <input type="radio" name="question_{$item.preguntaId}" id="question_{$item.preguntaId}_{$key}" value='{$item2}' class="md-radiobtn" {if $item.currentAnswer eq $item2}checked{/if}>
                                     <label for="question_{$item.preguntaId}_{$key}">
@@ -111,6 +122,7 @@
                                         {$item2|strtolower|ucfirst}
                                     </label>
                                 </div>
+                                {/if}
                             {/foreach}
                         </td>
                     </tr>
@@ -118,6 +130,13 @@
                 </tbody>
             </table>
         {/foreach}
+        <table>
+            <tr>
+                <td>
+                    <img src={$chart}" width="650px">
+                </td>
+            </tr>
+        </table>
     </div>
 
     </body>

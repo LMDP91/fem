@@ -1,12 +1,11 @@
 <?php
-
-
 class Question extends Encuesta
 {
     private $currentAnswers = [];
     private $answersExist = [];
     private $victimaId;
     private $pollVictimaId;
+    private $dataChart = [];
     public function setVictimaId($value){
         $this->Util()->ValidateRequireField($value, 'Favor de ingresar los datos personales');
         $this->victimaId = $value;
@@ -28,6 +27,9 @@ class Question extends Encuesta
     }
     public function getPollVictimaId(){
         return $this->pollVictimaId;
+    }
+    public function resetDataChart(){
+        unset($this->dataChart);
     }
     public function createArrayCurrentAnswers(){
         $this->resetCurrentAnswers();
@@ -147,7 +149,7 @@ class Question extends Encuesta
     }
     public function validateFullResolvePoll(){
         $pendiente = 0;
-        $this->Util()->DB()->setQuery("select * from encuesta where tipo = '".$this->getContexto()."' ");
+        $this->Util()->DB()->setQuery("select * from encuesta where tipo in('".$this->getContexto()."','Todos')  ");
         $result = $this->Util()->DB()->GetResult();
         foreach ($result as $key => $value){
             $sql  ="select status from pollVictima where encuestaId='".$value["encuestaId"]."' and victimaId = '".$this->victimaId."' ";
@@ -166,7 +168,7 @@ class Question extends Encuesta
         $victima->setVictimaId($this->victimaId);
         $infoVictima = $victima->Info();
 
-        $this->Util()->DB()->setQuery("select * from encuesta where tipo = '".$infoVictima['tipo']."' ");
+        $this->Util()->DB()->setQuery("select * from encuesta where tipo in('".$infoVictima['tipo']."','Todos')  order by position asc ");
         $encuestas = $this->Util()->DB()->GetResult();
         foreach($encuestas as $key =>$value){
             $this->setEncuestaId($value["encuestaId"]);
@@ -181,6 +183,11 @@ class Question extends Encuesta
         $this->Util()->DB()->setQuery($sql);
         return  !$this->Util()->DB()->GetSingle()? "Pendiente" : $this->Util()->DB()->GetSingle();
     }
+    public function getPorcentInChart(){
+        $sql  ="select porcentInChart from pollVictima where encuestaId='".$this->getEncuestaId()."' and victimaId = '".$this->victimaId."' ";
+        $this->Util()->DB()->setQuery($sql);
+        return  $this->Util()->DB()->GetSingle();
+    }
     public function generateResultPoll($pollVictimaId){
         $frecuencias = ["Siempre"=>1,"Frecuentemente"=>.75,"Por lo menos una vez"=>.50,"Nunca"=>.25];
         $sumMat = 0;
@@ -194,7 +201,9 @@ class Question extends Encuesta
             $totalPreguntas++;
         }
         $resultadoEncuesta = $this->getValueResultByPoint($totalPreguntas,$sumMat);
-        $sql  ="update pollVictima set resultadoEncuesta ='$resultadoEncuesta', puntos = '$sumMat' where pollVictimaId = '".$this->pollVictimaId."' ";
+        $porcentInChart = $this->getValueInChart($totalPreguntas,$sumMat);
+
+        $sql  ="update pollVictima set resultadoEncuesta ='$resultadoEncuesta', puntos = '$sumMat', porcentInchart = '$porcentInChart' where pollVictimaId = '".$this->pollVictimaId."' ";
         $this->Util()->DB()->setQuery($sql);
         $this->Util()->DB()->UpdateData();
     }
@@ -203,13 +212,13 @@ class Question extends Encuesta
             case 12:
                 if($point>=84)
                     return "Severa";
-                elseif($point>81.01&&$point<=83.9)
+                elseif($point>82&&$point<=83.9)
                     return "Moderada";
                 else return "Baja";
             case 9:
-                if($point>=49.6)
+                if($point>=49.5)
                     return "Severa";
-                elseif($point>47.26&&$point<=49.5)
+                elseif($point>47.26&&$point<=49.4)
                     return "Moderada";
                 else return "Baja";
             case 7:
@@ -221,5 +230,77 @@ class Question extends Encuesta
             default:
                 return "Baja";
         }
+    }
+    function getValueInChart($totalQuestion =0,$point= 0){
+        $porcent = number_format(100/3,4);
+        $maxs = [12=>90,9=>54,7=>35];
+        $mins = [12=>81,9=>47.25,7=>29.75];
+        $factor = $maxs[$totalQuestion]-$mins[$totalQuestion];
+        $currentFactor = $point-$mins[$totalQuestion];
+        $porcentOverPorcent = ($currentFactor * $porcent)/$factor;
+        return $porcentOverPorcent;
+    }
+    public function generateDataForChart(){
+        global $victima;
+        $victima->setVictimaId($this->victimaId);
+        $infoVictima = $victima->Info();
+
+        $this->Util()->DB()->setQuery("select * from encuesta where tipo in('".$infoVictima['tipo']."')  order by position asc ");
+        $encuestas = $this->Util()->DB()->GetResult();
+        foreach($encuestas as $key =>$value){
+            $this->setEncuestaId($value["encuestaId"]);
+            $this->setVictimaId($this->victimaId);
+            $value["resultado"] = $this->getResultPoll();
+            $value["porcentInChart"] = $this->getPorcentInChart();
+            $this->dataChart [] = $value;
+        }
+    }
+    public function generateChartToImg(){
+        $data = [];
+        $labels = [];
+        foreach($this->dataChart as $var){
+            $porcentOver100 =  number_format((($var["porcentInChart"]*100)/33.3333),4);
+            $data[] = $porcentOver100;
+            $labels[] = substr($var["nombre"],9,10);
+        }
+        /* Create and populate the pData object */
+        $MyData = new pData();
+        $MyData->addPoints($data,"puntos");
+        $MyData->setAxisName(0,"Porcenaje de violencia (%)");
+        $MyData->addPoints($labels,"tipos");
+        $MyData->setSerieDescription("tipos","Browsers");
+        $MyData->setAbscissa("tipos");
+        $MyData->setAbscissaName("Tipos de violencia");
+        $MyData->setAxisDisplay(0,AXIS_FORMAT_DEFAULT,1);
+
+        /* Create the pChart object */
+        $myPicture = new pImage(800,320,$MyData);
+
+        /* Write the chart title */
+        $myPicture->setFontProperties(array("FontName"=>DOC_ROOT."/libs/pChart/fonts/Forgotte.ttf","FontSize"=>15));
+        $myPicture->drawText(30,15,"Grafica de resultado de encuestas",array("FontSize"=>20));
+
+        /* Define the default font */
+        $myPicture->setFontProperties(array("FontName"=>DOC_ROOT."/libs/pChart/fonts/pf_arma_five.ttf","FontSize"=>10));
+
+        /* Set the graph area */
+        $myPicture->setGraphArea(100,60,750,300);
+        $myPicture->drawGradientArea(100,60,800,320,DIRECTION_HORIZONTAL,array("StartR"=>200,"StartG"=>200,"StartB"=>200,"EndR"=>255,"EndG"=>255,"EndB"=>255,"Alpha"=>30));
+
+        /* Draw the chart scale */
+        $AxisBoundaries = array(0=>array("Min"=>0,"Max"=>100));
+        $scaleSettings = array("AxisAlpha"=>10,"TickAlpha"=>10,"DrawXLines"=>FALSE,"Mode"=>SCALE_MODE_MANUAL,"ManualScale"=>$AxisBoundaries,"GridR"=>0,"GridG"=>0,"GridB"=>0,"GridAlpha"=>10,"Pos"=>SCALE_POS_TOPBOTTOM);
+        $myPicture->drawScale($scaleSettings);
+
+        /* Turn on shadow computing */
+        $myPicture->setShadow(TRUE,array("X"=>1,"Y"=>1,"R"=>0,"G"=>0,"B"=>0,"Alpha"=>10));
+
+        /* Draw the chart */
+        $myPicture->drawBarChart(array("DisplayValues"=>TRUE,"DisplayShadow"=>TRUE,"DisplayPos"=>LABEL_POS_INSIDE,"Rounded"=>TRUE,"Surrounding"=>30));
+
+        /* Render the picture (choose the best way) */
+       // $myPicture->autoOutput("pictures/example.drawBarChart.poll.png");
+        $v = $this->getVictimaId();
+        $myPicture->render(DOC_ROOT."/charts/chart_$v.png");
     }
 }

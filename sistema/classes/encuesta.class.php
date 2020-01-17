@@ -130,15 +130,15 @@ class Encuesta extends Main
 		$this->Util()->DB()->setQuery($sql);
 		$info = $this->Util()->DB()->GetRow();
 				
-		$info['estado'] = $this->Util()->GetNomEstado($info['estadoId']);
-		$info['municipio'] = $this->Util()->GetNomMunicipio($info['municipioId']);
+		//$info['estado'] = $this->Util()->GetNomEstado($info['estadoId']);
+		//$info['municipio'] = $this->Util()->GetNomMunicipio($info['municipioId']);
 				
 		return $info;
 	}//Info
 	
 	public function getListEncuesta(){
 
-		$sql = 'SELECT * FROM encuesta';
+		$sql = 'SELECT * FROM encuesta order by position asc';
 		$this->Util()->DB()->setQuery($sql);
 		return $this->Util()->DB()->GetResult();
 	}
@@ -171,10 +171,10 @@ class Encuesta extends Main
 			return false; 
 		}
 		if($this->id){
-			 $sql = 'UPDATE encuesta SET 
+			$sql = 'UPDATE encuesta SET 
 				nombre = "'.utf8_decode($this->nombre).'", 
 				inicio = "'.($this->inicio).'", 
-				fin = "'.($this->fin).'"}
+				fin = "'.($this->fin).'"
 				WHERE encuestaId = "'.$this->id.'"';
 			$this->Util()->DB()->setQuery($sql);
 			$this->Util()->DB()->UpdateData();
