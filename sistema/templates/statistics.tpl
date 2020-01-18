@@ -30,14 +30,9 @@
 			<div class="portlet-title">
 				<div class="caption">
 				   <i class="icon-settings font-green"></i>
-				   <span class="caption-subject font-green sbold">Encuesta </span>
+				   <span class="caption-subject font-green sbold">Estadisticas </span>
 				 </div>  
 				<div class="actions">
-				    <div class="btn-group btn-group-devided" data-toggle="buttons"> 
-					<a href="javascript:;" class="btn btn-circle sbold green" onClick="AddReg()">
-						<i class="fa fa-plus"></i>Agregar
-					</a>
-					</div>
 				</div>
 			</div>
 			<div class="portlet-body" id="tblContent">

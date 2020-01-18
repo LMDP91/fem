@@ -422,21 +422,87 @@ class Encuesta extends Main
 	    return $this->Util()->DB()->GetSingle();
     }
     public function getDataForChartGeneral(){
-	    $filtro = "";
+	    global $globalNameMonths;
+        $filtro = "";
+        switch($_POST["detail"]){
+            case "month":
+                for($i=1;$i<=12;$i++){
+                    $v["clave"] = $globalNameMonths[$i];
+                    $v["value"] = 0;
+                    $monthBase[(int)$i] = $v;
+                }
+                if((int)$this->anio)
+                    $filtro .=" and year(fechaIncidente)= '".(int)$this->anio."' ";
 
-	    if((int)$this->anio)
-	        $filtro .=" and year(c.fechaIncidente)= '".(int)$this->anio."' ";
+                if((int)$this->mes)
+                    $filtro .=" and month(fechaIncidente) = '".(int)$this->mes."' ";
 
-        if((int)$this->mes)
-            $filtro .=" and month(c.fechaIncidente) = '".(int)$this->mes."' ";
+                if($_POST["contexto"]!="")
+                    $filtro .=" and tipo = '".$_POST["contexto"]."' ";
 
-	    $sql  =" select  b.nombre,b.encuestaId,COUNT(*)AS total  from pollVictima a 
-                inner join victima c on a.victimaId=c.victimaId
-                inner join encuesta b on a.encuestaId = b.encuestaId 
-                where a.status ='Finalizado' $filtro  group by a.encuestaId
-                ";
-        $this->Util()->DB()->setQuery($sql);
-        return $this->Util()->DB()->GetResult();
+                $sql  =" select  victimaId,tipo,month(fechaIncidente) as mes from victima a  where 1 $filtro ";
+                $this->Util()->DB()->setQuery($sql);
+                $result =  $this->Util()->DB()->GetResult();
+                $months = [];
+                $monthTemporal = [];
+                foreach($result as $var){
+                    $sql = "select count(*) from pollVictima where victimaId = '".$var["victimaId"]."' and status ='Pendiente' ";
+                    $this->Util()->DB()->setQuery($sql);
+                    $pendiente=  $this->Util()->DB()->GetSingle();
+                    if($pendiente)
+                        continue;
+
+                    if(!in_array($var["mes"],$months)) {
+                        array_push($months,$var["mes"]);
+                        $card["clave"] = $globalNameMonths[$var["mes"]];
+                        $card["value"] = 1;
+                        $monthTemporal[(int)$var["mes"]] = $card;
+                    }else{
+                        $monthTemporal[(int)$var["mes"]]["value"]++;
+                    }
+                }
+                $arrayMerge = array_replace($monthBase,$monthTemporal);
+                foreach ($arrayMerge as $item) {
+                    $arrayNew[] = $item;
+                }
+                return json_encode($arrayNew);
+            default:
+                if((int)$this->anio)
+                    $filtro .=" and year(fechaIncidente)= '".(int)$this->anio."' ";
+
+                if((int)$this->mes)
+                    $filtro .=" and month(fechaIncidente) = '".(int)$this->mes."' ";
+
+                if($_POST["contexto"]!="")
+                    $filtro .=" and tipo = '".$_POST["contexto"]."' ";
+
+                $sql  =" select  victimaId,tipo from victima a  where 1 $filtro ";
+                $this->Util()->DB()->setQuery($sql);
+                $result =  $this->Util()->DB()->GetResult();
+                $tipos = [];
+                $arrayTipos = [];
+                foreach($result as $var){
+                    $sql = "select count(*) from pollVictima where victimaId = '".$var["victimaId"]."' and status ='Pendiente' ";
+                    $this->Util()->DB()->setQuery($sql);
+                    $pendiente=  $this->Util()->DB()->GetSingle();
+                    if($pendiente)
+                        continue;
+                    if(!in_array($var["tipo"],$tipos)) {
+                       array_push($tipos,$var["tipo"]);
+                       $card["clave"] = $var["tipo"];
+                       $card["value"] = 1;
+                       $arrayTipos[$var["tipo"]] = $card;
+                    }else{
+                        $arrayTipos[$var["tipo"]]["value"]++;
+                    }
+                }
+                $arrayNew = [];
+                foreach ($arrayTipos as $item) {
+                    $arrayNew[] = $item;
+                }
+                return  json_encode($arrayNew);
+        }
+
     }
 
 }

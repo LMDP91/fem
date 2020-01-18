@@ -1,14 +1,10 @@
 <?php	
 	
 	//comprobar privilegios de acceso a modulo
-	$user->AllowAccess(15);
-	$user->AllowAccess(17);
+	$user->AllowAccess(19);
+	$user->AllowAccess(26);
 
 	$util->PrintErrors2();
 	$data = $encuesta->Enumerate();
-
-	if(!empty($clientes))
-		$smarty->assign('datatable_flag',true);
-
-	$smarty->assign('registros',$data);
+	$smarty->assign("year",date("Y"));
 ?>
