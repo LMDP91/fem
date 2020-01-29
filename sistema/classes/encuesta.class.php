@@ -331,64 +331,7 @@ class Encuesta extends Main
 					
 		return $data;
 	}//EnumeratePreguntas
-
-	
-	public function preguntasalCliente()
-    {
-        $sql = '
-			SELECT 
-				* 
-			FROM 
-				1pregunta as p
-			left join 1encuesta as e on e.encuestaId = p.encuestaId 
-			WHERE  e.encuestaId = 3 ' . $filtro . '';
-        $this->Util()->DB()->setQuery($sql);
-        $lst = $this->Util()->DB()->GetResult();
-        foreach ($lst as $key => $aux) {
-            if ($aux["tiporespuesta"] == "opcional") {
-                unset($opciones);
-                $op = explode("_", $aux["opcional"]);
-                for ($i = 0; $i <= 5; $i++) {
-                    if ($op[$i] <> "") {
-                        $opciones[] = $op[$i];
-                    }
-                }
-                $lst[$key]["opciones"] = $opciones;
-            }
-        }
-        return $lst;
-    }
-
-	public function totalesRespuesta(){
-		$sql = 'SELECT * 
-				from
-					1pregunta 
-				where
-					encuestaId = '.$this->id;
-			
-		$this->Util()->DB()->setQuery($sql);
-		$ls = $this->Util()->DB()->GetResult();
-		
-		foreach($ls as $key=>$aux){
-			$sql = '
-				SELECT 
-					*,
-					(select count(*) from 1resultado as r1 where r1.preguntaId = '.$aux["preguntaId"].' and r1.respuesta = r12.respuesta) as Total
-				FROM
-					1resultado as r12
-				WHERE
-					r12.preguntaId = '.$aux["preguntaId"].' group by r12.respuesta';
-			$this->Util()->DB()->setQuery($sql);
-			$lstRes = $this->Util()->DB()->GetResult();
-			
-			$ls[$key]["respuesta"] = $lstRes;
-			
-		}
-		
-		return $ls;
-		
-	}
-	
+    
 	public function InfoPregunta(){
 		$sql = 'SELECT *, preguntaId AS idReg FROM pregunta WHERE preguntaId = "'.$this->id.'"';
 		$this->Util()->DB()->setQuery($sql);
