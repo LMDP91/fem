@@ -52,7 +52,63 @@ function drawChart(value) {
         am4core.useTheme(am4themes_animated);
 // Themes end
 // create chart
-        var chart = am4core.create("modal-chart", am4charts.GaugeChart);
+        // Create chart
+        var chart = am4core.createFromConfig({
+
+            // Set inner radius
+            "innerRadius": -20,
+
+            // Create axis
+            "xAxes": [{
+                "type": "ValueAxis",
+                "min": 0,
+                "max": 100,
+                "strictMinMax": true,
+
+                // Add ranges
+                "axisRanges": [{
+                    "value": 0,
+                    "endValue": 20,
+                    "axisFill": {
+                        "fillOpacity": 1,
+                        "fill": "#ffff00",
+                        "zIndex": -1
+                    }
+                }, {
+                    "value": 20,
+                    "endValue": 40,
+                    "axisFill": {
+                        "fillOpacity": 1,
+                        "fill": "#ffa500",
+                        "zIndex": -1
+                    }
+                }, {
+                    "value": 40,
+                    "endValue": 100,
+                    "axisFill": {
+                        "fillOpacity": 1,
+                        "fill": "#ff0000",
+                        "zIndex": -1
+                    }
+                }]
+            }],
+
+            // Add hands
+            /*"hands": [{
+                "type": "ClockHand",
+                "value": parseInt(value),
+                "fill": "#2D93AD",
+                "stroke": "#2D93AD",
+                "innerRadius": "50%",
+                "radius": "97%",
+                "startWidth": 15,
+                "pin": {
+                    "disabled": true
+                }
+            }]*/
+
+        }, "modal-chart", am4charts.GaugeChart);
+        /*var chart = am4core.create("modal-chart", am4charts.GaugeChart);
         chart.innerRadius = -15;
 
         var axis = chart.xAxes.push(new am4charts.ValueAxis());
@@ -72,9 +128,9 @@ function drawChart(value) {
         axis.renderer.line.strokeOpacity = 1;
 
         axis.renderer.grid.template.disabled = true;
-
+*/
         var hand = chart.hands.push(new am4charts.ClockHand());
-        hand.radius = am4core.percent(97);
+        hand.radius = am4core.percent(90);
         hand.showValue(parseInt(value), 0, am4core.ease.cubicOut);
     });
 }
