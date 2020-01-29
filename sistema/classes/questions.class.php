@@ -273,6 +273,14 @@ class Question extends Encuesta
             $this->dataChart [] = $value;
         }
     }
+    public function generatePointsForViolentometro(){
+        $points = 0;
+        foreach($this->dataChart as $var){
+            $porcentOver100 =  number_format($var["porcentInChart"],2);
+            $points += $porcentOver100;
+        }
+        return $points;
+    }
     public function generateChartToImg(){
         $data = [];
         $labels = [];

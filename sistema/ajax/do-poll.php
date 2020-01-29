@@ -43,8 +43,9 @@ switch($_POST["type"]){
         echo "ok[#]";
         $smarty->display(DOC_ROOT."/templates/boxes/modal-chart.tpl");
         echo "[#]";
-        $victima->setVictimaId($_POST["id"]);
-        $puntos = $victima->getResultPollByVictima(true);
+        $question->setVictimaId($_POST["id"]);
+        $question->generateDataForChart();
+        $puntos = $question->generatePointsForViolentometro();
         echo $puntos;
     break;
 }

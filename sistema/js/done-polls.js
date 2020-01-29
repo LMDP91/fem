@@ -34,7 +34,7 @@ function drawChart(value) {
 
         var axis = chart.xAxes.push(new am4charts.ValueAxis());
         axis.min = 0;
-        axis.max = 179;
+        axis.max = 100;
         axis.strictMinMax = true;
 
         var colorSet = new am4core.ColorSet();
