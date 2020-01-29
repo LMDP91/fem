@@ -41,11 +41,21 @@ switch($_POST["type"]){
     break;
     case "showChart":
         echo "ok[#]";
-        $smarty->display(DOC_ROOT."/templates/boxes/modal-chart.tpl");
-        echo "[#]";
         $question->setVictimaId($_POST["id"]);
         $question->generateDataForChart();
         $puntos = $question->generatePointsForViolentometro();
+        $victima->setVictimaId($_POST["id"]);
+        $smarty->assign("info",$victima->info());
+        $smarty->display(DOC_ROOT."/templates/boxes/modal-chart.tpl");
+        echo "[#]";
+
         echo $puntos;
+    break;
+    case 'saveComentario':
+        $victima->setVictimaId($_POST["vId"]);
+        $victima->setComentario($_POST["comentarioAdicional"]);
+        $victima->saveComentario();
+        echo "ok[#]";
+        $smarty->display(DOC_ROOT.'/templates/boxes/messages.tpl');
     break;
 }

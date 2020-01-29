@@ -90,8 +90,16 @@
                 <td class="mayuscula">{$info.tipo}</td>
             </tr>
             <tr class="border-bottom">
-                <td  colspan="2" class="mayuscula"><b>Diagnostico</b></td>
-                <td colspan="2"  style="text-align: left" class="mayuscula">Violencia {$resultGeneral}</td>
+                <td  class="mayuscula"><b>Diagnostico</b></td>
+                <td  style="text-align: left" class="mayuscula">Violencia {$resultGeneral}</td>
+                <td class="mayuscula"><b>% de violencia</b></td>
+                <td class="mayuscula">{$porcentajeGeneral} %</td>
+            </tr>
+            <tr class="border-bottom">
+                <td  class="mayuscula"><b>Tiempo de relacion con su pareja</b></td>
+                <td  style="text-align: left" class="mayuscula">{$info.timeRelacion}</td>
+                <td class="mayuscula"><b>Numero de hijos</b></td>
+                <td class="mayuscula">{$info.numHijo}</td>
             </tr>
         </table>
         {foreach from=$encuestas item=encu key=kenc}
@@ -135,11 +143,22 @@
         {/foreach}
         <table>
             <tr>
-                <td>
+                <td colspan="2">
                     <br>
                     <img src={$chart}" width="650px">
                 </td>
             </tr>
+            <tr>
+                <td  colspan="2" class="mayuscula">
+                    <b>Comentarios adicionales<b>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: justify">
+                    {$info.comentarioAdicional}
+                </td>
+            </tr>
+
         </table>
     </div>
 

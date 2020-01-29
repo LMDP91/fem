@@ -22,6 +22,29 @@ $(function(){
         }
     );
 });
+$(document).on("click","#btnComentario",function () {
+    $.ajax({
+        type: "POST",
+        url: WEB_ROOT+"/ajax/do-poll.php",
+        data: $("#frmComentario").serialize(),
+        beforeSend:function(){
+            $("#txtMessage").html("");
+            $("#loader").html(LOADER);
+            $("#btnComentario").hide();
+        },
+        success: function(response) {
+            var splitResp = response.split("[#]");
+            $("#loader").hide();
+            $("#btnComentario").show();
+            if(splitResp[0] == "ok") {
+                $("#txtMessage").html(splitResp[1]);
+            }
+        },
+        error:function(){
+            alert(msgError);
+        }
+    });
+});
 
 function drawChart(value) {
     am4core.ready(function() {

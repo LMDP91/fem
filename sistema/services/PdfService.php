@@ -25,6 +25,7 @@ class PdfService extends Question{
         $this->generateDataForChart();
         $this->generateChartToImg();
         $this->smarty->assign('resultGeneral',  $victima->getResultPollByVictima());
+        $this->smarty->assign('porcentajeGeneral',  $this->generatePointsForViolentometro());
         $this->smarty->assign('encuestas', $resultados);
         $this->smarty->assign('info', $info);
 

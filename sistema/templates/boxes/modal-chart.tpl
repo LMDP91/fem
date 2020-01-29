@@ -13,15 +13,25 @@
             </div>
             <hr class="clearfix" />
             <form action="" onsubmit="return false;" name="frmComentario" id="frmComentario" class="form-horizontal">
+                <input type="hidden" id="type" name="type" value="saveComentario">
+                <input type="hidden" id="vId" name="vId" value="{$info.victimaId}">
                 <div class="form-group">
                     <label class="control-label col-md-3"><span class="reqIcon"></span>Comentarios adicionales</label>
                     <div class="col-md-9">
-                        <textarea name = "comentario_adicional"  id="comentario_adicional" class="form-control">{$info.comentario_adicional}</textarea>
+                        <textarea name = "comentarioAdicional"  id="comentarioAdicional" class="form-control">{$info.comentarioAdicional}</textarea>
                     </div>
                 </div>
             </form>
+            <div class="row">
+                <div id="txtMessage">
+
+                </div>
+            </div>
         </div>
         <div class="modal-footer">
+            <div align="center" id="loader"></div>
+            <button class="btn green"  id="btnComentario">Guardar comentario</button>
         </div>
+
     </div>
 </div>

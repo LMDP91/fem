@@ -17,6 +17,9 @@ class Victima extends main
     private $tipo;
     private $cordenada;
     private $fechaIncidente;
+    private $comentarioAdicional;
+    private $timeRelacion;
+    private $numHijo;
 
     public function setVictimaId($value){
         $this->Util()->ValidateInteger($value);
@@ -88,6 +91,20 @@ class Victima extends main
         $this->tipo = $value;
 
     }
+    public function setComentario($value){
+        $this->comentarioAdicional = $value;
+
+    }
+    public function setTimeRelacionPareja($value){
+        $this->Util()->ValidateRequireField($value, 'Tiempo de relacion con su pareja');
+        $this->timeRelacion = $value;
+
+    }
+    public function setNumHijo($value){
+        $this->Util()->ValidateRequireField($value, 'Numero de hijos');
+        $this->numHijo = $value;
+
+    }
     public function save(){
         if($this->Util()->PrintErrors()){
             return false;
@@ -106,6 +123,8 @@ class Victima extends main
         $tipo = $this->tipo;
         $cordenada = $this->cordenada;
         $fechaIncidente = $this->fechaIncidente;
+        $timeRelacion = $this->timeRelacion;
+        $numHijo = $this->numHijo;
 
         $sql ="insert into victima(
                     nombre,
@@ -121,7 +140,9 @@ class Victima extends main
                     colonia,
                     tipo,
                     cordenada,
-                    fechaIncidente
+                    fechaIncidente,
+                    timeRelacion,
+                    numHijo
                     )values(
                      '$nombre',
                      '$apaterno',
@@ -136,7 +157,9 @@ class Victima extends main
                      '$colonia',
                      '$tipo',
                      '$cordenada',
-                     '$fechaIncidente'
+                     '$fechaIncidente',
+                     '$timeRelacion',
+                     '$numHijo'
                     )";
         $this->Util()->DB()->setQuery($sql);
         $id = $this->Util()->DB()->InsertData();
@@ -162,6 +185,8 @@ class Victima extends main
         $tipo = $this->tipo;
         $cordenada = $this->cordenada;
         $fechaIncidente = $this->fechaIncidente;
+        $timeRelacion = $this->timeRelacion;
+        $numHijo = $this->numHijo;
 
         $sql ="update victima set 
                     nombre = '$nombre',
@@ -177,11 +202,25 @@ class Victima extends main
                     colonia = '$colonia',
                     tipo = '$tipo',
                     fechaIncidente  = '$fechaIncidente',
-                    cordenada = '$cordenada'
+                    cordenada = '$cordenada',
+                    timeRelacion = '$timeRelacion',
+                    numHijo = '$numHijo'
                     where victimaId ='".$this->victimaId."' ";
         $this->Util()->DB()->setQuery($sql);
         $this->Util()->DB()->UpdateData();
 
+        return true;
+    }
+    public function saveComentario(){
+        $comentarioAdicional = $this->comentarioAdicional;
+        $sql ="update victima set 
+                    comentarioAdicional = '$comentarioAdicional'
+                    where victimaId ='".$this->victimaId."' ";
+        $this->Util()->DB()->setQuery($sql);
+        $this->Util()->DB()->UpdateData();
+
+        $this->Util()->setError(0,"complete","Datos guardado correctamente");
+        $this->Util()->PrintErrors();
         return true;
     }
     public function info(){
