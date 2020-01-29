@@ -87,10 +87,10 @@
 			 style="background: url({$WEB_ROOT}/images/ari/{$img1}?{$time}) no-repeat center center; border-top: 3px solid #7F0000; border-bottom: 2px solid #7F0000">
 		<div class="container" style="background-color: ">
 			<div class="twelve columns">
-				<h1><b><font style="color:blue; font-weight: 900">ROMPE EL SILENCIO ALTO A LA VIOLENCIA</font></b></h1>
-				<h6><font style="color:blue; font-weight: 900">MUJERES FUERTES Y SEGURAS DE SI MISMAS</font></h6>
+				<h1><b><font style="color:black; font-weight: 900">ROMPE EL SILENCIO ALTO A LA VIOLENCIA</font></b></h1>
+				<h6><font style="color:black; font-weight: 900">MUJERES FUERTES Y SEGURAS DE SI MISMAS</font></h6>
 			</div>
-			<a class="button" style="background:; " href="{$WEB_ROOT}/docs/Violencia2019_Nal.pdf" target="_blank">DÍA INTERNACIONAL DE LA ELIMINACIÓN DE LA
+			<a class="button" style="background:brown; " href="{$WEB_ROOT}/docs/Violencia2019_Nal.pdf" target="_blank">DÍA INTERNACIONAL DE LA ELIMINACIÓN DE LA
 VIOLENCIA CONTRA LA MUJER
 				DE LA VILENCIA</a>
 		</div>

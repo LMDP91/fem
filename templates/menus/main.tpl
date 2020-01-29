@@ -11,7 +11,7 @@
             <ul id="nav" class="sixteen columns">
                 <li class="current"><a data-description="Start here" class="drp-aro" href="{$WEB_ROOT}">Inicio</a>
                 </li>
-                <li><a data-description="We have done" class="drp-aro" href="{$WEB_ROOT}/smarttest">Encuestas</a>
+                <!--<li><a data-description="We have done" class="drp-aro" href="{$WEB_ROOT}/smarttest">Encuestas</a>-->
                 </li>
             </ul>
         </div>

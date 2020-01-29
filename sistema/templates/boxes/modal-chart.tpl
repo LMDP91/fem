@@ -16,7 +16,7 @@
                 <input type="hidden" id="type" name="type" value="saveComentario">
                 <input type="hidden" id="vId" name="vId" value="{$info.victimaId}">
                 <div class="form-group">
-                    <label class="control-label col-md-3"><span class="reqIcon"></span>Comentarios adicionales</label>
+                    <label class="control-label col-md-3"><span class="reqIcon"></span>Observaciones:</label>
                     <div class="col-md-9">
                         <textarea name = "comentarioAdicional"  id="comentarioAdicional" class="form-control">{$info.comentarioAdicional}</textarea>
                     </div>

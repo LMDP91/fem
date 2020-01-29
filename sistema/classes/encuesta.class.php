@@ -33,12 +33,10 @@ class Encuesta extends Main
 
 	public function setNombre($value){	
 		if($this->Util()->ValidateRequireField($value, 'Nombre')){
-			$this->Util()->ValidateString($value, 100, 0, '');
 			$this->nombre = $value;
 		}		
 	}
 	public function setRespuesta($value){
-			$this->Util()->ValidateString($value, 100, 0, '');
 			$this->respuesta = $value;
 	}
 	public function setContexto($value){
@@ -58,35 +56,30 @@ class Encuesta extends Main
     }
 	public function setPregunta($value){	
 		if($this->Util()->ValidateRequireField($value, 'Pregunta')){
-			$this->Util()->ValidateString($value, 100, 0, '');
 			$this->pregunta = $value;
 		}		
 	}
 	
 	public function setTipoEncuesta($value){	
 		if($this->Util()->ValidateRequireField($value, 'Tipo Encuesta')){
-			$this->Util()->ValidateString($value, 100, 0, '');
 			$this->tipoencuesta = $value;
 		}		
 	}
 	
 	public function setRango($value){	
 		if($this->Util()->ValidateRequireField($value, 'Rango')){
-			$this->Util()->ValidateString($value, 100, 0, '');
 			$this->rango = $value;
 		}		
 	}
 	
 	public function setOpcional($value){	
 		if($this->Util()->ValidateRequireField($value, 'Rango')){
-			$this->Util()->ValidateString($value, 100, 0, '');
 			$this->opcional = $value;
 		}		
 	}
 	
 	public function setNumCaracter($value){	
 		if($this->Util()->ValidateRequireField($value, 'Num. Caracter')){
-			$this->Util()->ValidateString($value, 100, 0, '');
 			$this->numcaracter = $value;
 		}		
 	}
@@ -94,7 +87,6 @@ class Encuesta extends Main
 	
 	public function setInicio($value){	
 		if($this->Util()->ValidateRequireField($value, 'Inicio')){
-			$this->Util()->ValidateString($value, 100, 0, '');
 			$this->inicio = $value;
 		}		
 	}
@@ -102,19 +94,16 @@ class Encuesta extends Main
 	
 	public function setFin($value){	
 		if($this->Util()->ValidateRequireField($value, 'Fin')){
-			$this->Util()->ValidateString($value, 100, 0, '');
 			$this->fin = $value;
 		}		
 	}
 	
 	
 	public function setTipo($value){	
-		$this->Util()->ValidateString($value, 100, 0, '');
 		$this->tipo = $value;
 	}
 	
 	public function setActivo($value){	
-		$this->Util()->ValidateString($value, 100, 0, '');
 		$this->activo = $value;
 	}
     public function setAnio($value){

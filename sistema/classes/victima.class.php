@@ -36,7 +36,7 @@ class Victima extends main
 
     }
     public function setCordenada($value){
-        $this->Util()->ValidateRequireField($value, 'Favor de ubicar en el mapa, el lugar aproximado de los hechos');
+       // $this->Util()->ValidateRequireField($value, 'Favor de ubicar en el mapa, el lugar aproximado de los hechos');
         $this->cordenada = $value;
 
     }

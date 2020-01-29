@@ -150,7 +150,7 @@
             </tr>
             <tr>
                 <td  colspan="2" class="mayuscula">
-                    <b>Comentarios adicionales<b>
+                    <b>Observaciones:<b>
                 </td>
             </tr>
             <tr>

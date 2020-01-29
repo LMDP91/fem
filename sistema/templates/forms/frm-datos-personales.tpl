@@ -93,7 +93,19 @@
                             <input class="form-control" name="fechaIncidente" id="fechaIncidente" onclick="Calendario(this)" value="{$post.fechaIncidente}">
                         </div>
                     </div>
-                </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label><span class="reqIcon"> * </span> tiempo de reación con su pareja</label>
+                            <input class="form-control" name="timeRelacion" id="timeRelacion" value="{$post.timeRelacion}">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label><span class="reqIcon"> * </span> Cuantos Hijos tiene</label>
+                            <input class="form-control" name="numHijo" id="numHijo"  value="{$post.numHijo}">
+                        </div>
+                    </div>
+                </div>                
                 <div class="row">
                     <input type="hidden" name="latLng" id="latLng" value="{$post.cordenada}">
                     <label for=""><span class="reqIcon">* </span> Ubicar en el mapa el lugar aproximado de los hechos.</label>
