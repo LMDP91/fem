@@ -192,6 +192,8 @@
             $victima->setTipo($_POST["tipoContexto"]);
             $victima->setCordenada($_POST["latLng"]);
             $victima->setFechaIncidente($_POST["fechaIncidente"]);
+            $victima->setTimeRelacionPareja($_POST["timeRelacion"]);
+            $victima->setNumHijo($_POST["numHijo"]);
             if($id = $victima->save()){
                 echo "ok[#]";
                 echo $id;
@@ -216,6 +218,8 @@
             $victima->setTipo($_POST["tipoContexto"]);
             $victima->setCordenada($_POST["latLng"]);
             $victima->setFechaIncidente($_POST["fechaIncidente"]);
+            $victima->setTimeRelacionPareja($_POST["timeRelacion"]);
+            $victima->setNumHijo($_POST["numHijo"]);
             if($id = $victima->update()){
                 echo "ok[#]";
                 echo $_POST["id"];
