@@ -110,7 +110,6 @@
                     <input type="hidden" name="latLng" id="latLng" value="{$post.cordenada}">
                     <label for=""><span class="reqIcon">* </span> Ubicar en el mapa el lugar aproximado de los hechos.</label>
                     <div class="col-md-12" id="map" style="height:500px; width: 100%">
-
                     </div>
                 </div>
             </div>
