@@ -1,4 +1,6 @@
 <?php
+
+session_start();
 include_once(DOC_ROOT.'/properties/errors.es.php');
 require(DOC_ROOT.'/libs/Smarty.class.php');
 require(DOC_ROOT.'/libs/nusoap.php');
@@ -75,7 +77,7 @@ include_once(DOC_ROOT.'/classes/sendmail.class.php');
   include_once(DOC_ROOT."/libs/pChart/class/pDraw.class.php");
   include_once(DOC_ROOT."/libs/pChart/class/pPie.class.php");
   include_once(DOC_ROOT."/libs/pChart/class/pImage.class.php");
- 
+
 /*include_once(DOC_ROOT.'/libs/jpgraph/src/jpgraph.php');
 include_once(DOC_ROOT.'/libs/jpgraph/src/jpgraph_line.php');
 include_once(DOC_ROOT.'/libs/jpgraph/src/jpgraph_pie.php');
@@ -87,7 +89,7 @@ $Usr = $_SESSION['Usr'];
 if($Usr["rolId"]==1)
     $objRole->setAdmin(1);
 
-$objRole->setRoleId($Usr['roleId']);
+$objRole->setRoleId($Usr['rolId']);
 $permissions = $objRole->GetPermisosByRol();
 $smarty->assign('privilegios', $permissions);
 $smarty->assign('Usr', $Usr);

@@ -5,10 +5,10 @@
 			<div class="sidebar-toggler">
 				<span></span>
 			</div>
-		</li>   
+		</li>
     <li class="nav-item start {if $page == 'homepage'}active{/if}">
-        <a href="{$WEB_ROOT}" class="nav-link nav-toggle"> 
-        <i class="fa fa-home"></i> 
+        <a href="{$WEB_ROOT}" class="nav-link nav-toggle">
+        <i class="fa fa-home"></i>
         <span class="title">Inicio</span>
         {if $page == "homepage"}
 		 <span class="selected"></span>
@@ -16,13 +16,13 @@
         {/if}
         </a>
     </li>
-	<li class="heading">	
+	<li class="heading">
        <h3 class="uppercase">Menu de opciones</h3>
     </li>
     {if in_array(1,$privilegios) or $Usr.rolId eq 1}
     <li class="nav-item {if $page=='config' || $page=='usuario' || $page=='rol' || $page=='empresa'}active open{/if}">
         <a href="javascript:;" class="nav-link nav-toggle">
-        <i class="icon-settings"></i> 
+        <i class="icon-settings"></i>
         <span class="title">Configuraciones</span>
         {if $page =='rol' ||$page=='config_role'|| $page=='perm_accion'|| $page=='usuario' || $page=='empresa' || $page=='colonia'}
 			 <span class="selected"></span>
@@ -48,7 +48,7 @@
 					</a>
 				</li>
 			{/if}
-			
+
 			{if in_array(7,$privilegios) or $Usr.rolId eq 1}
 				<li class="nav-item {if $page=='usuario'}active open{/if}">
 					<a class="nav-link " href="{$WEB_ROOT}/usuario">
@@ -58,13 +58,13 @@
 				</li>
 			{/if}
         </ul>
-	</li>  
+	</li>
 	{/if}
 
-	{if in_array(2,$privilegios) or $Usr.rolId eq 1} 
+	{if in_array(2,$privilegios) or $Usr.rolId eq 1}
     <li class="nav-item {if $page =='imagenes'}active open{/if}">
         <a href="javascript:;" class="nav-link nav-toggle">
-        <i class="icon-briefcase"></i> 
+        <i class="icon-briefcase"></i>
         <span class="title">Pagina Web</span>
 		{if $page=='imagenes'}
 		 <span class="selected"></span>
@@ -83,7 +83,7 @@
 				</li>
 			{/if}
         </ul>
-	</li> 
+	</li>
 	{/if}
     {if in_array(15,$privilegios) || $Usr.rolId eq 1}
 	 <li class="nav-item {if $page =='poll' || $page =='question' || $page =='colonia'}active open{/if}">
@@ -106,14 +106,14 @@
 				</a>
 			</li>
 			{/if}
-			{if in_array(16,$privilegios) or $usr.rolId eq 1}
+			{*if in_array(16,$privilegios) or $usr.rolId eq 1}
 				<li class="nav-item {if $page=='colonia'}active open{/if}">
 					<a class="nav-link " href="{$WEB_ROOT}/colonia">
 						<i class="icon-settings"></i>
 						<span class="title">Colonias</span>
 					</a>
 				</li>
-			{/if}
+			{/if*}
 		</ul>
       </li>
     {/if}

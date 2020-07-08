@@ -42,7 +42,7 @@ class Colonia extends Main
     }
     public function EnumerateAll(){
         $filtro ="";
-        $sql = 'SELECT count(*) FROM colonias a LEFT JOIN municipio b ON a.municipioId=b.municipioId
+        echo $sql = 'SELECT count(*) FROM colonias a LEFT JOIN municipio b ON a.codigoMunicipio=b.municipioId
 				WHERE a.status= "activo"';
         $this->Util()->DB()->setQuery($sql);
         $total = $this->Util()->DB()->GetSingle();
@@ -50,7 +50,7 @@ class Colonia extends Main
         $resPage = $this->Util->HandlePagesAjax($this->page, $total , '');
         $sqlLim = "LIMIT ".$resPage['pages']['start'].", ".$resPage['pages']['items_per_page'];
 
-        $sql0 = 'SELECT a.*,b.nombre as municipio FROM colonias a LEFT JOIN municipio b ON a.municipioId=b.municipioId
+        echo $sql0 = 'SELECT a.*,b.nombre as municipio FROM colonias a LEFT JOIN municipio b ON a.municipioId=b.municipioId
 				WHERE a.status= "activo"
 				ORDER BY nombreColonia ASC '.$sqlLim;
         $this->Util()->DB()->setQuery($sql0);
